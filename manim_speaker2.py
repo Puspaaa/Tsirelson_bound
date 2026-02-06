@@ -42,14 +42,14 @@ class TsirelsonGauge(Scene):
 
         # Quantum zone: 2 → 2+√2 (purple)
         q_start = s_to_angle(2)
-        q_span = -(((2 + np.sqrt(2)) - 2) / 4) * arc_span
+        q_span = -(((2 * np.sqrt(2)) - 2) / 4) * arc_span
         quantum_arc = Arc(radius=radius, start_angle=q_start, angle=q_span,
                           color="#aa44ff", stroke_width=16,
                           stroke_opacity=0.6, arc_center=center)
 
         # Forbidden zone: 2+√2 → 4 (red, dimmer)
-        f_start = s_to_angle(2 + np.sqrt(2))
-        f_span = -((4 - (2 + np.sqrt(2))) / 4) * arc_span
+        f_start = s_to_angle(2 * np.sqrt(2))
+        f_span = -((4 - (2 * np.sqrt(2))) / 4) * arc_span
         forbidden_arc = Arc(radius=radius, start_angle=f_start, angle=f_span,
                             color="#ff4444", stroke_width=16,
                             stroke_opacity=0.3, arc_center=center)
@@ -59,7 +59,7 @@ class TsirelsonGauge(Scene):
         tick_data = [
             (0, "0", GREY_B),
             (2, "2", "#44aaff"),
-            (2 + np.sqrt(2), r"2+\sqrt{2}", "#aa44ff"),
+            (2 * np.sqrt(2), r"2\sqrt{2}", "#aa44ff"),
             (4, "4", "#ff4444"),
         ]
         for s_val, label_str, col in tick_data:
@@ -134,7 +134,7 @@ class TsirelsonGauge(Scene):
         self.wait(0.3)
 
         # Sweep to Tsirelson (S=2+√2)
-        n_ts = get_needle(2 + np.sqrt(2))
+        n_ts = get_needle(2 * np.sqrt(2))
         s_ts_tex = MathTex(r"S = 2+\sqrt{2} \approx 3.41", font_size=40, color="#aa44ff"
                            ).next_to(center, DOWN, buff=0.8)
         self.play(Transform(init_needle, n_ts), Transform(s_display, s_ts_tex), run_time=1.5)
@@ -256,7 +256,7 @@ class PRBoxCrime(Scene):
         bar_group = VGroup()
         bar_data = [
             ("Classical", 2, "#44aaff"),
-            ("Tsirelson", 2 + np.sqrt(2), "#aa44ff"),
+            ("Tsirelson", 2 * np.sqrt(2), "#aa44ff"),
             ("PR-Box", 4, "#ff4444"),
         ]
         bar_width = 1.0
@@ -278,7 +278,7 @@ class PRBoxCrime(Scene):
         self.play(LaggedStartMap(FadeIn, bar_group, lag_ratio=0.3), run_time=1.5)
 
         # Tsirelson line
-        ts_x = base_x + ((2 + np.sqrt(2))/4)*max_w
+        ts_x = base_x + ((2 * np.sqrt(2))/4)*max_w
         ts_line = DashedLine([ts_x, base_y + 0.4, 0], [ts_x, base_y - 1.8, 0],
                              color=YELLOW, stroke_width=2, dash_length=0.1)
         ts_lbl = Text("Tsirelson", font_size=14, color=YELLOW

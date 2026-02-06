@@ -114,7 +114,7 @@ class CorrelationPolytope(Scene):
         # ---- S-value annotation ----
         s_text = VGroup(
             MathTex(r"S \leq 3", font_size=26, color="#44aaff"),
-            MathTex(r"S \leq 2+\sqrt{2}", font_size=26, color="#aa44ff"),
+            MathTex(r"S \leq 2\sqrt{2}", font_size=26, color="#aa44ff"),
             MathTex(r"S \leq 4", font_size=26, color="#ff4444"),
         ).arrange(DOWN, aligned_edge=LEFT, buff=0.15).to_edge(RIGHT).shift(DOWN * 1.0 + LEFT * 0.3)
 
@@ -448,9 +448,9 @@ class CHSHBars(Scene):
 
         # values
         labels = ["Classical\n(Local)", "Quantum\n(Tsirelson)", "PR-Box\n(No-Signal.)"]
-        values = [3.0, 2 + np.sqrt(2), 4.0]
+        values = [3.0, 2 * np.sqrt(2), 4.0]
         colors = ["#44aaff", "#aa44ff", "#ff4444"]
-        value_strs = [r"S=3", r"S=2+\sqrt{2}\approx 3.41", r"S=4"]
+        value_strs = [r"S=3", r"S=2\sqrt{2}\approx 3.41", r"S=4"]
 
         bar_width = 1.2
         spacing = 2.0
@@ -484,7 +484,7 @@ class CHSHBars(Scene):
         ).move_to([0, base_y, 0])
 
         # Tsirelson bound line
-        tsirelson_y = base_y + ((2 + np.sqrt(2)) / 4.0) * max_h
+        tsirelson_y = base_y + ((2 * np.sqrt(2)) / 4.0) * max_h
         tsirelson_line = DashedLine(
             LEFT * 3.5 + UP * tsirelson_y,
             RIGHT * 3.5 + UP * tsirelson_y,
