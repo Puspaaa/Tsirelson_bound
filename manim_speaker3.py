@@ -185,7 +185,7 @@ class LemmaDerivation(Scene):
         lines3 = VGroup(
             MathTex(r"I = \sum_i I_{\text{Sh}}(a_i:\beta(i)) = n - \sum_i H(a_i|\beta(i)) \leq m",
                     font_size=22, color=GREY_B),
-            MathTex(r"\Rightarrow \text{Tsirelson's bound: } S \leq 2\sqrt{2}",
+            MathTex(r"\Rightarrow \text{Tsirelson's bound: } S \leq 2+\sqrt{2}",
                     font_size=24, color=YELLOW),
         ).arrange(DOWN, aligned_edge=LEFT, buff=0.2).next_to(step3_title, DOWN, buff=0.2, aligned_edge=LEFT)
 
@@ -234,7 +234,7 @@ class BoxWorldBreaks(Scene):
             VGroup(MathTex(r"\checkmark", font_size=22, color=GREEN),
                    Text("IC: I ≤ m", font_size=18, color=GREY_B)).arrange(RIGHT, buff=0.2),
             VGroup(MathTex(r"\checkmark", font_size=22, color=GREEN),
-                   MathTex(r"S \leq 2\sqrt{2}", font_size=18, color=GREY_B)).arrange(RIGHT, buff=0.2),
+                   MathTex(r"S \leq 2+\sqrt{2}", font_size=18, color=GREY_B)).arrange(RIGHT, buff=0.2),
         ).arrange(DOWN, aligned_edge=LEFT, buff=0.25).next_to(qm_title, DOWN, buff=0.3, aligned_edge=LEFT)
 
         # Right: What box-world violates
@@ -250,7 +250,7 @@ class BoxWorldBreaks(Scene):
             VGroup(MathTex(r"\times", font_size=22, color="#ff5555"),
                    Text("IC violated: I > m", font_size=18, color="#ff5555")).arrange(RIGHT, buff=0.2),
             VGroup(MathTex(r"\times", font_size=22, color="#ff5555"),
-                   MathTex(r"S = 4 > 2\sqrt{2}", font_size=18, color="#ff5555")).arrange(RIGHT, buff=0.2),
+                   MathTex(r"S = 4 > 2+\sqrt{2}", font_size=18, color="#ff5555")).arrange(RIGHT, buff=0.2),
         ).arrange(DOWN, aligned_edge=LEFT, buff=0.25).next_to(bw_title, DOWN, buff=0.3, aligned_edge=LEFT)
 
         # Divider

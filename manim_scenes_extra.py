@@ -445,7 +445,7 @@ class CompositeScene(Scene):
 class CHSHBarsV2(Scene):
     """
     Bar chart with standard CHSH convention:
-    Classical S ≤ 2, Quantum S ≤ 2√2, No-Signaling S ≤ 4.
+    Classical S ≤ 2, Quantum S ≤ 2+√2, No-Signaling S ≤ 4.
     """
 
     def construct(self):
@@ -456,9 +456,9 @@ class CHSHBarsV2(Scene):
         self.play(Write(title), run_time=0.8)
 
         labels = ["Classical\n(Local)", "Quantum\n(Tsirelson)", "PR-Box\n(No-Signal.)"]
-        values = [2.0, 2 * np.sqrt(2), 4.0]
+        values = [2.0, 2 + np.sqrt(2), 4.0]
         colors = ["#44aaff", "#aa44ff", "#ff4444"]
-        value_strs = [r"S \leq 2", r"S \leq 2\sqrt{2} \approx 2.83", r"S = 4"]
+        value_strs = [r"S \leq 2", r"S \leq 2+\sqrt{2} \approx 3.41", r"S = 4"]
 
         bar_width = 1.2
         spacing = 2.0
@@ -487,7 +487,7 @@ class CHSHBarsV2(Scene):
         baseline = Line(LEFT * 3, RIGHT * 3, color=GREY, stroke_width=1
                         ).move_to([0, base_y, 0])
 
-        tsirelson_y = base_y + (2 * np.sqrt(2) / 4.0) * max_h
+        tsirelson_y = base_y + ((2 + np.sqrt(2)) / 4.0) * max_h
         tsirelson_line = DashedLine(LEFT * 3.5, RIGHT * 3.5,
                                     color=YELLOW, stroke_width=2,
                                     dash_length=0.15).move_to([0, tsirelson_y, 0])
