@@ -952,70 +952,6 @@
       </section>
 
 
-      <!-- ═══ THE GEOMETRIC DERIVATION ═══ -->
-      <section data-transition="slide">
-        <h3 style="margin-bottom:0.15em;"><span class="accent-ylw">The Geometric Derivation</span></h3>
-        <p class="small dim" style="margin-top:0;">From Information Conservation to the Tsirelson Bound</p>
-
-        <div class="split">
-          <div class="left">
-            <div class="step-block orange" style="padding:0.35rem 0.5rem;">
-              <p class="small" style="margin:0; font-weight:600; color:var(--accent-orange);">1. The Geometric Constraint</p>
-              <p class="tiny" style="margin:0.15em 0 0; color: var(--text-muted);">
-                IC + no recursive explosion $\Rightarrow$ Euclidean norm constraint:
-              </p>
-              <p style="margin:0.2em 0 0; font-size:0.85em; text-align:center;">
-                $\displaystyle\sum_i (2p_i - 1)^2 \;\leq\; 1$
-              </p>
-              <p class="tiny dim" style="margin:0.1em 0 0;">
-                where $p_i = P(\text{guess } a_i \text{ correctly})$ and $(2p_i - 1)$ is Bob's <strong>bias</strong>.
-              </p>
-            </div>
-
-            <div class="step-block purple" style="padding:0.35rem 0.5rem; margin-top:0.25rem;">
-              <p class="small" style="margin:0; font-weight:600; color:var(--accent-purple);">2. Physics Link: RAC → CHSH</p>
-              <p class="tiny" style="margin:0.15em 0 0; color: var(--text-muted);">
-                Bob's guessing efficiency is proportional to correlation strength:
-              </p>
-              <p style="margin:0.2em 0 0; font-size:0.85em; text-align:center;">
-                $2p_i - 1 = \dfrac{S}{4}$
-              </p>
-            </div>
-
-            <div class="step-block green" style="padding:0.35rem 0.5rem; margin-top:0.25rem;">
-              <p class="small" style="margin:0; font-weight:600; color:var(--accent-green);">3. The Calculation</p>
-              <p class="tiny" style="margin:0.15em 0 0; color: var(--text-muted);">
-                Substituting into the constraint (symmetric for both bits):
-              </p>
-              <p style="margin:0.2em 0 0; font-size:0.85em; text-align:center;">
-                $2 \cdot \left(\dfrac{S}{4}\right)^2 \leq 1 \;\;\Rightarrow\;\; \dfrac{S^2}{8} \leq 1 \;\;\Rightarrow\;\; \boxed{S \leq 2\sqrt{2}}$
-              </p>
-            </div>
-
-            <div class="highlight-box" style="margin-top:0.3rem; padding:0.25rem; text-align:center; border-color:rgba(90,228,167,0.3);">
-              <p class="small" style="margin:0;">
-                <strong class="accent-grn">The bias vector must stay inside the unit sphere.</strong><br>
-                <span class="tiny dim">PR-Box ($S=4$) gives $|\vec{b}| = \sqrt{2} > 1$ — <span class="accent-red">violates IC!</span></span>
-              </p>
-            </div>
-          </div>
-          <div class="right">
-            <div class="video-box">
-              <video autoplay muted playsinline preload="auto">
-                <source src="assets/3_rac.webm" type="video/webm" />
-              </video>
-            </div>
-          </div>
-        </div>
-
-        <aside class="notes">
-          This is the heart of the paper. IC forces Bob's bias vector to live inside a unit hypersphere.
-          The PR-Box vector has length sqrt(2), piercing the sphere. Quantum mechanics is exactly at the boundary.
-          Therefore, QM is the limit of non-locality that respects information conservation.
-        </aside>
-      </section>
-
-
       <!-- ═══════════════════════════════════════════════════════
            SECTION IV: THE PROOF
            ═══════════════════════════════════════════════════════ -->
@@ -1371,6 +1307,94 @@
       </section>
 
 
+      <!-- ═══ THE RAC-CHSH DERIVATION ═══ -->
+      <section data-transition="slide">
+        <h3 style="margin-bottom:0.15em;"><span class="accent-ylw">The RAC-CHSH Relation</span></h3>
+        <p class="small dim" style="margin-top:0;">From Information Causality to the Tsirelson Bound — Full Derivation</p>
+
+        <div class="split">
+          <div class="left">
+            <div class="step-block orange" style="padding:0.35rem 0.5rem;">
+              <p class="small" style="margin:0; font-weight:600; color:var(--accent-orange);">1. The Setup</p>
+              <p class="tiny" style="margin:0.15em 0 0; color: var(--text-muted);">
+                Alice has $\vec{a} = (a_0, a_1) \in \{0,1\}^2$. Bob wants bit $a_y$ (where $y \in \{0,1\}$).
+              </p>
+              <p class="tiny" style="margin:0.15em 0 0; color: var(--text-muted);">
+                Strategy: Alice → measurement $x = a_0 \oplus a_1$, Bob → measurement $y$.<br>
+                Outcomes: $\alpha, \beta \in \{\pm 1\}$. Bob guesses $\hat{a}_y = \frac{1}{2}(1 - \alpha \cdot \beta)$.
+              </p>
+            </div>
+
+            <div class="step-block purple" style="padding:0.35rem 0.5rem; margin-top:0.25rem;">
+              <p class="small" style="margin:0; font-weight:600; color:var(--accent-purple);">2. Winning Condition</p>
+              <p class="tiny" style="margin:0.15em 0 0; color: var(--text-muted);">
+                Bob wins if $\hat{a}_y = a_y$. Using correlation $E_{xy} = P(\alpha=\beta) - P(\alpha \neq \beta)$:
+              </p>
+              <p style="margin:0.2em 0 0; font-size:0.85em; text-align:center;">
+                $P(\text{win}) = \dfrac{1 + \alpha \cdot \beta \cdot (-1)^{a_y}}{2} = \dfrac{1 \pm E_{xy}}{2}$
+              </p>
+            </div>
+
+            <div class="step-block blue" style="padding:0.35rem 0.5rem; margin-top:0.25rem;">
+              <p class="small" style="margin:0; font-weight:600; color:var(--accent-blue);">3. Average Success Probability</p>
+              <p class="tiny" style="margin:0.15em 0 0; color: var(--text-muted);">
+                Averaging over all 4 inputs $(a_0,a_1)$ for both $y=0$ and $y=1$:
+              </p>
+              <p style="margin:0.2em 0 0; font-size:0.8em; text-align:center;">
+                $p = \dfrac{1}{2} + \dfrac{1}{8}(E_{00} + E_{01} + E_{10} - E_{11}) = \dfrac{1}{2} + \dfrac{S}{8}$
+              </p>
+              <p class="tiny dim" style="margin:0.1em 0 0;">
+                where $S = E_{00} + E_{01} + E_{10} - E_{11}$ is the <strong>CHSH parameter</strong>.
+              </p>
+            </div>
+          </div>
+
+          <div class="right">
+            <div class="step-block green" style="padding:0.35rem 0.5rem;">
+              <p class="small" style="margin:0; font-weight:600; color:var(--accent-green);">4. The Geometric Constraint</p>
+              <p class="tiny" style="margin:0.15em 0 0; color: var(--text-muted);">
+                IC bounds the bias vector: $\sum_i (2p_i - 1)^2 \leq 1$.<br>
+                Bob's bias for each bit: $2p - 1 = \frac{S}{4}$.
+              </p>
+              <p style="margin:0.2em 0 0; font-size:0.85em; text-align:center;">
+                $2 \cdot \left(\dfrac{S}{4}\right)^2 \leq 1 \;\Rightarrow\; \dfrac{S^2}{8} \leq 1 \;\Rightarrow\; \boxed{S \leq 2\sqrt{2}}$
+              </p>
+            </div>
+
+            <div style="font-size:0.65em; margin-top:0.4rem; background: var(--bg-surface); border-radius:8px; padding:0.4rem; border:1px solid var(--border);">
+              <p class="small" style="margin:0 0 0.2rem 0; font-weight:600; color:var(--accent-gold);">Input-Correlation Mapping Table</p>
+              <table style="width:100%; border-collapse:collapse; font-size:0.9em;">
+                <tr style="border-bottom:1px solid var(--border);">
+                  <th style="padding:3px; text-align:left;">$(a_0,a_1)$</th>
+                  <th style="padding:3px;">$y$</th>
+                  <th style="padding:3px;">$a_y$</th>
+                  <th style="padding:3px;">Correlation</th>
+                </tr>
+                <tr><td style="padding:2px;">(0,0)</td><td style="padding:2px; text-align:center;">0</td><td style="padding:2px; text-align:center;">0</td><td style="padding:2px; color:var(--accent-blue);">$+E_{00}$</td></tr>
+                <tr><td style="padding:2px;">(0,1)</td><td style="padding:2px; text-align:center;">0</td><td style="padding:2px; text-align:center;">0</td><td style="padding:2px; color:var(--accent-blue);">$+E_{10}$</td></tr>
+                <tr><td style="padding:2px;">(1,0)</td><td style="padding:2px; text-align:center;">1</td><td style="padding:2px; text-align:center;">0</td><td style="padding:2px; color:var(--accent-blue);">$+E_{01}$</td></tr>
+                <tr><td style="padding:2px;">(1,1)</td><td style="padding:2px; text-align:center;">1</td><td style="padding:2px; text-align:center;">1</td><td style="padding:2px; color:var(--accent-red);">$-E_{11}$</td></tr>
+              </table>
+              <p class="tiny dim" style="margin:0.2em 0 0;">The minus sign on $E_{11}$ yields the CHSH combination.</p>
+            </div>
+
+            <div class="highlight-box" style="margin-top:0.3rem; padding:0.25rem; text-align:center; border-color:rgba(90,228,167,0.3);">
+              <p class="small" style="margin:0;">
+                <strong class="accent-grn">Q.E.D.</strong> — The bias vector must stay inside the unit sphere.<br>
+                <span class="tiny dim">PR-Box ($S=4$) gives $|\vec{b}| = \sqrt{2} > 1$ — <span class="accent-red">violates IC!</span></span>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <aside class="notes">
+          This is the full proof connecting Random Access Codes to the CHSH inequality.
+          The key insight: IC constrains the bias vector to a unit sphere. The PR-Box pierces this sphere.
+          Quantum mechanics sits exactly at the Tsirelson boundary — the maximum non-locality that respects IC.
+        </aside>
+      </section>
+
+
       <!-- ═══ THANK YOU ═══ -->
       <section class="title-slide" data-transition="fade">
         <h1 style="background: linear-gradient(135deg, var(--accent-green), var(--accent-blue), var(--accent-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
@@ -1460,13 +1484,13 @@
       { title: "Part III: The Principle", section: "divider", part: "III", sectionName: "The Principle", gradient: "var(--accent-orange), var(--accent-gold)" },
       { title: "Entropy & DPI",          section: "The Principle", part: "III", sectionName: "The Principle", gradient: "var(--accent-orange), var(--accent-gold)" },
       { title: "Information Causality",  section: "The Principle", part: "III", sectionName: "The Principle", gradient: "var(--accent-orange), var(--accent-gold)" },
-      { title: "Geometric Derivation",   section: "The Principle", part: "III", sectionName: "The Principle", gradient: "var(--accent-orange), var(--accent-gold)" },
       { title: "Part IV: The Proof",     section: "divider", part: "IV", sectionName: "The Proof", gradient: "var(--accent-purple), var(--accent-red)" },
       { title: "The Four Lemmas",        section: "The Proof", part: "IV", sectionName: "The Proof", gradient: "var(--accent-purple), var(--accent-red)" },
       { title: "From Axioms to Tsirelson", section: "The Proof", part: "IV", sectionName: "The Proof", gradient: "var(--accent-purple), var(--accent-red)" },
       { title: "Part V: The Verdict",    section: "divider", part: "V", sectionName: "The Verdict", gradient: "var(--accent-green), var(--accent-blue)" },
       { title: "Box-World Breakdown",    section: "The Verdict", part: "V", sectionName: "The Verdict", gradient: "var(--accent-green), var(--accent-blue)" },
       { title: "The Big Picture",        section: "The Verdict", part: "V", sectionName: "The Verdict", gradient: "var(--accent-green), var(--accent-blue)" },
+      { title: "RAC-CHSH Derivation",    section: "The Verdict", part: "V", sectionName: "The Verdict", gradient: "var(--accent-green), var(--accent-blue)" },
       { title: "Thank You",             section: "", part: "" },
     ];
 
