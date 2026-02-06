@@ -907,6 +907,251 @@
       </section>
 
 
+      <!-- ═══ LEMMA 3: SUBADDITIVITY ═══ -->
+      <section data-transition="slide">
+        <h3 style="margin-bottom:0.15em;"><span class="accent-blu">Lemma 3 — Subadditivity</span></h3>
+        <p class="small dim" style="margin-top:0;">Individual uncertainties sum to more than joint uncertainty</p>
+
+        <div class="split">
+          <div class="left">
+            <div class="highlight-box" style="margin-bottom:0.4rem; text-align:center;">
+              <p style="margin:0; font-size:0.72em; color:var(--accent-blue);">
+                $\displaystyle\sum_{i=1}^{n} H(A_i|\gamma) \;\geq\; H(A_1 A_2 \ldots A_n | \gamma)$
+              </p>
+            </div>
+
+            <div class="step-block blue">
+              <p class="small" style="margin:0;">
+                <strong class="accent-blu">Intuition:</strong>
+                Measuring subsystems individually loses correlations between them,
+                so individual entropies always overcount.
+              </p>
+            </div>
+
+            <div class="step-block" style="border-left-color: var(--accent-purple); margin-top:0.25rem;">
+              <p class="small" style="margin:0;">
+                <strong class="accent-pur">Proof sketch:</strong>
+              </p>
+              <p class="tiny" style="margin:0.15em 0 0; color:var(--text-muted);">
+                1. Apply <strong>COND</strong>: chain rule splits joint entropy<br>
+                &nbsp;&nbsp;&nbsp;$H(A_1 A_2|\gamma) = H(A_1|\gamma) + H(A_2|A_1\gamma)$<br>
+                2. Apply <strong>DPI</strong>: discarding $A_1$ can't increase info<br>
+                &nbsp;&nbsp;&nbsp;$H(A_2|A_1\gamma) \leq H(A_2|\gamma)$<br>
+                3. Induction over $n$ subsystems gives the full result.
+              </p>
+            </div>
+
+            <div class="step-block green" style="margin-top:0.25rem;">
+              <p class="small" style="margin:0;">
+                <strong class="accent-grn">Axioms used:</strong> COND + DPI
+              </p>
+              <p class="tiny dim" style="margin:0.1em 0 0;">
+                The DPI step is critical — it's what fails in box-world,
+                making subadditivity break there too.
+              </p>
+            </div>
+          </div>
+          <div class="right">
+            <div class="video-box">
+              <video autoplay loop muted playsinline preload="auto">
+                <source src="assets/s4_lemma3_subadditivity.webm" type="video/webm" />
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <aside class="notes">
+          Lemma 3 is subadditivity: the sum of individual entropies ≥ joint entropy.
+          Proved by chain rule (COND) plus data processing (DPI) applied inductively.
+          This is the workhorse that lets us split the per-bit bound later.
+        </aside>
+      </section>
+
+
+      <!-- ═══ LEMMA 4: PRODUCT STATES ═══ -->
+      <section data-transition="slide">
+        <h3 style="margin-bottom:0.15em;"><span class="accent-grn">Lemma 4 — Product State Independence</span></h3>
+        <p class="small dim" style="margin-top:0;">For product states, conditioning on one system doesn't reduce uncertainty about the other</p>
+
+        <div class="split">
+          <div class="left">
+            <div class="highlight-box" style="margin-bottom:0.4rem; text-align:center;">
+              <p style="margin:0; font-size:0.72em; color:var(--accent-green);">
+                $H(A|B) = H(A) \quad\text{for } \vec{P}_A \otimes \vec{P}_B$
+              </p>
+            </div>
+
+            <div class="step-block green">
+              <p class="small" style="margin:0;">
+                <strong class="accent-grn">Intuition:</strong>
+                If Alice and Bob share no correlations (product state), observing Bob's
+                system tells you nothing about Alice's.
+              </p>
+            </div>
+
+            <div class="step-block" style="border-left-color: var(--accent-purple); margin-top:0.25rem;">
+              <p class="small" style="margin:0;">
+                <strong class="accent-pur">Proof sketch:</strong>
+              </p>
+              <p class="tiny" style="margin:0.15em 0 0; color:var(--text-muted);">
+                1. <strong>COND</strong>: $H(A|B) = H(AB) - H(B)$<br>
+                2. For product states, need $H(AB) = H(A) + H(B)$<br>
+                3. <strong>SHAN</strong>: applies to classical outcomes<br>
+                4. <strong>DPI</strong>: bounding processing of product marginals<br>
+                5. Together: $H(A|B) = H(A) + H(B) - H(B) = H(A)$
+              </p>
+            </div>
+
+            <div class="step-block orange" style="margin-top:0.25rem;">
+              <p class="small" style="margin:0;">
+                <strong class="accent-org">Why it matters:</strong>
+                Used in Lemma 6 to separate Alice's input entropy from Bob's side information.
+              </p>
+              <p class="tiny dim" style="margin:0.1em 0 0;">
+                <strong>Axioms used:</strong> COND + SHAN + DPI (all three!)
+              </p>
+            </div>
+          </div>
+          <div class="right">
+            <div class="video-box">
+              <video autoplay loop muted playsinline preload="auto">
+                <source src="assets/s4_lemma4_product.webm" type="video/webm" />
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <aside class="notes">
+          Lemma 4 says independent systems have independent entropies.
+          Trivial for Shannon entropy, but needs proof in general GPTs
+          because the entropy function might not decompose naturally for product states.
+        </aside>
+      </section>
+
+
+      <!-- ═══ LEMMA 5: POSITIVITY ═══ -->
+      <section data-transition="slide">
+        <h3 style="margin-bottom:0.15em;"><span class="accent-org">Lemma 5 — Positivity of Conditional Entropy</span></h3>
+        <p class="small dim" style="margin-top:0;">Classical variables always have non-negative conditional entropy</p>
+
+        <div class="split">
+          <div class="left">
+            <div class="highlight-box" style="margin-bottom:0.4rem; text-align:center;">
+              <p style="margin:0; font-size:0.72em; color:var(--accent-orange);">
+                $H(X|Y) \geq 0 \quad\text{for classical } X$
+              </p>
+            </div>
+
+            <div class="step-block orange">
+              <p class="small" style="margin:0;">
+                <strong class="accent-org">Intuition:</strong>
+                Classical information can be freely copied. A copy of $X$ always
+                determines $X$ perfectly, forcing conditional entropy $\geq 0$.
+              </p>
+            </div>
+
+            <div class="step-block" style="border-left-color: var(--accent-purple); margin-top:0.25rem;">
+              <p class="small" style="margin:0;">
+                <strong class="accent-pur">Proof sketch (cloning argument):</strong>
+              </p>
+              <p class="tiny" style="margin:0.15em 0 0; color:var(--text-muted);">
+                1. <strong>Classical</strong> $X$ can be cloned: create copy $X'$<br>
+                2. <strong>DPI</strong>: more data doesn't increase entropy<br>
+                &nbsp;&nbsp;&nbsp;$H(X|Y) \geq H(X|YX')$<br>
+                3. But $X' = X$, so $H(X|YX') = H(X|YX) = 0$<br>
+                4. Therefore $H(X|Y) \geq 0$ &nbsp;$\checkmark$
+              </p>
+            </div>
+
+            <div class="step-block" style="border-left-color: var(--accent-red); margin-top:0.25rem;">
+              <p class="small" style="margin:0;">
+                <strong class="accent-red">Quantum contrast:</strong>
+                Quantum conditional entropy $H(A|B)$ <em>can</em> be negative (e.g. entangled states),
+                because quantum systems <strong>cannot be cloned</strong> (no-cloning theorem).
+              </p>
+              <p class="tiny dim" style="margin:0.1em 0 0;">
+                <strong>Axioms used:</strong> DPI (+ classicality of $X$)
+              </p>
+            </div>
+          </div>
+          <div class="right">
+            <div class="video-box">
+              <video autoplay loop muted playsinline preload="auto">
+                <source src="assets/s4_lemma5_positivity.webm" type="video/webm" />
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <aside class="notes">
+          Lemma 5 uses a clever cloning trick: classical data can be copied,
+          so giving the copy alongside Y can never increase conditional entropy.
+          This fails for quantum states due to no-cloning — explaining why
+          quantum conditional entropy can go negative.
+        </aside>
+      </section>
+
+
+      <!-- ═══ LEMMA 6: IC BOUND ═══ -->
+      <section data-transition="slide">
+        <h3 style="margin-bottom:0.15em;"><span class="accent-pur">Lemma 6 — The IC Bound</span></h3>
+        <p class="small dim" style="margin-top:0;">Combining all lemmas to bound Bob's total information about Alice's bits</p>
+
+        <div class="split">
+          <div class="left">
+            <div class="highlight-box" style="margin-bottom:0.4rem; text-align:center;">
+              <p style="margin:0; font-size:0.72em; color:var(--accent-purple);">
+                $H(\vec{a}\,|\,B\vec{x}) \;\geq\; n - m$
+              </p>
+            </div>
+
+            <div class="step-block" style="border-left-color: var(--accent-purple);">
+              <p class="small" style="margin:0;">
+                <strong class="accent-pur">Intuition:</strong>
+                Alice has $n$ random bits but can only send $m$ classical bits to Bob.
+                No matter what shared non-local resource they use,
+                Bob's total uncertainty about $\vec{a}$ is at least $n - m$.
+              </p>
+            </div>
+
+            <div class="step-block" style="border-left-color: var(--accent-gold); margin-top:0.25rem;">
+              <p class="small" style="margin:0;">
+                <strong class="accent-ylw">Derivation:</strong>
+              </p>
+              <p class="tiny" style="margin:0.15em 0 0; color:var(--text-muted);">
+                1. <strong>COND</strong>: $H(\vec{a}|B\vec{x}) - H(\vec{x}|\vec{a}B) = H(\vec{a}) - H(\vec{x}|B)$<br>
+                2. <strong>Lemma 4</strong>: $\vec{a}, \vec{x}$ independent ⟹ $H(\vec{a}) = n$<br>
+                3. <strong>Lemma 5</strong>: $H(\vec{x}|\vec{a}B) \geq 0$ ($\vec{x}$ classical)<br>
+                4. <strong>SHAN + DPI</strong>: $H(\vec{x}|B) \leq H(\vec{x}) \leq m$<br>
+                5. Combine: $H(\vec{a}|B\vec{x}) \geq n - m$ &nbsp;$\checkmark$
+              </p>
+            </div>
+
+            <div class="step-block green" style="margin-top:0.25rem;">
+              <p class="small" style="margin:0;">
+                <strong class="accent-grn">This is the key inequality!</strong>
+                Together with Lemma 3 (subadditivity), it yields
+                Information Causality: $I \leq m$.
+              </p>
+            </div>
+          </div>
+          <div class="right">
+            <div class="video-box">
+              <video autoplay loop muted playsinline preload="auto">
+                <source src="assets/s4_lemma6_ic_bound.webm" type="video/webm" />
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <aside class="notes">
+          Lemma 6 is the capstone — combining independence (Lemma 4), positivity
+          (Lemma 5), COND and SHAN to bound Bob's total uncertainty.
+          This directly gives Information Causality, from which Tsirelson follows.
+        </aside>
+      </section>
+
+
       <!-- ═══ STEP-BY-STEP DERIVATION ═══ -->
       <section data-transition="slide">
         <h3 style="margin-bottom:0.15em;"><span class="accent-grn">From Axioms to Tsirelson</span></h3>
@@ -1192,6 +1437,10 @@
       { title: "The Logical Chain",      section: "The Principle" },
       { title: "Part IV: The Proof",     section: "divider" },
       { title: "Proof Architecture",     section: "The Proof" },
+      { title: "Lemma 3: Subadditivity", section: "The Proof" },
+      { title: "Lemma 4: Product States", section: "The Proof" },
+      { title: "Lemma 5: Positivity",    section: "The Proof" },
+      { title: "Lemma 6: IC Bound",      section: "The Proof" },
       { title: "From Axioms to Tsirelson", section: "The Proof" },
       { title: "Part V: The Verdict",    section: "divider" },
       { title: "Box-World Breakdown",    section: "The Verdict" },
@@ -1205,7 +1454,7 @@
       { idx: 5,  label: "II. The Framework" },
       { idx: 9,  label: "III. The Principle" },
       { idx: 13, label: "IV. The Proof" },
-      { idx: 16, label: "V. The Verdict" },
+      { idx: 20, label: "V. The Verdict" },
     ];
 
     // Progress bar
