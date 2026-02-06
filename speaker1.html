@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Limit of Nature — Speaker 1</title>
+
+  <!-- Reveal.js core -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" id="theme" />
+  <!-- Math plugin styles -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css" />
+
+  <!-- KaTeX for math rendering -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+
+  <style>
+    /*  ─── Global Theme Overrides ─── */
+    :root {
+      --r-background-color: #0f0f1a;
+      --r-main-font: 'Inter', 'Segoe UI', system-ui, sans-serif;
+      --r-heading-font: 'Inter', 'Segoe UI', system-ui, sans-serif;
+      --r-main-font-size: 32px;
+      --r-heading-color: #e0e0ff;
+      --r-main-color: #c8c8e0;
+      --r-link-color: #aa88ff;
+      --r-selection-background-color: #aa44ff55;
+    }
+    .reveal { font-family: var(--r-main-font); }
+    .reveal h1, .reveal h2, .reveal h3 {
+      font-weight: 700;
+      text-transform: none;
+      letter-spacing: -0.02em;
+    }
+
+    /* ─── Custom utility classes ─── */
+    .accent     { color: #aa88ff; }
+    .accent-red { color: #ff5555; }
+    .accent-grn { color: #55ff99; }
+    .accent-ylw { color: #ffdd44; }
+    .accent-blu { color: #44aaff; }
+    .accent-pur { color: #aa44ff; }
+    .small      { font-size: 0.65em; }
+    .tiny       { font-size: 0.50em; }
+    .dim        { opacity: 0.55; }
+    .left-align { text-align: left; }
+
+    /* ─── Split layout ─── */
+    .split {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+    .split > .left  { flex: 1; text-align: left; }
+    .split > .right { flex: 1; display: flex; justify-content: center; align-items: center; }
+
+    /* ─── Video container ─── */
+    .video-box {
+      border: 1px solid #333;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 0 30px rgba(170, 68, 255, 0.15);
+    }
+    .video-box video {
+      display: block;
+      max-width: 100%;
+      max-height: 55vh;
+      background: #000;
+    }
+
+    /* ─── Hierarchy bars ─── */
+    .hierarchy-item {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      margin: 0.5rem 0;
+      font-size: 0.8em;
+    }
+    .hierarchy-bar {
+      height: 8px;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+    .bar-local    { width: 80px;  background: #44aaff; }
+    .bar-quantum  { width: 140px; background: #aa44ff; }
+    .bar-ns       { width: 200px; background: #ff4444; }
+
+    /* ─── Two-column layout ─── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      align-items: start;
+      text-align: left;
+    }
+
+    /* ─── Property list ─── */
+    .prop-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .prop-list li {
+      padding: 0.3em 0;
+      font-size: 0.75em;
+      border-bottom: 1px solid #ffffff10;
+    }
+    .prop-list li::before {
+      content: '▸ ';
+      color: #aa88ff;
+    }
+    .prop-list li.bad::before {
+      content: '✗ ';
+      color: #ff5555;
+    }
+    .prop-list li.good::before {
+      content: '✓ ';
+      color: #55ff99;
+    }
+
+    /* ─── Flow diagram ─── */
+    .flow {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+    }
+    .flow-box {
+      background: #1a1a2e;
+      border: 2px solid;
+      border-radius: 12px;
+      padding: 1rem 1.2rem;
+      text-align: center;
+      min-width: 140px;
+    }
+    .flow-box h4 {
+      margin: 0 0 0.3rem 0;
+      font-size: 0.75em;
+      font-weight: 700;
+    }
+    .flow-box p, .flow-box .katex {
+      margin: 0;
+      font-size: 0.6em;
+    }
+    .flow-arrow {
+      font-size: 1.8em;
+      color: #555;
+    }
+
+    /* ─── Slide-specific ─── */
+    .title-slide h1 {
+      font-size: 2.2em;
+      background: linear-gradient(135deg, #aa88ff, #44aaff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.15em;
+    }
+    .title-slide h2 {
+      font-size: 0.85em;
+      color: #888;
+      font-weight: 400;
+      margin-bottom: 1.5em;
+    }
+    .title-slide .meta {
+      font-size: 0.55em;
+      color: #666;
+      margin-top: 0.8em;
+    }
+    .title-slide .meta span { display: block; margin: 0.2em 0; }
+
+    /* Speaker notes styling */
+    .reveal .speaker-controls-notes {
+      font-family: var(--r-main-font);
+      font-size: 0.9em;
+    }
+
+    /* ─── Animated highlight box ─── */
+    .highlight-box {
+      background: linear-gradient(135deg, #aa44ff15, #ff444415);
+      border: 1px solid #aa44ff44;
+      border-radius: 10px;
+      padding: 1rem 1.3rem;
+      margin: 0.8rem 0;
+    }
+
+    /* Gap question */
+    .question-big {
+      font-size: 1.1em;
+      color: #ffdd44;
+      font-style: italic;
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    /* ─── Subtle grid bg ─── */
+    .reveal .slides {
+      background-image:
+        radial-gradient(circle at 20% 80%, rgba(170, 68, 255, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(68, 170, 255, 0.03) 0%, transparent 50%);
+    }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+      <!-- ══════════════════════════════════════════════════════
+           SLIDE 1 — TITLE
+           ══════════════════════════════════════════════════════ -->
+      <section class="title-slide" data-transition="fade">
+        <h1>The Limit of Nature</h1>
+        <h2>Tsirelson's Bound from a Generalised Data Processing Inequality</h2>
+
+        <div style="margin: 2rem 0;">
+          <span style="font-size:0.65em; color:#aa88ff;">Based on Dahlsten, Lercher &amp; Renner — <em>New J. Phys.</em> <strong>14</strong> (2012) 063024</span>
+        </div>
+
+        <div class="meta">
+          <span><strong style="color:#bbb;">Mohammed Boudjemaa&ensp;·&ensp;Yash Kumar Nagar&ensp;·&ensp;Nishchay Vora</strong></span>
+          <span>M2 Quantum Information — February 6, 2026</span>
+        </div>
+
+        <aside class="notes">
+          Good morning. We all know Quantum Mechanics is strange — but today we are
+          asking an even deeper question: <strong>Why isn't it stranger?</strong><br><br>
+          We will explore the physical principle — the <em>Data Processing Inequality</em> —
+          that bounds quantum non-locality at exactly Tsirelson's limit, and not a
+          bit further. Let's begin.
+        </aside>
+      </section>
+
+
+      <!-- ══════════════════════════════════════════════════════
+           SLIDE 2 — THE CORRELATION LANDSCAPE
+           ══════════════════════════════════════════════════════ -->
+      <section data-transition="slide">
+        <h3 style="margin-bottom:0.2em;">The Correlation Landscape</h3>
+        <p class="small dim" style="margin-top:0;">Where does Quantum Mechanics sit?</p>
+
+        <div class="split">
+          <!-- LEFT: text -->
+          <div class="left">
+            <div class="hierarchy-item fragment" data-fragment-index="1">
+              <div class="hierarchy-bar bar-local"></div>
+              <div>
+                <strong class="accent-blu">Local&ensp;(\(\mathcal{L}\))</strong><br>
+                <span class="small">\(S \leq 2\)&ensp;—&ensp;Classical Physics</span>
+              </div>
+            </div>
+
+            <div class="hierarchy-item fragment" data-fragment-index="2">
+              <div class="hierarchy-bar bar-quantum"></div>
+              <div>
+                <strong class="accent-pur">Quantum&ensp;(\(\mathcal{Q}\))</strong><br>
+                <span class="small">\(S \leq 2\sqrt{2} \approx 2.83\)&ensp;—&ensp;Tsirelson's Bound</span>
+              </div>
+            </div>
+
+            <div class="hierarchy-item fragment" data-fragment-index="3">
+              <div class="hierarchy-bar bar-ns"></div>
+              <div>
+                <strong class="accent-red">No-Signaling&ensp;(\(\mathcal{NS}\))</strong><br>
+                <span class="small">\(S \leq 4\)&ensp;—&ensp;Relativity Limit</span>
+              </div>
+            </div>
+
+            <div class="highlight-box fragment" data-fragment-index="4">
+              <strong class="accent-ylw">The Gap:</strong>
+              <span class="small">&ensp;\(\mathcal{L} \subset \mathcal{Q} \subset \mathcal{NS}\)</span><br>
+              <p class="question-big" style="font-size:0.75em;">Why does nature leave space between \(\mathcal{Q}\) and \(\mathcal{NS}\) empty?</p>
+            </div>
+          </div>
+
+          <!-- RIGHT: animation -->
+          <div class="right">
+            <div class="video-box">
+              <video autoplay loop muted playsinline preload="auto">
+                <source src="assets/1_polytope.webm" type="video/webm" />
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <aside class="notes">
+          We visualize the space of all possible theories as nested shapes.<br><br>
+          <strong>Inner shape</strong> — classical physics. Only correlations obeying Bell inequalities.<br>
+          <strong>Outer square</strong> — the No-Signaling limit, everything allowed by Special Relativity.<br>
+          <strong>Quantum Mechanics lives in between</strong>, in this convex body bounded by
+          \(S = 2\sqrt{2} \approx 2.83\).<br><br>
+          The question is: <em>Why can't we reach the corners of the No-Signaling square?
+          Why is there a gap?</em>
+        </aside>
+      </section>
+
+
+      <!-- ══════════════════════════════════════════════════════
+           SLIDE 2b — CHSH BAR COMPARISON (bonus visual)
+           ══════════════════════════════════════════════════════ -->
+      <section data-transition="slide">
+        <h3 style="margin-bottom:0.2em;">The CHSH Score</h3>
+        <p class="small dim" style="margin-top:0;">Quantifying non-locality</p>
+
+        <div style="text-align:center; margin: 0.5rem 0;">
+          <div class="highlight-box" style="display:inline-block;">
+            \[
+              S \;=\; \sum_{x,y} P(a \oplus b = x \cdot y \mid x,y)
+            \]
+          </div>
+        </div>
+
+        <div class="split">
+          <div class="left" style="flex: 0.45;">
+            <ul class="prop-list fragment" data-fragment-index="1">
+              <li><strong class="accent-blu">Classical:</strong>&ensp;Limited by Logic &ensp;\(S \leq 2\)</li>
+              <li><strong class="accent-pur">Quantum:</strong>&ensp;Limited by Tsirelson's Bound &ensp;\(S \leq 2\sqrt{2} \approx 2.83\)</li>
+              <li><strong class="accent-red">No-Signaling:</strong>&ensp;Algebraically allows &ensp;\(S \leq 4\)</li>
+            </ul>
+            <div class="fragment" data-fragment-index="2" style="margin-top:1rem;">
+              <p class="small" style="color:#aa88ff;">
+                Tsirelson (1980) proved that <strong>no quantum state</strong> can exceed
+                \(2\sqrt{2}\). But <em>why</em>?
+              </p>
+            </div>
+          </div>
+          <div class="right" style="flex: 0.55;">
+            <div class="video-box">
+              <video autoplay loop muted playsinline preload="auto">
+                <source src="assets/4_chsh_bars.webm" type="video/webm" />
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <aside class="notes">
+          The CHSH quantity S measures how well two parties can win a specific
+          correlation game. Classical physics gives at most S = 2. Quantum mechanics
+          reaches \(2\sqrt{2} \approx 2.83\). But algebraically, S can go all the way to 4
+          without violating no-signaling. Tsirelson proved the quantum bound in 1980,
+          but the question "Why this value?" remained open for decades.
+        </aside>
+      </section>
+
+
+      <!-- ══════════════════════════════════════════════════════
+           SLIDE 3 — THE PLAYGROUND: GPT
+           ══════════════════════════════════════════════════════ -->
+      <section data-transition="slide">
+        <h3 style="margin-bottom:0.2em;">The Playground:&ensp;<span class="accent-blu">General Probabilistic Theories</span></h3>
+        <p class="small dim" style="margin-top:0;">Beyond Hilbert spaces — an operational framework</p>
+
+        <div class="split">
+          <!-- LEFT: text -->
+          <div class="left">
+            <div class="fragment" data-fragment-index="1">
+              <div class="highlight-box" style="border-color:#ff444444;">
+                <h4 style="color:#888; margin:0 0 0.3rem 0; font-size:0.7em;">❌&ensp;Traditional QM</h4>
+                <p class="small" style="margin:0; color:#888;">States as vectors \(\psi \in \mathcal{H}\) in Hilbert Spaces</p>
+                <p class="small" style="margin:0.2em 0 0; color:#888;">Too specific — assumes the answer!</p>
+              </div>
+            </div>
+
+            <div class="fragment" data-fragment-index="2" style="margin-top:0.8rem;">
+              <div class="highlight-box" style="border-color:#44aaff44;">
+                <h4 style="color:#44aaff; margin:0 0 0.3rem 0; font-size:0.7em;">✓&ensp;Operational View</h4>
+                <p class="small" style="margin:0;">
+                  <strong>Definition of a State</strong> \(\vec{P}\):<br>
+                  A list of probabilities for \(k\) <strong>fiducial measurements</strong>.
+                </p>
+                <p style="margin:0.5rem 0 0; font-size:0.7em; color:white;">
+                  \(\vec{P} = \big( P(i|j) \big)_{i,j}\)
+                </p>
+                <p class="small dim" style="margin:0.2em 0 0;">Outcome \(i\) given measurement \(j\)</p>
+              </div>
+            </div>
+
+            <ul class="prop-list fragment" data-fragment-index="3" style="margin-top:0.6rem;">
+              <li><strong>Convexity:</strong>&ensp;Mixtures of states are valid states</li>
+              <li><strong>Transformations:</strong>&ensp;\(\vec{P} \mapsto M \cdot \vec{P}\)&ensp;(linear maps)</li>
+              <li><strong>Measurements:</strong>&ensp;Effects \(\vec{R}_i\) with \(\vec{R}_i \cdot \vec{P} = P(\text{outcome } i)\)</li>
+            </ul>
+          </div>
+
+          <!-- RIGHT: animation -->
+          <div class="right">
+            <div class="video-box">
+              <video autoplay loop muted playsinline preload="auto">
+                <source src="assets/6_gpt.webm" type="video/webm" />
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <aside class="notes">
+          To ask "Why is QM the way it is?", we can't use QM itself as a framework —
+          that would be circular. Instead, we work in the framework of <strong>General
+          Probabilistic Theories</strong> (GPTs).<br><br>
+          A state is simply defined by the probabilities it assigns to fiducial
+          measurements. We don't assume Hilbert spaces. The set of states must be
+          convex (mixtures are allowed), and transformations are linear maps on
+          these probability vectors.<br><br>
+          Quantum theory, classical probability theory, and exotic theories like
+          "box-world" all fit into this framework.
+        </aside>
+      </section>
+
+
+      <!-- ══════════════════════════════════════════════════════
+           SLIDE 4 — DEFINING REALITY: SYSTEMS OF TYPE (k,l)
+           ══════════════════════════════════════════════════════ -->
+      <section data-transition="slide">
+        <h3 style="margin-bottom:0.2em;">Defining Reality:&ensp;<span class="accent">Systems of Type \((k, l)\)</span></h3>
+        <p class="small dim" style="margin-top:0;">What distinguishes Quantum from Box-World?</p>
+
+        <div class="split">
+          <div class="left" style="text-align:center;">
+            <div class="video-box" style="display:inline-block;">
+              <video data-autoplay loop muted playsinline style="max-height:45vh;">
+                <source src="assets/7_systems.webm" type="video/webm" />
+              </video>
+            </div>
+          </div>
+
+          <div class="right" style="flex-direction:column; align-items:flex-start;">
+            <div class="fragment" data-fragment-index="1">
+              <div class="highlight-box">
+                <p style="font-size:0.7em; margin:0;">
+                  <strong class="accent">System Type \((k, l)\):</strong>&ensp;
+                  \(k\) measurements, \(l\) outcomes each.
+                </p>
+              </div>
+            </div>
+
+            <div class="two-col fragment" data-fragment-index="2" style="margin-top:0.8rem; font-size:0.7em;">
+              <div>
+                <h4 style="color:#44aaff; margin:0 0 0.3rem;">Quantum</h4>
+                <ul class="prop-list">
+                  <li>Continuous measurements</li>
+                  <li>\(k \approx d^2\) fiducial measurements</li>
+                  <li>State space: Bloch sphere</li>
+                </ul>
+              </div>
+              <div>
+                <h4 style="color:#ff9800; margin:0 0 0.3rem;">Box-World</h4>
+                <ul class="prop-list">
+                  <li>Elementary system: type \((2,2)\)</li>
+                  <li>\(k = 2\) fiducial measurements</li>
+                  <li>State space: square (all no-signaling distributions)</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="fragment" data-fragment-index="3" style="margin-top:0.8rem;">
+              <div class="highlight-box" style="border-color:#ffdd4444;">
+                <p style="font-size:0.65em; margin:0; color:#ffdd44;">
+                  <strong>PR-Box:</strong> Lives in box-world. Defined by the marginal probabilities
+                  of just 2 measurements on a \((2,2)\) system.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <aside class="notes">
+          In GPTs, we classify systems by their "type" \((k, l)\): the number of
+          fiducial measurements \(k\) and outcomes per measurement \(l\).<br><br>
+          <strong>Quantum theory</strong> for a qubit has \(k = d^2 = 4\), with a
+          continuous set of measurements and the Bloch sphere as state space.<br><br>
+          <strong>Box-world</strong> is the theory where elementary systems have type
+          \((2,2)\) and the state space includes <em>all</em> no-signaling distributions.
+          Its state space is a square — larger than the Bloch disk. The PR-box lives
+          at its corners.
+        </aside>
+      </section>
+
+
+      <!-- ══════════════════════════════════════════════════════
+           SLIDE 5 — COMPOSITE SYSTEMS & NO-SIGNALING
+           ══════════════════════════════════════════════════════ -->
+      <section data-transition="slide">
+        <h3 style="margin-bottom:0.2em;">The Rules:&ensp;<span class="accent-grn">Composite Systems &amp; No-Signaling</span></h3>
+        <p class="small dim" style="margin-top:0;">How systems combine — and what they cannot do</p>
+
+        <div class="split">
+          <div class="left">
+            <div class="fragment" data-fragment-index="1">
+              <div class="highlight-box">
+                <h4 style="color:#aa88ff; margin:0 0 0.3rem 0; font-size:0.75em;">1. Composite Systems</h4>
+                <p style="font-size:0.7em; margin:0;">
+                  If Alice has space \(V_A\) and Bob has \(V_B\):
+                </p>
+                <p style="font-size:0.85em; margin:0.4rem 0 0; text-align:center; color:white;">
+                  \(V_{AB} = V_A \otimes V_B\)
+                </p>
+                <p class="small dim" style="margin:0.2em 0 0;">
+                  Joint state defined by \(P(ii'|jj')\).
+                </p>
+              </div>
+            </div>
+
+            <div class="fragment" data-fragment-index="2" style="margin-top:0.8rem;">
+              <div class="highlight-box">
+                <h4 style="color:#aa88ff; margin:0 0 0.3rem 0; font-size:0.75em;">2. No-Signaling Principle</h4>
+                <p style="font-size:0.7em; margin:0;">
+                  Marginals are independent of remote settings:
+                </p>
+                <p style="font-size:0.85em; margin:0.4rem 0 0; text-align:center; color:white;">
+                  \(P_A(i|j) = \sum_{i'} P_{AB}(ii'|jj')\)
+                </p>
+                <p class="small dim" style="margin:0.2em 0 0;">
+                  Measuring B cannot reveal what transformation was applied to A.
+                </p>
+              </div>
+            </div>
+
+            <div class="fragment" data-fragment-index="3" style="margin-top:0.8rem;">
+              <div class="highlight-box" style="border-color:#ffdd4444; background:linear-gradient(135deg, #ffdd4410, #ff444410);">
+                <p style="font-size:0.7em; margin:0; color:#ffdd44; font-weight:bold;">
+                  Key Point: Box-world satisfies all these rules...
+                  yet it violates Tsirelson's bound.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="right">
+            <div class="video-box">
+              <video autoplay loop muted playsinline preload="auto">
+                <source src="assets/8_composite.webm" type="video/webm" />
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <aside class="notes">
+          In the GPT framework, composite systems are built via the tensor product
+          \(V_{AB} = V_A \otimes V_B\). The joint state is fully specified by
+          probabilities \(P(ii'|jj')\).<br><br>
+          No-signaling follows automatically from the assumption that operations
+          on A and B can be applied in any order. It means Alice's marginal
+          statistics don't depend on what Bob does.<br><br>
+          <strong>The critical point:</strong> Box-world satisfies all these structural
+          rules — convexity, tensor products, no-signaling — yet its correlations
+          can violate Tsirelson's bound. So we need an <em>additional</em> principle
+          to recover the quantum limit. That principle is the Data Processing Inequality.
+        </aside>
+      </section>
+
+
+      <!-- ══════════════════════════════════════════════════════
+           SLIDE 6 — THE SUSPECT: PR-BOXES
+           ══════════════════════════════════════════════════════ -->
+      <section data-transition="slide">
+        <h3 style="margin-bottom:0.2em;">The Suspect:&ensp;<span class="accent-ylw">PR-Boxes</span></h3>
+        <p class="small dim" style="margin-top:0;">Popescu &amp; Rohrlich (1994)</p>
+
+        <div class="split">
+          <!-- LEFT: definition -->
+          <div class="left">
+            <div class="highlight-box fragment" data-fragment-index="1">
+              <h4 style="color:#ffdd44; margin:0 0 0.5rem 0; font-size:0.8em;">Definition</h4>
+              <p class="small" style="margin:0;">
+                A hypothetical device with inputs \(x, y \in \{0,1\}\) and outputs
+                \(a, b \in \{0,1\}\) such that:
+              </p>
+            </div>
+
+            <ul class="prop-list fragment" data-fragment-index="2">
+              <li class="good">\(P(a = b \mid 00) = 1\)&ensp;— perfect correlation</li>
+              <li class="good">\(P(a = b \mid 01) = 1\)</li>
+              <li class="good">\(P(a = b \mid 10) = 1\)</li>
+              <li class="bad">\(P(a \neq b \mid 11) = 1\)&ensp;— anti-correlation</li>
+            </ul>
+
+            <div class="fragment" data-fragment-index="3" style="margin-top:0.8rem;">
+              <ul class="prop-list">
+                <li class="good" style="border:none;"><strong>CHSH Score:</strong>&ensp;
+                  <span class="accent-ylw" style="font-size:1.1em;">\(S = 4\)</span>&ensp;(maximal!)</li>
+                <li class="good" style="border:none;">Respects <strong>No-Signaling</strong> — marginals are uniform</li>
+                <li class="bad" style="border:none;"><strong>Violates Tsirelson's Bound</strong></li>
+              </ul>
+            </div>
+
+            <div class="fragment" data-fragment-index="4">
+              <p class="question-big" style="font-size:0.7em;">
+                It doesn't violate relativity. So why doesn't nature allow it?
+              </p>
+            </div>
+          </div>
+
+          <!-- RIGHT: animation -->
+          <div class="right">
+            <div class="video-box">
+              <video autoplay loop muted playsinline preload="auto">
+                <source src="assets/2_prbox.webm" type="video/webm" />
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <aside class="notes">
+          At the corner of the No-Signaling square lives the "PR-Box", proposed by
+          Popescu and Rohrlich in 1994.<br><br>
+          It is designed to win the CHSH game 100% of the time (\(S=4\)). Its local
+          marginals are uniformly random — so it <em>cannot</em> be used to send signals
+          faster than light. Strictly speaking, it is a <em>valid</em> physical theory
+          from the No-Signaling perspective.<br><br>
+          But we don't see it in our universe. We need a <strong>new principle</strong>
+          — beyond just no-signaling — to rule it out.
+        </aside>
+      </section>
+
+
+      <!-- ══════════════════════════════════════════════════════
+           SLIDE 7 — THE DEEPER SUSPECT: DPI
+           ══════════════════════════════════════════════════════ -->
+      <section data-transition="slide">
+        <h3 style="margin-bottom:0.2em;">The Deeper Suspect:&ensp;<span class="accent-ylw">Data Processing Inequality</span></h3>
+        <p class="small dim" style="margin-top:0;">Correlations cannot be created locally</p>
+
+        <div class="split">
+          <div class="left">
+            <div class="fragment" data-fragment-index="1">
+              <div class="highlight-box" style="border-color:#ffdd4444;">
+                <h4 style="color:#ffdd44; margin:0 0 0.4rem 0; font-size:0.75em;">The Claim</h4>
+                <p style="font-size:0.75em; margin:0; color:white;">
+                  If a theory respects <strong class="accent-ylw">DPI</strong>,
+                  it respects <strong class="accent-pur">Tsirelson's Bound</strong>.
+                </p>
+              </div>
+            </div>
+
+            <div class="fragment" data-fragment-index="2" style="margin-top:0.8rem;">
+              <div class="highlight-box">
+                <h4 style="color:#aa88ff; margin:0 0 0.4rem 0; font-size:0.75em;">Data Processing Inequality (DPI)</h4>
+                <p style="font-size:0.7em; margin:0;">
+                  For any state \(\vec{P}_{AB}\) and any local transformation \(T: B \to B'\):
+                </p>
+                <p style="font-size:0.9em; margin:0.5rem 0; text-align:center; color:white;">
+                  \(H(A|B)_{\vec{P}_{AB}} \;\leq\; H(A|B')_{(\mathbb{1} \otimes T)\vec{P}_{AB}}\)
+                </p>
+                <p class="small dim" style="margin:0;">
+                  Local operations on B cannot increase the correlations between A and B.
+                </p>
+              </div>
+            </div>
+
+            <ul class="prop-list fragment" data-fragment-index="3" style="margin-top:0.6rem;">
+              <li>\(H(A|B)\) = conditional entropy = \(H(AB) - H(B)\) &ensp;(COND)</li>
+              <li>\(H\) reduces to Shannon entropy for classical systems &ensp;(SHAN)</li>
+              <li>DPI + COND + SHAN &ensp;\(\Rightarrow\)&ensp; Tsirelson's Bound</li>
+            </ul>
+          </div>
+
+          <div class="right">
+            <div class="video-box">
+              <video autoplay loop muted playsinline preload="auto">
+                <source src="assets/5_dpi.webm" type="video/webm" />
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <aside class="notes">
+          Here is the central claim of the paper: if any generalized probabilistic
+          theory respects the Data Processing Inequality, then it automatically
+          respects Tsirelson's bound.<br><br>
+          DPI says: applying a local operation T on Bob's system <em>cannot increase</em>
+          the correlations between Alice and Bob, as measured by conditional entropy.<br><br>
+          The proof uses three ingredients: DPI itself, the definition of conditional
+          entropy (COND), and the fact that entropy reduces to Shannon entropy for
+          classical systems (SHAN). These three conditions together imply information
+          causality, which in turn implies Tsirelson's bound.<br><br>
+          Box-world <em>violates</em> DPI (and strong subadditivity), which is precisely
+          why it can exceed the quantum limit.
+        </aside>
+      </section>
+
+
+      <!-- ══════════════════════════════════════════════════════
+           SLIDE 8 — THE PROBE: RANDOM ACCESS CODES
+           ══════════════════════════════════════════════════════ -->
+      <section data-transition="slide">
+        <h3 style="margin-bottom:0.2em;">The Probe:&ensp;<span class="accent">Random Access Codes</span></h3>
+        <p class="small dim" style="margin-top:0;">van Dam's Game — measuring information capacity</p>
+
+        <!-- Flow diagram -->
+        <div class="flow fragment" data-fragment-index="1">
+          <div class="flow-box" style="border-color:#00bfa5;">
+            <h4 style="color:#00bfa5;">Alice</h4>
+            <p>\(\vec{a} = (a_0, a_1)\)</p>
+            <p class="tiny dim">2 random bits</p>
+          </div>
+
+          <div class="flow-arrow">→</div>
+
+          <div class="flow-box" style="border-color:#ff9800;">
+            <h4 style="color:#ff9800;">Channel</h4>
+            <p>\(\vec{x}\)&ensp;(1 bit)</p>
+            <p class="tiny dim">Classical message</p>
+          </div>
+
+          <div class="flow-arrow">→</div>
+
+          <div class="flow-box" style="border-color:#448aff;">
+            <h4 style="color:#448aff;">Bob</h4>
+            <p>Input \(b \in \{0,1\}\)</p>
+            <p>Outputs guess \(\beta\)</p>
+          </div>
+        </div>
+
+        <!-- Shared resource line -->
+        <div class="fragment" data-fragment-index="2" style="text-align:center; margin:0.6rem 0 0.3rem 0;">
+          <div style="display:inline-flex; align-items:center; gap:0.5rem;">
+            <span style="width:60px; border-top: 2px dashed #aa44ff;"></span>
+            <span class="small accent-pur">Shared Resource (entanglement / PR-Box)</span>
+            <span style="width:60px; border-top: 2px dashed #aa44ff;"></span>
+          </div>
+        </div>
+
+        <div class="split fragment" data-fragment-index="3">
+          <div class="left" style="flex:1;">
+            <div class="highlight-box" style="font-size:0.7em;">
+              <strong class="accent-ylw">The Goal:</strong>&ensp;Bob wants to guess \(a_b\).<br>
+              <strong class="accent-ylw">The Constraint:</strong>&ensp;Alice sends only \(m = 1\) bit.<br>
+              <strong class="accent-ylw">Efficiency:</strong>&ensp;\(\eta = P(\beta = a_b)\)
+            </div>
+          </div>
+          <div class="right" style="flex:1;">
+            <div class="video-box" style="max-width:420px;">
+              <video autoplay loop muted playsinline preload="auto">
+                <source src="assets/3_rac.webm" type="video/webm" />
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <div class="fragment" data-fragment-index="4" style="margin-top:0.5rem;">
+          <div class="highlight-box" style="text-align:center;">
+            <p style="font-size:0.7em; margin:0;">
+              <strong class="accent">Information Causality</strong> states:&ensp;
+              \(\displaystyle\sum_i I(a_i : \beta \mid b=i) \;\leq\; m\)
+            </p>
+            <p class="small dim" style="margin:0.3em 0 0;">
+              The total information Bob extracts about Alice's bits cannot exceed what she sent.
+            </p>
+          </div>
+        </div>
+
+        <aside class="notes">
+          To convict the PR-box, we don't measure energy or momentum. We measure
+          <strong>Information Capacity</strong>.<br><br>
+          We play a game: Alice has 2 random bits. She can only send 1 classical bit
+          to Bob. Bob must guess one of Alice's bits, chosen at random.<br><br>
+          In a classical world, Bob can't do better than guessing one bit perfectly
+          and the other at random. But what if they share a PR-box?<br><br>
+          <strong>Information Causality</strong> says: the total mutual information Bob
+          can extract is bounded by the number of bits Alice sent.<br><br>
+          My colleague [Speaker 2] will now show how this simple game <em>exposes
+          the crime</em> of the PR-box — and how the Data Processing Inequality is the
+          deeper principle behind it all.
+        </aside>
+      </section>
+
+
+    </div><!-- /slides -->
+  </div><!-- /reveal -->
+
+
+  <!-- ─── Reveal.js + plugins ─── -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+
+  <script>
+    Reveal.initialize({
+      // Presentation settings
+      hash: true,
+      history: true,
+      center: true,
+      transition: 'slide',
+      transitionSpeed: 'default',
+      backgroundTransition: 'fade',
+      slideNumber: 'c/t',
+      showNotes: false,          // Press 'S' for speaker view
+
+      // Navigation
+      mouseWheel: true,          // Scroll to navigate slides
+      keyboard: true,            // Space / arrows to navigate
+      touch: true,               // Touch swipe on mobile
+      navigationMode: 'linear',  // Linear navigation for scroll
+
+      // Aspect ratio
+      width: 1920,
+      height: 1080,
+
+      // Plugins
+      plugins: [RevealNotes, RevealMath.KaTeX, RevealHighlight],
+
+      // KaTeX options
+      katex: {
+        local: 'https://cdn.jsdelivr.net/npm/katex@0.16.11',
+        trust: true,
+        macros: {
+          "\\RR": "\\mathbb{R}",
+        },
+      },
+    });
+
+    // ─── Auto-play / pause videos on slide change ───
+    function handleSlideVideos(event) {
+      // Pause all videos
+      document.querySelectorAll('video').forEach(function(v) {
+        v.pause();
+      });
+      // Play videos on current slide
+      var slide = event.currentSlide;
+      if (slide) {
+        slide.querySelectorAll('video').forEach(function(v) {
+          v.currentTime = 0;
+          v.play().catch(function() {});
+        });
+      }
+    }
+    Reveal.on('slidechanged', handleSlideVideos);
+    Reveal.on('ready', handleSlideVideos);
+  </script>
+</body>
+</html>

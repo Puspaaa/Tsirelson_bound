@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Crime &amp; The Law — Speaker 2</title>
+
+  <!-- Reveal.js core -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" id="theme" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css" />
+
+  <!-- KaTeX -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
+
+  <style>
+    /* ─── Global Theme (matches Speaker 1) ─── */
+    :root {
+      --r-background-color: #0f0f1a;
+      --r-main-font: 'Inter', 'Segoe UI', system-ui, sans-serif;
+      --r-heading-font: 'Inter', 'Segoe UI', system-ui, sans-serif;
+      --r-main-font-size: 32px;
+      --r-heading-color: #e0e0ff;
+      --r-main-color: #c8c8e0;
+      --r-link-color: #aa88ff;
+      --r-selection-background-color: #aa44ff55;
+    }
+    .reveal { font-family: var(--r-main-font); }
+    .reveal h1, .reveal h2, .reveal h3 {
+      font-weight: 700; text-transform: none; letter-spacing: -0.02em;
+    }
+
+    /* ─── Utility classes ─── */
+    .accent     { color: #aa88ff; }
+    .accent-red { color: #ff5555; }
+    .accent-grn { color: #55ff99; }
+    .accent-ylw { color: #ffdd44; }
+    .accent-blu { color: #44aaff; }
+    .accent-pur { color: #aa44ff; }
+    .accent-org { color: #ff9800; }
+    .small      { font-size: 0.65em; }
+    .tiny       { font-size: 0.50em; }
+    .dim        { opacity: 0.55; }
+    .left-align { text-align: left; }
+
+    /* ─── Split layout ─── */
+    .split {
+      display: flex; gap: 2rem; align-items: center;
+      justify-content: center; width: 100%;
+    }
+    .split > .left  { flex: 1; text-align: left; }
+    .split > .right { flex: 1; display: flex; justify-content: center; align-items: center; }
+
+    /* ─── Video container ─── */
+    .video-box {
+      border: 1px solid #333; border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 0 30px rgba(170, 68, 255, 0.15);
+    }
+    .video-box video {
+      display: block; max-width: 100%; max-height: 55vh; background: #000;
+    }
+
+    /* ─── Hierarchy bars ─── */
+    .hierarchy-item {
+      display: flex; align-items: center; gap: 0.8rem;
+      margin: 0.5rem 0; font-size: 0.8em;
+    }
+    .hierarchy-bar { height: 8px; border-radius: 4px; flex-shrink: 0; }
+    .bar-local    { width: 80px;  background: #44aaff; }
+    .bar-quantum  { width: 140px; background: #aa44ff; }
+    .bar-ns       { width: 200px; background: #ff4444; }
+
+    /* ─── Two-column layout ─── */
+    .two-col {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 2rem; align-items: start; text-align: left;
+    }
+
+    /* ─── Property list ─── */
+    .prop-list { list-style: none; padding: 0; margin: 0; }
+    .prop-list li {
+      padding: 0.3em 0; font-size: 0.75em; border-bottom: 1px solid #ffffff10;
+    }
+    .prop-list li::before  { content: '▸ '; color: #aa88ff; }
+    .prop-list li.bad::before  { content: '✗ '; color: #ff5555; }
+    .prop-list li.good::before { content: '✓ '; color: #55ff99; }
+
+    /* ─── Flow diagram ─── */
+    .flow {
+      display: flex; align-items: center; justify-content: center;
+      gap: 0.5rem; flex-wrap: wrap;
+    }
+    .flow-box {
+      background: #1a1a2e; border: 2px solid; border-radius: 12px;
+      padding: 1rem 1.2rem; text-align: center; min-width: 140px;
+    }
+    .flow-box h4 { margin: 0 0 0.3rem 0; font-size: 0.75em; font-weight: 700; }
+    .flow-box p, .flow-box .katex { margin: 0; font-size: 0.6em; }
+    .flow-arrow { font-size: 1.8em; color: #555; }
+
+    /* ─── Title slide ─── */
+    .title-slide h1 {
+      font-size: 2.2em;
+      background: linear-gradient(135deg, #ff5555, #ffdd44);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text; margin-bottom: 0.15em;
+    }
+    .title-slide h2 {
+      font-size: 0.85em; color: #888; font-weight: 400; margin-bottom: 1.5em;
+    }
+    .title-slide .meta {
+      font-size: 0.55em; color: #666; margin-top: 0.8em;
+    }
+    .title-slide .meta span { display: block; margin: 0.2em 0; }
+
+    /* ─── Highlight box ─── */
+    .highlight-box {
+      background: linear-gradient(135deg, #aa44ff15, #ff444415);
+      border: 1px solid #aa44ff44; border-radius: 10px;
+      padding: 1rem 1.3rem; margin: 0.8rem 0;
+    }
+
+    /* ─── Question callout ─── */
+    .question-big {
+      font-size: 1.1em; color: #ffdd44;
+      font-style: italic; text-align: center; margin-top: 1rem;
+    }
+
+    /* ─── Subtle grid bg ─── */
+    .reveal .slides {
+      background-image:
+        radial-gradient(circle at 20% 80%, rgba(255, 68, 68, 0.03) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(255, 221, 68, 0.03) 0%, transparent 50%);
+    }
+
+    /* ─── Bound badge (Speaker 2 special) ─── */
+    .bound-badge {
+      display: inline-block;
+      padding: 0.4em 1em;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.85em;
+      margin: 0.3em;
+    }
+    .bound-classical { background: #44aaff22; border: 2px solid #44aaff; color: #44aaff; }
+    .bound-quantum   { background: #aa44ff22; border: 2px solid #aa44ff; color: #aa44ff; }
+    .bound-ns        { background: #ff444422; border: 2px solid #ff4444; color: #ff4444; }
+
+    /* ─── Verdict card ─── */
+    .verdict-card {
+      background: #0a0a1a;
+      border: 2px solid;
+      border-radius: 14px;
+      padding: 1.2rem 1.5rem;
+      text-align: center;
+    }
+    .verdict-card h4 {
+      margin: 0 0 0.5rem 0;
+      font-size: 0.85em;
+    }
+    .verdict-card .katex {
+      font-size: 0.75em;
+    }
+    .verdict-pass { border-color: #55ff99; }
+    .verdict-fail { border-color: #ff5555; }
+
+    /* ─── Chain section ─── */
+    .chain-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.8rem;
+      margin: 1rem 0;
+    }
+    .chain-node {
+      background: #1a1a2e;
+      border: 2px solid;
+      border-radius: 14px;
+      padding: 0.8rem 1.2rem;
+      text-align: center;
+      min-width: 180px;
+    }
+    .chain-node h4 { margin: 0 0 0.3rem 0; font-size: 0.7em; font-weight: 700; }
+    .chain-node p  { margin: 0; font-size: 0.55em; color: #99a; }
+    .chain-arrow {
+      font-size: 2em;
+      color: #ffdd44;
+    }
+
+    /* ─── Stamp overlay ─── */
+    .stamp {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%) rotate(15deg);
+      font-size: 4em;
+      font-weight: 900;
+      font-family: 'Courier New', monospace;
+      letter-spacing: 0.1em;
+      padding: 0.2em 0.6em;
+      border: 6px solid;
+      border-radius: 10px;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 10;
+    }
+    .stamp.violation {
+      color: #ff4444; border-color: #ff4444;
+    }
+
+    /* ─── Step explanation blocks ─── */
+    .step-block {
+      background: #12122a;
+      border-left: 4px solid #aa44ff;
+      border-radius: 0 10px 10px 0;
+      padding: 0.8rem 1.2rem;
+      margin: 0.5rem 0;
+      text-align: left;
+    }
+    .step-block.orange { border-left-color: #ff9800; }
+    .step-block.blue   { border-left-color: #44aaff; }
+    .step-block.green  { border-left-color: #55ff99; }
+  </style>
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+
+      <!-- ══════════════════════════════════════════════════════
+           SLIDE 1 — TITLE: THE CRIME & THE LAW
+           ══════════════════════════════════════════════════════ -->
+      <section class="title-slide" data-transition="fade">
+        <h1>The Crime &amp; The Law</h1>
+        <h2>Why Nature Refuses to Be Maximally Non-Local</h2>
+
+        <div style="margin: 1.5rem 0;">
+          <span class="bound-badge bound-classical">Classical: $S \leq 2$</span>
+          <span class="bound-badge bound-quantum">Tsirelson: $S \leq 2\sqrt{2}$</span>
+          <span class="bound-badge bound-ns">No-Signaling: $S \leq 4$</span>
+        </div>
+
+        <p class="small dim" style="margin-top: 1rem;">
+          Speaker 2&ensp;·&ensp;Mohammed Boudjemaa,&ensp;Yash Kumar Nagar,&ensp;Nishchay Vora
+        </p>
+        <p class="tiny dim">M2 Quantum Information — February 6, 2026</p>
+
+        <aside class="notes">
+          Welcome back. Speaker 1 set up the landscape of correlations.
+          Now I pick up from where they left off — we've seen the hierarchy,
+          we've seen the CHSH game. Now let's ask: what exactly IS Tsirelson's bound,
+          what violates it, and what fundamental law prevents Nature from going further?
+        </aside>
+      </section>
+
+
+      <!-- ══════════════════════════════════════════════════════
+           SLIDE 2 — TSIRELSON'S BOUND
+           ══════════════════════════════════════════════════════ -->
+      <section data-transition="slide">
+        <h2 style="margin-bottom:0.3em;">
+          <span class="accent-pur">Tsirelson's Bound</span>
+          <span class="small dim" style="margin-left:0.5em;">(1980)</span>
+        </h2>
+
+        <div class="split">
+          <div class="left">
+            <div class="highlight-box" style="margin-bottom: 1rem;">
+              <p class="small" style="margin:0 0 0.5rem 0; color:#99a;">
+                <strong>Theorem.</strong> For any quantum strategy using shared entanglement:
+              </p>
+              <p style="text-align:center; font-size:1.1em; margin:0;">
+                $2 - \sqrt{2} \;\leq\; S \;\leq\; 2 + \sqrt{2}$
+              </p>
+            </div>
+
+            <p class="small" style="margin-bottom: 0.6rem;">
+              where the <span class="accent-pur">CHSH score</span> is defined as:
+            </p>
+            <p style="text-align:center; font-size:0.85em;">
+              $S = \displaystyle\sum_{x,y \in \{0,1\}} P(a \oplus b = x \cdot y \mid x, y)$
+            </p>
+
+            <div style="margin-top: 1.2rem;">
+              <div class="hierarchy-item">
+                <div class="hierarchy-bar bar-local"></div>
+                <span class="accent-blu small">Classical limit: $S = 2$</span>
+              </div>
+              <div class="hierarchy-item">
+                <div class="hierarchy-bar bar-quantum"></div>
+                <span class="accent-pur small">Quantum limit: $S = 2\sqrt{2} \approx 2.83$</span>
+              </div>
+              <div class="hierarchy-item">
+                <div class="hierarchy-bar bar-ns"></div>
+                <span class="accent-red small">No-signaling: $S = 4$ (algebraic max)</span>
+              </div>
+            </div>
+
+            <p class="question-big" style="font-size: 0.85em; margin-top: 1rem;">
+              Why does nature stop at $2\sqrt{2}$ and not at $4$?
+            </p>
+          </div>
+          <div class="right">
+            <div class="video-box">
+              <video autoplay loop muted playsinline preload="auto">
+                <source src="assets/s2_tsirelson_gauge.webm" type="video/webm" />
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <aside class="notes">
+          Tsirelson's bound tells us that quantum mechanics can outperform
+          classical physics in the CHSH game — but only up to a point.
+          The maximum quantum CHSH score is 2 plus root 2, approximately 2.83.
+          This is strictly less than the algebraic maximum of 4 allowed by
+          no-signaling. The animation shows a gauge sweeping through regions:
+          classical, quantum, and the forbidden zone beyond Tsirelson's limit.
+          Watch how the needle bounces back — nature refuses to cross that line.
+        </aside>
+      </section>
+
+
+      <!-- ══════════════════════════════════════════════════════
+           SLIDE 3 — THE PR-BOX: PERFECT CRIME
+           ══════════════════════════════════════════════════════ -->
+      <section data-transition="slide">
+        <h2 style="margin-bottom:0.3em;">
+          <span class="accent-red">The PR-Box</span>
+          <span class="small dim" style="margin-left:0.5em;">Popescu &amp; Rohrlich, 1994</span>
+        </h2>
+
+        <div class="split">
+          <div class="left">
+            <p class="small" style="margin-bottom: 0.5rem;">
+              A hypothetical device with the <span class="accent-ylw">perfect correlation rule</span>:
+            </p>
+
+            <div class="highlight-box" style="text-align: center;">
+              <p style="font-size:1.2em; margin:0;">
+                $a \oplus b = x \cdot y$
+              </p>
+              <p class="tiny dim" style="margin-top:0.3em;">
+                Always satisfied &mdash; deterministically, for every input pair
+              </p>
+            </div>
+
+            <div style="margin-top: 1rem;">
+              <div class="step-block">
+                <p class="small" style="margin:0;">
+                  <strong class="accent-ylw">Winning probability:</strong>
+                  $P(\text{win}) = 1$ for all inputs $(x,y)$
+                </p>
+              </div>
+              <div class="step-block orange">
+                <p class="small" style="margin:0;">
+                  <strong class="accent-org">CHSH score:</strong>
+                  $S = 4$ — the algebraic maximum
+                </p>
+              </div>
+              <div class="step-block green">
+                <p class="small" style="margin:0;">
+                  <strong class="accent-grn">No-signaling?</strong>
+                  Yes! Marginals are uniform: $P(a|x) = P(b|y) = \tfrac{1}{2}$
+                </p>
+              </div>
+            </div>
+
+            <p class="question-big" style="font-size: 0.8em; margin-top: 0.8rem;">
+              If it doesn't violate relativity, why doesn't it exist?
+            </p>
+          </div>
+          <div class="right">
+            <div class="video-box">
+              <video autoplay loop muted playsinline preload="auto">
+                <source src="assets/s2_prbox_crime.webm" type="video/webm" />
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <aside class="notes">
+          The PR-box is a thought experiment: a hypothetical device that satisfies
+          a-XOR-b equals x-AND-y for EVERY input pair, achieving a perfect CHSH
+          score of 4. It respects no-signaling — the marginals are completely
+          uniform, so neither Alice nor Bob can signal. Yet it obliterates
+          Tsirelson's bound. The animation builds a truth table row by row,
+          showing all four input combinations winning perfectly, then reveals the
+          S=4 score with a VIOLATION stamp. If no-signaling isn't enough to
+          exclude it, what law of physics does?
+        </aside>
+      </section>
+
+
+      <!-- ══════════════════════════════════════════════════════
+           SLIDE 4 — INFORMATION CAUSALITY
+           ══════════════════════════════════════════════════════ -->
+      <section data-transition="slide">
+        <h2 style="margin-bottom:0.3em;">
+          <span class="accent-pur">Information Causality</span>
+          <span class="small dim" style="margin-left:0.5em;">Pawłowski et al., 2009</span>
+        </h2>
+
+        <div class="split">
+          <div class="left">
+            <p class="small" style="margin-bottom: 0.6rem;">
+              A <span class="accent-pur">physical principle</span> constraining correlations:
+            </p>
+
+            <div class="highlight-box" style="text-align:center; margin-bottom: 0.8rem;">
+              <p class="small" style="margin:0 0 0.5rem 0; color:#99a;">
+                <strong>IC Principle.</strong> If Alice sends $m$ bits to Bob:
+              </p>
+              <p style="font-size:1em; margin:0;">
+                $I \;=\; \displaystyle\sum_{i=0}^{N-1} I_{\text{Sh}}(a_i : \beta \mid b = i) \;\leq\; m$
+              </p>
+            </div>
+
+            <div class="step-block" style="border-left-color: #aa44ff;">
+              <p class="small" style="margin:0;">
+                <strong class="accent-pur">The game:</strong>
+                Alice has $N$ random bits $(a_0, \ldots, a_{N-1})$.
+                She sends $m$ bits to Bob. Bob receives random index $b$
+                and must guess $a_b$.
+              </p>
+            </div>
+
+            <div class="step-block blue" style="margin-top: 0.3rem;">
+              <p class="small" style="margin:0;">
+                <strong class="accent-blu">Meaning:</strong>
+                Total accessible information $\leq$ bits communicated.
+                No free lunch from shared resources!
+              </p>
+            </div>
+
+            <div style="display: flex; gap: 1rem; margin-top: 0.8rem; justify-content: center;">
+              <div class="verdict-card verdict-pass" style="flex:1; max-width: 220px;">
+                <h4 class="accent-grn">Quantum</h4>
+                <p class="small">$I \leq m$</p>
+                <p class="tiny accent-grn" style="margin-top:0.3em;">&#10003; PASSES</p>
+              </div>
+              <div class="verdict-card verdict-fail" style="flex:1; max-width: 220px;">
+                <h4 class="accent-red">PR-Box</h4>
+                <p class="small">$I > m$</p>
+                <p class="tiny accent-red" style="margin-top:0.3em;">&#10007; FAILS</p>
+              </div>
+            </div>
+          </div>
+          <div class="right">
+            <div class="video-box">
+              <video autoplay loop muted playsinline preload="auto">
+                <source src="assets/s2_ic_game.webm" type="video/webm" />
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <aside class="notes">
+          Information Causality is the key insight from Pawlowski et al.
+          The total information Bob can access about Alice's data cannot
+          exceed the number of classical bits she sent — even with shared
+          entanglement or any no-signaling resource. Quantum mechanics
+          satisfies this beautifully. But the PR-box violates it: with a
+          PR-box, Bob could extract more information than Alice sent,
+          which would be a form of superluminal information transfer dressed
+          up in correlations. The animation shows the game setup and the
+          pass/fail verdict.
+        </aside>
+      </section>
+
+
+      <!-- ══════════════════════════════════════════════════════
+           SLIDE 5 — GENERALIZED ENTROPY & DPI
+           ══════════════════════════════════════════════════════ -->
+      <section data-transition="slide">
+        <h2 style="margin-bottom: 0.3em;">
+          <span class="accent-org">General Entropy</span>
+          <span class="small">&amp;</span>
+          <span class="accent-ylw">DPI</span>
+        </h2>
+
+        <div class="split">
+          <div class="left">
+            <p class="small" style="margin-bottom: 0.5rem;">
+              <strong>Dahlsten, Lercher &amp; Renner</strong> show that three
+              natural axioms imply Tsirelson's bound:
+            </p>
+
+            <div class="step-block orange">
+              <p class="small" style="margin:0;">
+                <strong class="accent-org">COND</strong> — Conditioning on
+                measurement outcomes gives valid sub-states
+              </p>
+            </div>
+            <div class="step-block" style="border-left-color: #ffdd44;">
+              <p class="small" style="margin:0;">
+                <strong class="accent-ylw">SHAN</strong> — Entropy of
+                classical states equals Shannon entropy
+              </p>
+            </div>
+            <div class="step-block" style="border-left-color: #ff5555;">
+              <p class="small" style="margin:0;">
+                <strong class="accent-red">DPI</strong> — Data-processing
+                inequality: $H(A \mid B) \leq H(A \mid T(B))$
+              </p>
+            </div>
+
+            <div class="highlight-box" style="margin-top: 0.8rem; text-align: center;">
+              <p class="small dim" style="margin:0 0 0.5rem 0;">
+                Where the generalized entropy is:
+              </p>
+              <p style="font-size: 0.85em; margin: 0;">
+                $H(\vec{P}) = \min_{e \in \mathcal{M}^*} H_{\text{Sh}}\!\bigl(e(\vec{P})\bigr)$
+              </p>
+              <p class="tiny dim" style="margin-top:0.3em;">
+                Minimized over all fine-grained measurements
+              </p>
+            </div>
+
+            <div class="chain-row" style="margin-top: 0.8rem;">
+              <div class="chain-node" style="border-color: #ff9800;">
+                <h4 class="accent-org">DPI</h4>
+                <p>+ COND + SHAN</p>
+              </div>
+              <span class="chain-arrow">⟹</span>
+              <div class="chain-node" style="border-color: #aa44ff;">
+                <h4 class="accent-pur">IC</h4>
+                <p>$I \leq m$</p>
+              </div>
+              <span class="chain-arrow">⟹</span>
+              <div class="chain-node" style="border-color: #44aaff;">
+                <h4 class="accent-blu">Tsirelson</h4>
+                <p>$S \leq 2\sqrt{2}$</p>
+              </div>
+            </div>
+          </div>
+          <div class="right">
+            <div class="video-box">
+              <video autoplay loop muted playsinline preload="auto">
+                <source src="assets/s2_entropy.webm" type="video/webm" />
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <aside class="notes">
+          This is the core result of the paper. Dahlsten, Lercher and Renner
+          define a generalized entropy — the minimum Shannon entropy over all
+          fine-grained measurements — and show it satisfies the Data Processing
+          Inequality in quantum mechanics. Combined with two other mild axioms
+          (COND and SHAN), the DPI implies Information Causality, which in
+          turn implies Tsirelson's bound. The animation visualizes how different
+          measurements give different Shannon entropies, and the generalized
+          entropy picks the minimum. The chain at the bottom shows the
+          logical flow: DPI implies IC implies Tsirelson's bound.
+        </aside>
+      </section>
+
+
+      <!-- ══════════════════════════════════════════════════════
+           SLIDE 6 — THE LOGICAL CHAIN (FULL ANIMATION)
+           ══════════════════════════════════════════════════════ -->
+      <section data-transition="slide">
+        <h2 style="margin-bottom:0.3em;">
+          <span class="accent-ylw">The Logical Chain</span>
+        </h2>
+
+        <p class="small dim" style="text-align: center; margin-bottom: 0.5rem;">
+          How a simple information-processing principle excludes super-quantum correlations
+        </p>
+
+        <div style="display: flex; justify-content: center;">
+          <div class="video-box" style="max-width: 85%;">
+            <video autoplay loop muted playsinline preload="auto"
+                   style="max-height: 60vh; width: 100%;">
+              <source src="assets/s2_dpi_chain.webm" type="video/webm" />
+            </video>
+          </div>
+        </div>
+
+        <div class="highlight-box" style="margin-top: 0.8rem; text-align: center;">
+          <p style="margin: 0; font-size: 0.85em;">
+            <strong class="accent-org">DPI</strong>
+            <span style="color:#ffdd44; margin: 0 0.5em;">⟹</span>
+            <strong class="accent-pur">Information Causality</strong>
+            <span style="color:#ffdd44; margin: 0 0.5em;">⟹</span>
+            <strong class="accent-blu">Tsirelson's Bound</strong>
+            <span style="color:#ffdd44; margin: 0 0.5em;">⟹</span>
+            <strong class="accent-red">PR-Box excluded</strong>
+          </p>
+          <p class="tiny dim" style="margin-top: 0.3em;">
+            The real constraint is information-theoretic, not just relativistic!
+          </p>
+        </div>
+
+        <aside class="notes">
+          This slide shows the full animated logical chain. The DPI — a
+          fundamental property of information processing — combined with
+          two mild axioms, implies Information Causality. Information
+          Causality then implies Tsirelson's bound, which excludes
+          super-quantum correlations like the PR-box. The key takeaway:
+          the limit of quantum correlations isn't just an accident of the
+          formalism. It's a consequence of how information fundamentally
+          works. No-signaling alone isn't enough — you need the DPI.
+          This completes the story of "the crime and the law."
+        </aside>
+      </section>
+
+
+    </div><!-- /slides -->
+  </div><!-- /reveal -->
+
+  <!-- ─── Scripts ─── -->
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+
+  <script>
+    Reveal.initialize({
+      hash: true,
+      history: true,
+      center: true,
+      transition: 'slide',
+      transitionSpeed: 'default',
+      backgroundTransition: 'fade',
+      slideNumber: 'c/t',
+      showNotes: false,
+
+      // Navigation
+      mouseWheel: true,
+      keyboard: true,
+      touch: true,
+      navigationMode: 'linear',
+
+      // Aspect ratio
+      width: 1920,
+      height: 1080,
+
+      // Plugins
+      plugins: [RevealNotes, RevealMath.KaTeX, RevealHighlight],
+
+      katex: {
+        local: 'https://cdn.jsdelivr.net/npm/katex@0.16.11',
+        trust: true,
+        macros: {
+          "\\RR": "\\mathbb{R}",
+        },
+      },
+    });
+
+    // ─── Auto-play / pause videos on slide change ───
+    function handleSlideVideos(event) {
+      document.querySelectorAll('video').forEach(function(v) {
+        v.pause();
+      });
+      var slide = event.currentSlide;
+      if (slide) {
+        slide.querySelectorAll('video').forEach(function(v) {
+          v.currentTime = 0;
+          v.play().catch(function() {});
+        });
+      }
+    }
+    Reveal.on('slidechanged', handleSlideVideos);
+    Reveal.on('ready', handleSlideVideos);
+  </script>
+</body>
+</html>

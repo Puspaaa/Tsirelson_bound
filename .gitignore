@@ -1,0 +1,5 @@
+__pycache__/
+media/
+*.pyc
+.DS_Store
+Dahlsten_2012_New_J._Phys._14_063024.pdf
