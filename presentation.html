@@ -298,6 +298,87 @@
       font-size: 24px; color: var(--text-muted); cursor: pointer; display: none;
     }
     #slide-map-close:hover { color: var(--text-heading); }
+    /* ─── Lemma Accordion ─── */
+    .lemma-accordion {
+      display: flex; flex-direction: column; gap: 8px;
+      width: 100%; max-width: 1840px; margin: 0 auto;
+    }
+    .lemma-card {
+      display: flex; align-items: center; gap: 16px;
+      background: var(--bg-surface); border: 1.5px solid var(--border);
+      border-radius: 10px; padding: 10px 18px;
+      cursor: pointer; transition: all 0.45s cubic-bezier(.4,0,.2,1);
+      overflow: hidden; min-height: 56px;
+    }
+    .lemma-card:hover { border-color: rgba(255,255,255,0.15); }
+    .lemma-card.active {
+      flex-grow: 1; padding: 16px 22px;
+      border-color: var(--lemma-color, var(--accent-purple));
+      box-shadow: 0 0 20px rgba(91,155,245,0.08);
+    }
+    .lemma-card:not(.active) {
+      flex-grow: 0;
+    }
+    .lemma-header {
+      display: flex; align-items: center; gap: 12px;
+      white-space: nowrap; flex-shrink: 0;
+    }
+    .lemma-tag {
+      font-size: 11px; font-weight: 700; letter-spacing: 0.06em;
+      padding: 3px 10px; border-radius: 5px;
+      background: rgba(91,155,245,0.1); border: 1px solid;
+      flex-shrink: 0;
+    }
+    .lemma-name {
+      font-size: 15px; font-weight: 600; color: var(--text-heading);
+      white-space: nowrap;
+    }
+    .lemma-eq-small {
+      font-size: 13px; color: var(--text-muted); margin-left: 8px;
+      white-space: nowrap;
+      transition: opacity 0.3s;
+    }
+    .lemma-card.active .lemma-eq-small { opacity: 0; position: absolute; pointer-events: none; }
+    .lemma-body {
+      display: none; flex: 1; gap: 18px; align-items: flex-start;
+      min-width: 0;
+    }
+    .lemma-card.active .lemma-body {
+      display: flex;
+    }
+    .lemma-detail {
+      flex: 1; min-width: 0;
+    }
+    .lemma-eq-big {
+      font-size: 20px; color: var(--text-heading); margin-bottom: 8px;
+      padding: 8px 14px; background: rgba(91,155,245,0.04);
+      border-radius: 8px; text-align: center;
+      border: 1px solid rgba(255,255,255,0.04);
+      transition: transform 0.4s cubic-bezier(.4,0,.2,1);
+    }
+    .lemma-card.active .lemma-eq-big {
+      transform: scale(1);
+    }
+    .lemma-description {
+      font-size: 12.5px; color: var(--text-body); line-height: 1.55;
+    }
+    .lemma-description strong { color: var(--text-heading); }
+    .lemma-axioms {
+      font-size: 11px; margin-top: 6px; padding: 4px 10px;
+      background: rgba(167,139,250,0.06); border-radius: 5px;
+      color: var(--text-muted); display: inline-block;
+    }
+    .lemma-venn {
+      flex-shrink: 0; width: 260px; height: 190px;
+      display: flex; align-items: center; justify-content: center;
+      transition: transform 0.4s cubic-bezier(.4,0,.2,1);
+    }
+    .lemma-card.active .lemma-venn {
+      transform: scale(1);
+    }
+    .lemma-card:not(.active) .lemma-venn { display: none; }
+    .lemma-venn svg { width: 100%; height: 100%; }
+
   </style>
 </head>
 <body>
@@ -907,247 +988,169 @@
       </section>
 
 
-      <!-- ═══ LEMMA 3: SUBADDITIVITY ═══ -->
-      <section data-transition="slide">
-        <h3 style="margin-bottom:0.15em;"><span class="accent-blu">Lemma 3 — Subadditivity</span></h3>
-        <p class="small dim" style="margin-top:0;">Individual uncertainties sum to more than joint uncertainty</p>
+      <!-- ═══ FOUR LEMMAS — INTERACTIVE ACCORDION ═══ -->
+      <section data-transition="slide" style="padding: 14px 30px;">
+        <h3 style="margin-bottom:0.05em;"><span class="accent-pur">The Four Lemmas</span></h3>
+        <p class="small dim" style="margin-top:0; margin-bottom:0.3em;">Click a lemma to expand its equation and Venn diagram</p>
 
-        <div class="split">
-          <div class="left">
-            <div class="highlight-box" style="margin-bottom:0.4rem; text-align:center;">
-              <p style="margin:0; font-size:0.72em; color:var(--accent-blue);">
-                $\displaystyle\sum_{i=1}^{n} H(A_i|\gamma) \;\geq\; H(A_1 A_2 \ldots A_n | \gamma)$
-              </p>
+        <div class="lemma-accordion" id="lemma-accordion">
+
+          <!-- LEMMA 3 -->
+          <div class="lemma-card active" data-lemma="3" style="--lemma-color: var(--accent-blue);" onclick="activateLemma(this)">
+            <div class="lemma-header">
+              <span class="lemma-tag" style="color:var(--accent-blue); border-color:var(--accent-blue);">L3</span>
+              <span class="lemma-name">Subadditivity</span>
+              <span class="lemma-eq-small">$\sum H(A_i|\gamma) \geq H(A_1\!\cdots\!A_n|\gamma)$</span>
             </div>
-
-            <div class="step-block blue">
-              <p class="small" style="margin:0;">
-                <strong class="accent-blu">Intuition:</strong>
-                Measuring subsystems individually loses correlations between them,
-                so individual entropies always overcount.
-              </p>
-            </div>
-
-            <div class="step-block" style="border-left-color: var(--accent-purple); margin-top:0.25rem;">
-              <p class="small" style="margin:0;">
-                <strong class="accent-pur">Proof sketch:</strong>
-              </p>
-              <p class="tiny" style="margin:0.15em 0 0; color:var(--text-muted);">
-                1. Apply <strong>COND</strong>: chain rule splits joint entropy<br>
-                &nbsp;&nbsp;&nbsp;$H(A_1 A_2|\gamma) = H(A_1|\gamma) + H(A_2|A_1\gamma)$<br>
-                2. Apply <strong>DPI</strong>: discarding $A_1$ can't increase info<br>
-                &nbsp;&nbsp;&nbsp;$H(A_2|A_1\gamma) \leq H(A_2|\gamma)$<br>
-                3. Induction over $n$ subsystems gives the full result.
-              </p>
-            </div>
-
-            <div class="step-block green" style="margin-top:0.25rem;">
-              <p class="small" style="margin:0;">
-                <strong class="accent-grn">Axioms used:</strong> COND + DPI
-              </p>
-              <p class="tiny dim" style="margin:0.1em 0 0;">
-                The DPI step is critical — it's what fails in box-world,
-                making subadditivity break there too.
-              </p>
+            <div class="lemma-body">
+              <div class="lemma-detail">
+                <div class="lemma-eq-big">$\displaystyle\sum_{i=1}^{n} H(A_i|\gamma) \;\geq\; H(A_1 A_2 \ldots A_n | \gamma)$</div>
+                <div class="lemma-description">
+                  <strong>Intuition:</strong> Measuring parts individually loses correlations — individual entropies always overcount the total.<br>
+                  <strong>Proof:</strong> Chain rule (<strong>COND</strong>) splits $H(A_1A_2|\gamma)=H(A_1|\gamma)+H(A_2|A_1\gamma)$.
+                  Then <strong>DPI</strong> gives $H(A_2|A_1\gamma)\leq H(A_2|\gamma)$ — discarding info can't help. Induction over $n$ parts.
+                </div>
+                <span class="lemma-axioms">Axioms: COND + DPI</span>
+              </div>
+              <div class="lemma-venn">
+                <svg viewBox="0 0 260 190" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Two overlapping circles: sum of parts > whole -->
+                  <circle cx="100" cy="95" r="65" fill="rgba(91,155,245,0.12)" stroke="#5b9bf5" stroke-width="2"/>
+                  <circle cx="160" cy="95" r="65" fill="rgba(90,228,167,0.12)" stroke="#5ae4a7" stroke-width="2"/>
+                  <!-- Labels -->
+                  <text x="72" y="92" fill="#5b9bf5" font-size="13" font-weight="600" text-anchor="middle">H(A|γ)</text>
+                  <text x="130" y="75" fill="#fbbf24" font-size="11" font-weight="600" text-anchor="middle">I(A:B|γ)</text>
+                  <text x="188" y="92" fill="#5ae4a7" font-size="13" font-weight="600" text-anchor="middle">H(B|γ)</text>
+                  <!-- Caption -->
+                  <text x="130" y="178" fill="#6b7d8f" font-size="11" text-anchor="middle">Sum counts overlap twice → ΣH(Aᵢ) ≥ H(joint)</text>
+                </svg>
+              </div>
             </div>
           </div>
-          <div class="right">
-            <div class="video-box">
-              <video autoplay loop muted playsinline preload="auto">
-                <source src="assets/s4_lemma3_subadditivity.webm" type="video/webm" />
-              </video>
+
+          <!-- LEMMA 4 -->
+          <div class="lemma-card" data-lemma="4" style="--lemma-color: var(--accent-green);" onclick="activateLemma(this)">
+            <div class="lemma-header">
+              <span class="lemma-tag" style="color:var(--accent-green); border-color:var(--accent-green);">L4</span>
+              <span class="lemma-name">Product States</span>
+              <span class="lemma-eq-small">$H(A|B) = H(A)$ for $\vec{P}_A \otimes \vec{P}_B$</span>
+            </div>
+            <div class="lemma-body">
+              <div class="lemma-detail">
+                <div class="lemma-eq-big">$H(A|B) = H(A) \quad\text{for } \vec{P}_A \otimes \vec{P}_B$</div>
+                <div class="lemma-description">
+                  <strong>Intuition:</strong> Independent systems share no correlations — observing $B$ tells you nothing about $A$.<br>
+                  <strong>Proof:</strong> <strong>COND</strong>: $H(A|B) = H(AB) - H(B)$. For product states, <strong>SHAN</strong> + <strong>DPI</strong> give $H(AB) = H(A)+H(B)$.
+                  So $H(A|B)=H(A)+H(B)-H(B)=H(A)$.
+                </div>
+                <span class="lemma-axioms">Axioms: COND + SHAN + DPI (all three)</span>
+              </div>
+              <div class="lemma-venn">
+                <svg viewBox="0 0 260 190" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Two SEPARATE circles: no overlap = product state -->
+                  <circle cx="75" cy="95" r="50" fill="rgba(91,155,245,0.12)" stroke="#5b9bf5" stroke-width="2"/>
+                  <circle cx="185" cy="95" r="50" fill="rgba(251,146,60,0.12)" stroke="#fb923c" stroke-width="2"/>
+                  <!-- Tensor symbol between -->
+                  <text x="130" y="100" fill="#6b7d8f" font-size="22" font-weight="700" text-anchor="middle">⊗</text>
+                  <!-- Labels -->
+                  <text x="75" y="92" fill="#5b9bf5" font-size="14" font-weight="600" text-anchor="middle">H(A)</text>
+                  <text x="75" y="108" fill="#5b9bf5" font-size="11" text-anchor="middle">= H(A|B)</text>
+                  <text x="185" y="98" fill="#fb923c" font-size="14" font-weight="600" text-anchor="middle">H(B)</text>
+                  <!-- Caption -->
+                  <text x="130" y="178" fill="#6b7d8f" font-size="11" text-anchor="middle">No overlap → knowing B doesn't help with A</text>
+                </svg>
+              </div>
             </div>
           </div>
-        </div>
+
+          <!-- LEMMA 5 -->
+          <div class="lemma-card" data-lemma="5" style="--lemma-color: var(--accent-orange);" onclick="activateLemma(this)">
+            <div class="lemma-header">
+              <span class="lemma-tag" style="color:var(--accent-orange); border-color:var(--accent-orange);">L5</span>
+              <span class="lemma-name">Positivity</span>
+              <span class="lemma-eq-small">$H(X|Y) \geq 0$ for classical $X$</span>
+            </div>
+            <div class="lemma-body">
+              <div class="lemma-detail">
+                <div class="lemma-eq-big">$H(X|Y) \geq 0 \quad\text{for classical } X$</div>
+                <div class="lemma-description">
+                  <strong>Intuition:</strong> Classical data can be cloned. A copy of $X$ always determines $X$ perfectly, so conditional entropy stays $\geq 0$.<br>
+                  <strong>Proof:</strong> Clone $X \to X'$. <strong>DPI</strong>: $H(X|Y)\geq H(X|YX')$. But $X'=X$, so $H(X|YX)=0$. Therefore $H(X|Y)\geq 0$.<br>
+                  <em style="color:var(--accent-red);">Quantum contrast:</em> Entangled states can have $H(A|B)<0$ because no-cloning blocks this argument.
+                </div>
+                <span class="lemma-axioms">Axioms: DPI (+ classicality)</span>
+              </div>
+              <div class="lemma-venn">
+                <svg viewBox="0 0 260 190" xmlns="http://www.w3.org/2000/svg">
+                  <!-- X and Y overlapping, H(X|Y) highlighted as the remaining crescent -->
+                  <circle cx="105" cy="95" r="60" fill="rgba(251,146,60,0.08)" stroke="#fb923c" stroke-width="2"/>
+                  <circle cx="160" cy="95" r="55" fill="rgba(167,139,250,0.08)" stroke="#a78bfa" stroke-width="2"/>
+                  <!-- Highlight H(X|Y) crescent -->
+                  <clipPath id="xOnly">
+                    <rect x="0" y="0" width="120" height="190"/>
+                  </clipPath>
+                  <circle cx="105" cy="95" r="60" fill="rgba(251,146,60,0.25)" clip-path="url(#xOnly)"/>
+                  <!-- Labels -->
+                  <text x="68" y="95" fill="#fb923c" font-size="13" font-weight="700" text-anchor="middle">H(X|Y)</text>
+                  <text x="68" y="110" fill="#5ae4a7" font-size="12" font-weight="700" text-anchor="middle">≥ 0</text>
+                  <text x="135" y="80" fill="#fbbf24" font-size="11" text-anchor="middle">I(X:Y)</text>
+                  <text x="185" y="95" fill="#a78bfa" font-size="13" font-weight="600" text-anchor="middle">Y</text>
+                  <text x="70" y="40" fill="#fb923c" font-size="12" font-weight="500" text-anchor="middle">X (classical)</text>
+                  <!-- Caption -->
+                  <text x="130" y="178" fill="#6b7d8f" font-size="11" text-anchor="middle">Classical X: crescent always has area ≥ 0</text>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- LEMMA 6 -->
+          <div class="lemma-card" data-lemma="6" style="--lemma-color: var(--accent-purple);" onclick="activateLemma(this)">
+            <div class="lemma-header">
+              <span class="lemma-tag" style="color:var(--accent-purple); border-color:var(--accent-purple);">L6</span>
+              <span class="lemma-name">IC Bound</span>
+              <span class="lemma-eq-small">$H(\vec{a}|B\vec{x}) \geq n - m$</span>
+            </div>
+            <div class="lemma-body">
+              <div class="lemma-detail">
+                <div class="lemma-eq-big">$H(\vec{a}\,|\,B\vec{x}) \;\geq\; n - m$</div>
+                <div class="lemma-description">
+                  <strong>Intuition:</strong> Alice has $n$ random bits but sends only $m$ bits. Bob's uncertainty about $\vec{a}$ is always at least $n-m$, regardless of any shared resource.<br>
+                  <strong>Derivation:</strong> <strong>COND</strong> rewrites the difference.
+                  <strong>L4</strong> (independence) gives $H(\vec{a})=n$.
+                  <strong>L5</strong> (positivity) drops a non-negative term.
+                  <strong>SHAN+DPI</strong> bound $H(\vec{x}|B)\leq m$. Combining: $H(\vec{a}|B\vec{x})\geq n-m$.
+                </div>
+                <span class="lemma-axioms">Axioms: All — combines L3, L4, L5 + COND + SHAN + DPI</span>
+              </div>
+              <div class="lemma-venn">
+                <svg viewBox="0 0 260 190" xmlns="http://www.w3.org/2000/svg">
+                  <!-- Three overlapping circles: Alice's bits, Channel, Bob's info -->
+                  <circle cx="90" cy="85" r="55" fill="rgba(91,155,245,0.1)" stroke="#5b9bf5" stroke-width="2"/>
+                  <circle cx="170" cy="85" r="55" fill="rgba(167,139,250,0.1)" stroke="#a78bfa" stroke-width="2"/>
+                  <circle cx="130" cy="130" r="45" fill="rgba(251,191,36,0.1)" stroke="#fbbf24" stroke-width="1.5"/>
+                  <!-- Labels -->
+                  <text x="60" y="78" fill="#5b9bf5" font-size="12" font-weight="600" text-anchor="middle">ā</text>
+                  <text x="60" y="93" fill="#5b9bf5" font-size="10" text-anchor="middle">(n bits)</text>
+                  <text x="200" y="78" fill="#a78bfa" font-size="12" font-weight="600" text-anchor="middle">Bx̄</text>
+                  <text x="200" y="93" fill="#a78bfa" font-size="10" text-anchor="middle">(Bob)</text>
+                  <text x="130" y="155" fill="#fbbf24" font-size="11" font-weight="600" text-anchor="middle">Channel</text>
+                  <text x="130" y="168" fill="#fbbf24" font-size="10" text-anchor="middle">(m bits)</text>
+                  <!-- Bound annotation -->
+                  <text x="130" y="55" fill="#5ae4a7" font-size="12" font-weight="700" text-anchor="middle">H(ā|Bx̄) ≥ n − m</text>
+                  <!-- Caption -->
+                  <text x="130" y="188" fill="#6b7d8f" font-size="10" text-anchor="middle">Overlap bounded by channel capacity m</text>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+        </div><!-- /lemma-accordion -->
 
         <aside class="notes">
-          Lemma 3 is subadditivity: the sum of individual entropies ≥ joint entropy.
-          Proved by chain rule (COND) plus data processing (DPI) applied inductively.
-          This is the workhorse that lets us split the per-bit bound later.
-        </aside>
-      </section>
-
-
-      <!-- ═══ LEMMA 4: PRODUCT STATES ═══ -->
-      <section data-transition="slide">
-        <h3 style="margin-bottom:0.15em;"><span class="accent-grn">Lemma 4 — Product State Independence</span></h3>
-        <p class="small dim" style="margin-top:0;">For product states, conditioning on one system doesn't reduce uncertainty about the other</p>
-
-        <div class="split">
-          <div class="left">
-            <div class="highlight-box" style="margin-bottom:0.4rem; text-align:center;">
-              <p style="margin:0; font-size:0.72em; color:var(--accent-green);">
-                $H(A|B) = H(A) \quad\text{for } \vec{P}_A \otimes \vec{P}_B$
-              </p>
-            </div>
-
-            <div class="step-block green">
-              <p class="small" style="margin:0;">
-                <strong class="accent-grn">Intuition:</strong>
-                If Alice and Bob share no correlations (product state), observing Bob's
-                system tells you nothing about Alice's.
-              </p>
-            </div>
-
-            <div class="step-block" style="border-left-color: var(--accent-purple); margin-top:0.25rem;">
-              <p class="small" style="margin:0;">
-                <strong class="accent-pur">Proof sketch:</strong>
-              </p>
-              <p class="tiny" style="margin:0.15em 0 0; color:var(--text-muted);">
-                1. <strong>COND</strong>: $H(A|B) = H(AB) - H(B)$<br>
-                2. For product states, need $H(AB) = H(A) + H(B)$<br>
-                3. <strong>SHAN</strong>: applies to classical outcomes<br>
-                4. <strong>DPI</strong>: bounding processing of product marginals<br>
-                5. Together: $H(A|B) = H(A) + H(B) - H(B) = H(A)$
-              </p>
-            </div>
-
-            <div class="step-block orange" style="margin-top:0.25rem;">
-              <p class="small" style="margin:0;">
-                <strong class="accent-org">Why it matters:</strong>
-                Used in Lemma 6 to separate Alice's input entropy from Bob's side information.
-              </p>
-              <p class="tiny dim" style="margin:0.1em 0 0;">
-                <strong>Axioms used:</strong> COND + SHAN + DPI (all three!)
-              </p>
-            </div>
-          </div>
-          <div class="right">
-            <div class="video-box">
-              <video autoplay loop muted playsinline preload="auto">
-                <source src="assets/s4_lemma4_product.webm" type="video/webm" />
-              </video>
-            </div>
-          </div>
-        </div>
-
-        <aside class="notes">
-          Lemma 4 says independent systems have independent entropies.
-          Trivial for Shannon entropy, but needs proof in general GPTs
-          because the entropy function might not decompose naturally for product states.
-        </aside>
-      </section>
-
-
-      <!-- ═══ LEMMA 5: POSITIVITY ═══ -->
-      <section data-transition="slide">
-        <h3 style="margin-bottom:0.15em;"><span class="accent-org">Lemma 5 — Positivity of Conditional Entropy</span></h3>
-        <p class="small dim" style="margin-top:0;">Classical variables always have non-negative conditional entropy</p>
-
-        <div class="split">
-          <div class="left">
-            <div class="highlight-box" style="margin-bottom:0.4rem; text-align:center;">
-              <p style="margin:0; font-size:0.72em; color:var(--accent-orange);">
-                $H(X|Y) \geq 0 \quad\text{for classical } X$
-              </p>
-            </div>
-
-            <div class="step-block orange">
-              <p class="small" style="margin:0;">
-                <strong class="accent-org">Intuition:</strong>
-                Classical information can be freely copied. A copy of $X$ always
-                determines $X$ perfectly, forcing conditional entropy $\geq 0$.
-              </p>
-            </div>
-
-            <div class="step-block" style="border-left-color: var(--accent-purple); margin-top:0.25rem;">
-              <p class="small" style="margin:0;">
-                <strong class="accent-pur">Proof sketch (cloning argument):</strong>
-              </p>
-              <p class="tiny" style="margin:0.15em 0 0; color:var(--text-muted);">
-                1. <strong>Classical</strong> $X$ can be cloned: create copy $X'$<br>
-                2. <strong>DPI</strong>: more data doesn't increase entropy<br>
-                &nbsp;&nbsp;&nbsp;$H(X|Y) \geq H(X|YX')$<br>
-                3. But $X' = X$, so $H(X|YX') = H(X|YX) = 0$<br>
-                4. Therefore $H(X|Y) \geq 0$ &nbsp;$\checkmark$
-              </p>
-            </div>
-
-            <div class="step-block" style="border-left-color: var(--accent-red); margin-top:0.25rem;">
-              <p class="small" style="margin:0;">
-                <strong class="accent-red">Quantum contrast:</strong>
-                Quantum conditional entropy $H(A|B)$ <em>can</em> be negative (e.g. entangled states),
-                because quantum systems <strong>cannot be cloned</strong> (no-cloning theorem).
-              </p>
-              <p class="tiny dim" style="margin:0.1em 0 0;">
-                <strong>Axioms used:</strong> DPI (+ classicality of $X$)
-              </p>
-            </div>
-          </div>
-          <div class="right">
-            <div class="video-box">
-              <video autoplay loop muted playsinline preload="auto">
-                <source src="assets/s4_lemma5_positivity.webm" type="video/webm" />
-              </video>
-            </div>
-          </div>
-        </div>
-
-        <aside class="notes">
-          Lemma 5 uses a clever cloning trick: classical data can be copied,
-          so giving the copy alongside Y can never increase conditional entropy.
-          This fails for quantum states due to no-cloning — explaining why
-          quantum conditional entropy can go negative.
-        </aside>
-      </section>
-
-
-      <!-- ═══ LEMMA 6: IC BOUND ═══ -->
-      <section data-transition="slide">
-        <h3 style="margin-bottom:0.15em;"><span class="accent-pur">Lemma 6 — The IC Bound</span></h3>
-        <p class="small dim" style="margin-top:0;">Combining all lemmas to bound Bob's total information about Alice's bits</p>
-
-        <div class="split">
-          <div class="left">
-            <div class="highlight-box" style="margin-bottom:0.4rem; text-align:center;">
-              <p style="margin:0; font-size:0.72em; color:var(--accent-purple);">
-                $H(\vec{a}\,|\,B\vec{x}) \;\geq\; n - m$
-              </p>
-            </div>
-
-            <div class="step-block" style="border-left-color: var(--accent-purple);">
-              <p class="small" style="margin:0;">
-                <strong class="accent-pur">Intuition:</strong>
-                Alice has $n$ random bits but can only send $m$ classical bits to Bob.
-                No matter what shared non-local resource they use,
-                Bob's total uncertainty about $\vec{a}$ is at least $n - m$.
-              </p>
-            </div>
-
-            <div class="step-block" style="border-left-color: var(--accent-gold); margin-top:0.25rem;">
-              <p class="small" style="margin:0;">
-                <strong class="accent-ylw">Derivation:</strong>
-              </p>
-              <p class="tiny" style="margin:0.15em 0 0; color:var(--text-muted);">
-                1. <strong>COND</strong>: $H(\vec{a}|B\vec{x}) - H(\vec{x}|\vec{a}B) = H(\vec{a}) - H(\vec{x}|B)$<br>
-                2. <strong>Lemma 4</strong>: $\vec{a}, \vec{x}$ independent ⟹ $H(\vec{a}) = n$<br>
-                3. <strong>Lemma 5</strong>: $H(\vec{x}|\vec{a}B) \geq 0$ ($\vec{x}$ classical)<br>
-                4. <strong>SHAN + DPI</strong>: $H(\vec{x}|B) \leq H(\vec{x}) \leq m$<br>
-                5. Combine: $H(\vec{a}|B\vec{x}) \geq n - m$ &nbsp;$\checkmark$
-              </p>
-            </div>
-
-            <div class="step-block green" style="margin-top:0.25rem;">
-              <p class="small" style="margin:0;">
-                <strong class="accent-grn">This is the key inequality!</strong>
-                Together with Lemma 3 (subadditivity), it yields
-                Information Causality: $I \leq m$.
-              </p>
-            </div>
-          </div>
-          <div class="right">
-            <div class="video-box">
-              <video autoplay loop muted playsinline preload="auto">
-                <source src="assets/s4_lemma6_ic_bound.webm" type="video/webm" />
-              </video>
-            </div>
-          </div>
-        </div>
-
-        <aside class="notes">
-          Lemma 6 is the capstone — combining independence (Lemma 4), positivity
-          (Lemma 5), COND and SHAN to bound Bob's total uncertainty.
-          This directly gives Information Causality, from which Tsirelson follows.
+          All four lemmas on one slide. Click each to expand its equation and Venn diagram.
+          The Venn diagrams show the entropy relationships visually:
+          L3 = overlapping sets (double-counting), L4 = disjoint sets (independence),
+          L5 = crescent always positive (classicality), L6 = three-set bound (IC).
         </aside>
       </section>
 
@@ -1437,10 +1440,7 @@
       { title: "The Logical Chain",      section: "The Principle" },
       { title: "Part IV: The Proof",     section: "divider" },
       { title: "Proof Architecture",     section: "The Proof" },
-      { title: "Lemma 3: Subadditivity", section: "The Proof" },
-      { title: "Lemma 4: Product States", section: "The Proof" },
-      { title: "Lemma 5: Positivity",    section: "The Proof" },
-      { title: "Lemma 6: IC Bound",      section: "The Proof" },
+      { title: "The Four Lemmas",        section: "The Proof" },
       { title: "From Axioms to Tsirelson", section: "The Proof" },
       { title: "Part V: The Verdict",    section: "divider" },
       { title: "Box-World Breakdown",    section: "The Verdict" },
@@ -1454,7 +1454,7 @@
       { idx: 5,  label: "II. The Framework" },
       { idx: 9,  label: "III. The Principle" },
       { idx: 13, label: "IV. The Proof" },
-      { idx: 20, label: "V. The Verdict" },
+      { idx: 17, label: "V. The Verdict" },
     ];
 
     // Progress bar
@@ -1577,6 +1577,67 @@
     }
     Reveal.on('slidechanged', handleSlideVideos);
     Reveal.on('ready', handleSlideVideos);
+
+    // Lemma accordion interaction
+    function activateLemma(card) {
+      var cards = document.querySelectorAll('.lemma-card');
+      cards.forEach(function(c) { c.classList.remove('active'); });
+      card.classList.add('active');
+    }
+
+    // Keyboard: cycle lemmas with up/down arrows while on the lemma slide
+    document.addEventListener('keydown', function(e) {
+      var currentSlide = Reveal.getCurrentSlide();
+      var accordion = currentSlide && currentSlide.querySelector('#lemma-accordion');
+      if (!accordion) return;
+
+      if (e.key === 'ArrowUp' || e.key === 'ArrowDown') {
+        var cards = Array.from(accordion.querySelectorAll('.lemma-card'));
+        var activeIdx = cards.findIndex(function(c) { return c.classList.contains('active'); });
+        if (activeIdx === -1) activeIdx = 0;
+
+        if (e.key === 'ArrowDown') {
+          if (activeIdx < cards.length - 1) {
+            activateLemma(cards[activeIdx + 1]);
+            e.preventDefault();
+            e.stopPropagation();
+          }
+        } else if (e.key === 'ArrowUp') {
+          if (activeIdx > 0) {
+            activateLemma(cards[activeIdx - 1]);
+            e.preventDefault();
+            e.stopPropagation();
+          }
+        }
+      }
+    }, true);
+
+    // Mouse wheel: cycle lemmas when hovering over the accordion
+    (function() {
+      var acc = document.getElementById('lemma-accordion');
+      if (!acc) return;
+      var wheelCooldown = false;
+      acc.addEventListener('wheel', function(e) {
+        if (wheelCooldown) { e.preventDefault(); return; }
+        var cards = Array.from(acc.querySelectorAll('.lemma-card'));
+        var activeIdx = cards.findIndex(function(c) { return c.classList.contains('active'); });
+        if (activeIdx === -1) activeIdx = 0;
+
+        if (e.deltaY > 0 && activeIdx < cards.length - 1) {
+          activateLemma(cards[activeIdx + 1]);
+          e.preventDefault();
+          e.stopPropagation();
+          wheelCooldown = true;
+          setTimeout(function() { wheelCooldown = false; }, 400);
+        } else if (e.deltaY < 0 && activeIdx > 0) {
+          activateLemma(cards[activeIdx - 1]);
+          e.preventDefault();
+          e.stopPropagation();
+          wheelCooldown = true;
+          setTimeout(function() { wheelCooldown = false; }, 400);
+        }
+      }, { passive: false });
+    })();
   </script>
 </body>
 </html>
