@@ -1095,7 +1095,14 @@
               <div class="lemma-detail">
                 <div class="lemma-eq-big">$H(\vec{a}\,|\,B\vec{x}) \;\geq\; n - m$</div>
                 <div class="lemma-description">
-                  <strong>Intuition:</strong> Alice has $n$ random bits but sends only $m$ bits. Bob's uncertainty about $\vec{a}$ is always at least $n-m$, regardless of any shared resource.
+                  <strong>Intuition:</strong> Alice has $n$ random bits but sends only $m$ bits. Bob's uncertainty about $\vec{a}$ is always at least $n-m$.<br>
+                  <strong style="color:var(--accent-purple);">Derivation from L3, L4, L5:</strong><br>
+                  <span style="font-size:0.9em;">
+                    <strong style="color:var(--accent-orange);">1.</strong> <strong>COND</strong>: $H(\vec{a}|B\vec{x}) - H(\vec{x}|\vec{a}B) = H(\vec{a}) - H(\vec{x}|B)$<br>
+                    <strong style="color:var(--accent-green);">2.</strong> <strong>L4</strong>: $\vec{a}$ independent of $B$ → $H(\vec{a}) = n$<br>
+                    <strong style="color:var(--accent-orange);">3.</strong> <strong>L5</strong>: $H(\vec{x}|\vec{a}B) \geq 0$ → drop it: $H(\vec{a}|B\vec{x}) \geq n - H(\vec{x}|B)$<br>
+                    <strong style="color:var(--accent-blue);">4.</strong> <strong>DPI+SHAN</strong>: $H(\vec{x}|B) \leq H(\vec{x}) \leq m$ → $\boxed{H(\vec{a}|B\vec{x}) \geq n - m}$
+                  </span>
                 </div>
                 <span class="lemma-axioms">Axioms: All — combines L3, L4, L5 + COND + SHAN + DPI</span>
               </div>
@@ -1122,33 +1129,6 @@
           </div>
 
         </div><!-- /lemma-accordion -->
-
-        <!-- IC BOUND DERIVATION -->
-        <div style="margin-top: 0.5rem; background: var(--bg-surface); border-radius: 10px; padding: 0.5rem 0.8rem; border: 1px solid rgba(124,58,237,0.3);">
-          <p class="small" style="margin:0 0 0.3rem 0; font-weight:600; color:var(--accent-purple);">Deriving the IC Bound from L3, L4, L5</p>
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 0.5rem; font-size: 0.75em;">
-            <div>
-              <p style="margin:0; color:var(--text-muted);">
-                <strong style="color:var(--accent-orange);">Step 1 (COND):</strong> Rewrite using chain rule identity<br>
-                <span style="font-size:0.95em;">$H(\vec{a}|B\vec{x}) - H(\vec{x}|\vec{a}B) = H(\vec{a}) - H(\vec{x}|B)$</span>
-              </p>
-              <p style="margin:0.25rem 0 0; color:var(--text-muted);">
-                <strong style="color:var(--accent-green);">Step 2 (L4):</strong> Product state independence<br>
-                <span style="font-size:0.95em;">$\vec{a}$ is independent of $B$ initially → $H(\vec{a}) = n$</span>
-              </p>
-            </div>
-            <div>
-              <p style="margin:0; color:var(--text-muted);">
-                <strong style="color:var(--accent-orange);">Step 3 (L5):</strong> Classical positivity<br>
-                <span style="font-size:0.95em;">$H(\vec{x}|\vec{a}B) \geq 0$ → drop it: $H(\vec{a}|B\vec{x}) \geq n - H(\vec{x}|B)$</span>
-              </p>
-              <p style="margin:0.25rem 0 0; color:var(--text-muted);">
-                <strong style="color:var(--accent-blue);">Step 4 (DPI+SHAN):</strong> Channel capacity bound<br>
-                <span style="font-size:0.95em;">$H(\vec{x}|B) \leq H(\vec{x}) \leq m$ → $\boxed{H(\vec{a}|B\vec{x}) \geq n - m}$</span>
-              </p>
-            </div>
-          </div>
-        </div>
 
         <aside class="notes">
           All four lemmas on one slide. Click each to expand its equation and Venn diagram.
