@@ -867,54 +867,64 @@
       </section>
 
 
-      <!-- ═══ INFORMATION CAUSALITY ═══ -->
+      <!-- ═══ INFORMATION CAUSALITY & THE CHAIN ═══ -->
       <section data-transition="slide">
         <h3 style="margin-bottom:0.15em;"><span class="accent-pur">Information Causality</span></h3>
-        <p class="small dim" style="margin-top:0;">Pawlowski et al. (2009) — the constraint DPI enforces</p>
+        <p class="small dim" style="margin-top:0;">The principle that bridges DPI to Tsirelson's bound</p>
 
-        <!-- Game diagram -->
-        <div class="flow">
-          <div class="flow-box" style="border-color:var(--accent-teal);">
-            <h4 style="color:var(--accent-teal);">Alice</h4>
-            <p>$\vec{a} = (a_0, \ldots, a_{N-1})$</p>
-            <p class="tiny dim">$N$ random bits</p>
-          </div>
-          <div class="flow-arrow">&rarr;</div>
-          <div class="flow-box" style="border-color:var(--accent-orange);">
-            <h4 style="color:var(--accent-orange);">Channel</h4>
-            <p>$m$ bits</p>
-          </div>
-          <div class="flow-arrow">&rarr;</div>
-          <div class="flow-box" style="border-color:var(--accent-blue);">
-            <h4 style="color:var(--accent-blue);">Bob</h4>
-            <p>index $b$, guesses $\beta$</p>
-          </div>
-        </div>
-
-        <div class="split" style="margin-top:0.4rem;">
-          <div class="left" style="flex:1;">
-            <div class="highlight-box" style="text-align:center;">
-              <p style="font-size:0.82em; margin:0;">
-                $I = \displaystyle\sum_{i=0}^{N-1} I_{\text{Sh}}(a_i : \beta \mid b = i) \;\leq\; m$
-              </p>
-              <p class="tiny dim" style="margin-top:0.2em;">
-                Total info Bob extracts &le; bits sent. No free lunch from shared resources.
-              </p>
-            </div>
-            <div style="display: flex; gap: 0.8rem; margin-top: 0.5rem; justify-content: center;">
-              <div class="verdict-card verdict-pass" style="flex:1; max-width: 180px;">
-                <h4 class="accent-grn">Quantum</h4>
-                <p class="small">$I \leq m$</p>
-                <p class="tiny accent-grn" style="margin-top:0.2em;">&#10003; PASSES</p>
+        <div class="split">
+          <div class="left">
+            <!-- Game diagram (compact) -->
+            <div class="flow" style="margin-bottom:0.3rem; transform:scale(0.9); transform-origin:left top;">
+              <div class="flow-box" style="border-color:var(--accent-teal); padding:0.2rem 0.4rem;">
+                <h4 style="color:var(--accent-teal); font-size:0.7em; margin:0;">Alice</h4>
+                <p style="font-size:0.65em; margin:0;">$N$ bits $\vec{a}$</p>
               </div>
-              <div class="verdict-card verdict-fail" style="flex:1; max-width: 180px;">
-                <h4 class="accent-red">PR-Box</h4>
-                <p class="small">$I > m$</p>
-                <p class="tiny accent-red" style="margin-top:0.2em;">&#10007; FAILS</p>
+              <div class="flow-arrow" style="font-size:0.8em;">&rarr;</div>
+              <div class="flow-box" style="border-color:var(--accent-orange); padding:0.2rem 0.4rem;">
+                <h4 style="color:var(--accent-orange); font-size:0.7em; margin:0;">Channel</h4>
+                <p style="font-size:0.65em; margin:0;">$m$ bits</p>
+              </div>
+              <div class="flow-arrow" style="font-size:0.8em;">&rarr;</div>
+              <div class="flow-box" style="border-color:var(--accent-blue); padding:0.2rem 0.4rem;">
+                <h4 style="color:var(--accent-blue); font-size:0.7em; margin:0;">Bob</h4>
+                <p style="font-size:0.65em; margin:0;">guess $a_b$</p>
               </div>
             </div>
+
+            <div class="highlight-box" style="padding:0.3rem; margin-bottom:0.3rem;">
+              <p style="font-size:0.75em; margin:0; text-align:center;">
+                $I = \sum_i I_{\text{Sh}}(a_i : \beta \mid b\!=\!i) \;\leq\; m$
+              </p>
+              <p class="tiny dim" style="margin:0.15em 0 0; text-align:center;">
+                Total info Bob extracts ≤ bits sent — even with shared entanglement
+              </p>
+            </div>
+
+            <div style="display: flex; gap: 0.5rem; margin-bottom:0.3rem;">
+              <div class="verdict-card verdict-pass" style="flex:1; padding:0.25rem;">
+                <h4 class="accent-grn" style="font-size:0.7em;">Quantum</h4>
+                <p class="tiny accent-grn">$I \leq m$ &#10003;</p>
+              </div>
+              <div class="verdict-card verdict-fail" style="flex:1; padding:0.25rem;">
+                <h4 class="accent-red" style="font-size:0.7em;">PR-Box</h4>
+                <p class="tiny accent-red">$I > m$ &#10007;</p>
+              </div>
+            </div>
+
+            <div class="highlight-box" style="padding:0.25rem; border-color:rgba(251,191,36,0.3);">
+              <p style="margin: 0; font-size: 0.68em; text-align:center;">
+                <strong class="accent-org">DPI</strong>
+                <span style="color:var(--accent-gold); margin: 0 0.3em;">⟹</span>
+                <strong class="accent-pur">IC</strong>
+                <span style="color:var(--accent-gold); margin: 0 0.3em;">⟹</span>
+                <strong class="accent-blu">Tsirelson</strong>
+                <span style="color:var(--accent-gold); margin: 0 0.3em;">⟹</span>
+                <strong class="accent-red">PR-Box out</strong>
+              </p>
+            </div>
           </div>
-          <div class="right" style="flex:1;">
+          <div class="right">
             <div class="video-box">
               <video autoplay loop muted playsinline preload="auto">
                 <source src="assets/s2_ic_game.webm" type="video/webm" />
@@ -924,44 +934,9 @@
         </div>
 
         <aside class="notes">
-          IC says Bob cannot extract more information about Alice's data than the
-          bits she sent, even with shared entanglement. Quantum passes. The PR-box
-          fails — it would allow superluminal information capacity.
-        </aside>
-      </section>
-
-
-      <!-- ═══ THE LOGICAL CHAIN ═══ -->
-      <section data-transition="slide">
-        <h3 style="margin-bottom:0.15em;"><span class="accent-ylw">The Logical Chain</span></h3>
-        <p class="small dim" style="margin-top:0;">How an information-processing principle excludes super-quantum correlations</p>
-
-        <div style="display: flex; justify-content: center;">
-          <div class="video-box" style="max-width: 80%;">
-            <video autoplay loop muted playsinline preload="auto" style="max-height: 55vh; width: 100%;">
-              <source src="assets/s2_dpi_chain.webm" type="video/webm" />
-            </video>
-          </div>
-        </div>
-
-        <div class="highlight-box" style="margin-top: 0.6rem; text-align: center;">
-          <p style="margin: 0; font-size: 0.78em;">
-            <strong class="accent-org">DPI</strong>
-            <span style="color:var(--accent-gold); margin: 0 0.4em;">&#10233;</span>
-            <strong class="accent-pur">Information Causality</strong>
-            <span style="color:var(--accent-gold); margin: 0 0.4em;">&#10233;</span>
-            <strong class="accent-blu">Tsirelson's Bound</strong>
-            <span style="color:var(--accent-gold); margin: 0 0.4em;">&#10233;</span>
-            <strong class="accent-red">PR-Box excluded</strong>
-          </p>
-          <p class="tiny dim" style="margin-top: 0.2em;">
-            The real constraint is information-theoretic, not just relativistic.
-          </p>
-        </div>
-
-        <aside class="notes">
-          Full animated chain: DPI + COND + SHAN implies IC, which implies
-          Tsirelson's bound, which excludes the PR-box.
+          IC says Bob cannot extract more info than bits sent, even with entanglement.
+          DPI implies IC, IC implies Tsirelson, and Tsirelson excludes the PR-box.
+          This is why nature stops at 2+√2: information-theoretic, not just relativistic.
         </aside>
       </section>
 
@@ -1430,7 +1405,6 @@
       { title: "Part III: The Principle", section: "divider", part: "III", sectionName: "The Principle", gradient: "var(--accent-orange), var(--accent-gold)" },
       { title: "Entropy & DPI",          section: "The Principle", part: "III", sectionName: "The Principle", gradient: "var(--accent-orange), var(--accent-gold)" },
       { title: "Information Causality",  section: "The Principle", part: "III", sectionName: "The Principle", gradient: "var(--accent-orange), var(--accent-gold)" },
-      { title: "The Logical Chain",      section: "The Principle", part: "III", sectionName: "The Principle", gradient: "var(--accent-orange), var(--accent-gold)" },
       { title: "Part IV: The Proof",     section: "divider", part: "IV", sectionName: "The Proof", gradient: "var(--accent-purple), var(--accent-red)" },
       { title: "The Four Lemmas",        section: "The Proof", part: "IV", sectionName: "The Proof", gradient: "var(--accent-purple), var(--accent-red)" },
       { title: "From Axioms to Tsirelson", section: "The Proof", part: "IV", sectionName: "The Proof", gradient: "var(--accent-purple), var(--accent-red)" },
@@ -1445,8 +1419,8 @@
       { idx: 1,  label: "I. The Mystery" },
       { idx: 4,  label: "II. The Framework" },
       { idx: 7,  label: "III. The Principle" },
-      { idx: 11, label: "IV. The Proof" },
-      { idx: 14, label: "V. The Verdict" },
+      { idx: 10, label: "IV. The Proof" },
+      { idx: 13, label: "V. The Verdict" },
     ];
 
     // Progress bar
