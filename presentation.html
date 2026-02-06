@@ -771,47 +771,6 @@
       </section>
 
 
-      <!-- ═══ COMPOSITE SYSTEMS & NO-SIGNALING ═══ -->
-      <section data-transition="slide">
-        <h3 style="margin-bottom:0.15em;">Composite Systems <span class="accent-grn">&amp; No-Signaling</span></h3>
-        <p class="small dim" style="margin-top:0;">How systems combine — and the structural rules they obey</p>
-
-        <div class="split">
-          <div class="left">
-            <div class="highlight-box">
-              <h4 style="color:var(--accent-purple); margin:0 0 0.2rem 0; font-size:0.7em;">Tensor Products</h4>
-              <p style="font-size:0.75em; margin:0;">$V_{AB} = V_A \otimes V_B$</p>
-              <p class="small dim" style="margin:0.15em 0 0;">Joint state: $P(ii'|jj')$</p>
-            </div>
-            <div class="highlight-box" style="margin-top:0.4rem;">
-              <h4 style="color:var(--accent-purple); margin:0 0 0.2rem 0; font-size:0.7em;">No-Signaling Constraint</h4>
-              <p style="font-size:0.75em; margin:0;">$P_A(i|j) = \sum_{i'} P_{AB}(ii'|jj')$</p>
-              <p class="small dim" style="margin:0.15em 0 0;">Marginals independent of remote settings.</p>
-            </div>
-            <div class="highlight-box" style="margin-top:0.4rem; border-color:rgba(251,191,36,0.2); background:rgba(251,191,36,0.04);">
-              <p style="font-size:0.73em; margin:0; color:var(--accent-gold); font-weight:600;">
-                Box-world satisfies convexity, tensor products, and no-signaling
-                — yet exceeds $2\sqrt{2}$. We need something more.
-              </p>
-            </div>
-          </div>
-          <div class="right">
-            <div class="video-box">
-              <video autoplay muted playsinline preload="auto">
-                <source src="assets/8_composite.webm" type="video/webm" />
-              </video>
-            </div>
-          </div>
-        </div>
-
-        <aside class="notes">
-          Box-world is a legitimate GPT: it has convex state spaces, tensor
-          products, no-signaling. Yet it exceeds Tsirelson. The structural rules
-          are not enough — we need an information-theoretic principle.
-        </aside>
-      </section>
-
-
       <!-- ═══════════════════════════════════════════════════════
            SECTION III: THE PRINCIPLE
            ═══════════════════════════════════════════════════════ -->
@@ -1490,7 +1449,6 @@
       { title: "The CHSH Game",          section: "The Mystery", part: "I", sectionName: "The Mystery", gradient: "var(--accent-blue), var(--accent-purple)" },
       { title: "Part II: The Framework", section: "divider", part: "II", sectionName: "The Framework", gradient: "var(--accent-blue), var(--accent-green)" },
       { title: "GPT & Systems (k,l)",   section: "The Framework", part: "II", sectionName: "The Framework", gradient: "var(--accent-blue), var(--accent-green)" },
-      { title: "Composite Systems",      section: "The Framework", part: "II", sectionName: "The Framework", gradient: "var(--accent-blue), var(--accent-green)" },
       { title: "Part III: The Principle", section: "divider", part: "III", sectionName: "The Principle", gradient: "var(--accent-orange), var(--accent-gold)" },
       { title: "Entropy & DPI",          section: "The Principle", part: "III", sectionName: "The Principle", gradient: "var(--accent-orange), var(--accent-gold)" },
       { title: "Information Causality",  section: "The Principle", part: "III", sectionName: "The Principle", gradient: "var(--accent-orange), var(--accent-gold)" },
@@ -1508,9 +1466,9 @@
     var sections = [
       { idx: 1,  label: "I. The Mystery" },
       { idx: 4,  label: "II. The Framework" },
-      { idx: 7,  label: "III. The Principle" },
-      { idx: 11, label: "IV. The Proof" },
-      { idx: 14, label: "V. The Verdict" },
+      { idx: 6,  label: "III. The Principle" },
+      { idx: 9, label: "IV. The Proof" },
+      { idx: 13, label: "V. The Verdict" },
     ];
 
     // Progress bar
