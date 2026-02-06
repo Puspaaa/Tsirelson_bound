@@ -101,12 +101,12 @@ class TsirelsonGauge(Scene):
         # ── Side annotations ──
         bounds_text = VGroup(
             MathTex(r"\text{Classical: } S \leq 2", font_size=24, color="#44aaff"),
-            MathTex(r"\text{Tsirelson: } S \leq 2+\sqrt{2}", font_size=24, color="#aa44ff"),
+            MathTex(r"\text{Tsirelson: } S \leq 2\sqrt{2}", font_size=24, color="#aa44ff"),
             MathTex(r"\text{No-Signaling: } S \leq 4", font_size=24, color="#ff4444"),
         ).arrange(DOWN, aligned_edge=LEFT, buff=0.2).to_edge(RIGHT, buff=0.5).shift(DOWN*0.5)
 
         tsirelson_def = MathTex(
-            r"2 - \sqrt{2} \;\leq\; S \;\leq\; 2 + \sqrt{2}",
+            r"S \;\leq\; 2\sqrt{2}",
             font_size=28, color="#aa44ff"
         ).to_edge(DOWN, buff=0.4)
 
@@ -133,9 +133,9 @@ class TsirelsonGauge(Scene):
         self.play(Flash(needle_dot, color="#44aaff", flash_radius=0.3), run_time=0.5)
         self.wait(0.3)
 
-        # Sweep to Tsirelson (S=2+√2)
+        # Sweep to Tsirelson (S=2√2)
         n_ts = get_needle(2 * np.sqrt(2))
-        s_ts_tex = MathTex(r"S = 2+\sqrt{2} \approx 3.41", font_size=40, color="#aa44ff"
+        s_ts_tex = MathTex(r"S = 2\sqrt{2} \approx 2.83", font_size=40, color="#aa44ff"
                            ).next_to(center, DOWN, buff=0.8)
         self.play(Transform(init_needle, n_ts), Transform(s_display, s_ts_tex), run_time=1.5)
         self.play(Flash(needle_dot, color="#aa44ff", flash_radius=0.4), run_time=0.5)
@@ -472,7 +472,7 @@ class DPIChain(Scene):
                                   **box_style).shift(RIGHT*4.5 + UP*0.3)
         ts_title = Text("Tsirelson's\nBound", font_size=24, color="#44aaff",
                         weight=BOLD).move_to(ts_box.get_center() + UP*0.3)
-        ts_eq = MathTex(r"S \leq 2+\sqrt{2}", font_size=22, color=GREY_B
+        ts_eq = MathTex(r"S \leq 2\sqrt{2}", font_size=22, color=GREY_B
                         ).move_to(ts_box.get_center() + DOWN*0.35)
 
         # ── Arrows ──
