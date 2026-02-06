@@ -692,105 +692,59 @@
       </section>
 
 
-      <!-- ═══ GENERAL PROBABILISTIC THEORIES ═══ -->
+      <!-- ═══ SYSTEMS OF TYPE (k,l) ═══ -->
       <section data-transition="slide">
-        <h3 style="margin-bottom:0.15em;">General Probabilistic Theories</h3>
-        <p class="small dim" style="margin-top:0;">Beyond Hilbert spaces — an operational framework</p>
+        <h3 style="margin-bottom:0.15em;">Systems of Type <span class="accent">$(k, l)$</span></h3>
+        <p class="small dim" style="margin-top:0;">An operational language to compare any theory</p>
 
         <div class="split">
           <div class="left">
-            <div class="highlight-box" style="border-color:rgba(248,113,113,0.2);">
-              <h4 style="color:var(--text-muted); margin:0 0 0.2rem 0; font-size:0.75em;">&#10060;&ensp;Traditional QM</h4>
-              <p class="small" style="margin:0; color:var(--text-muted);">States as $\psi \in \mathcal{H}$ — assumes the answer!</p>
-            </div>
-            <div class="highlight-box" style="margin-top:0.4rem; border-color:rgba(91,155,245,0.2);">
-              <h4 style="color:var(--accent-blue); margin:0 0 0.2rem 0; font-size:0.75em;">&#10003;&ensp;Operational View</h4>
-              <p class="small" style="margin:0;">
-                <strong>State</strong> $\vec{P}$: probabilities for $k$ <strong>fiducial measurements</strong>,
-                each with $l$ outcomes.
+            <div class="highlight-box" style="margin-bottom: 0.4rem;">
+              <p style="font-size:0.8em; margin:0;">
+                <strong class="accent">Definition:</strong> A system has $k$ <em>fiducial measurements</em>, each with $l$ outcomes.
               </p>
-              <p style="margin:0.3rem 0 0; font-size:0.75em; color:var(--text-body);">
-                $\vec{P} = \big( P(i|j) \big)_{i,j}$
+              <p style="font-size:0.75em; margin:0.25rem 0 0; color:var(--text-body);">
+                State $\vec{P} = \big( P(i|j) \big)$ — probabilities for all measurement-outcome pairs.
               </p>
             </div>
-            <ul class="prop-list" style="margin-top:0.4rem;">
-              <li><strong>Convexity:</strong> Mixtures of states are valid states</li>
-              <li><strong>Transformations:</strong> $\vec{P} \mapsto M \cdot \vec{P}$ (linear)</li>
-              <li><strong>Measurements:</strong> Effects $\vec{R}_i$ with $\vec{R}_i \cdot \vec{P} = P(\text{outcome } i)$</li>
-            </ul>
-            <div class="highlight-box" style="border-color:rgba(90,228,167,0.2); margin-top:0.3rem;">
+
+            <div class="two-col" style="margin-top:0.4rem; font-size:0.72em;">
+              <div>
+                <h4 style="color:var(--accent-purple); margin:0 0 0.15rem;">Quantum (qubit)</h4>
+                <ul class="prop-list" style="margin:0;">
+                  <li>Bloch sphere states</li>
+                  <li>Continuous measurements</li>
+                </ul>
+              </div>
+              <div>
+                <h4 style="color:var(--accent-orange); margin:0 0 0.15rem;">Box-World (2,2)</h4>
+                <ul class="prop-list" style="margin:0;">
+                  <li>Square state space</li>
+                  <li>PR-Box at corners</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="highlight-box" style="border-color:rgba(90,228,167,0.2); margin-top:0.4rem;">
               <p style="font-size:0.7em; margin:0; color:var(--accent-green);">
-                QM, classical probability, and box-world are all GPTs. Same rules, different state spaces.
+                Same framework describes classical, quantum, and exotic theories.
+                Box-world's state space is <em>larger</em> than quantum's.
               </p>
             </div>
           </div>
           <div class="right">
             <div class="video-box">
               <video autoplay loop muted playsinline preload="auto">
-                <source src="assets/6_gpt.webm" type="video/webm" />
-              </video>
-            </div>
-          </div>
-        </div>
-
-        <aside class="notes">
-          To ask "Why is QM the way it is?", we can't use QM as the framework —
-          that would be circular. GPTs describe any theory via operational
-          probabilities. Quantum, classical, and exotic theories all fit.
-        </aside>
-      </section>
-
-
-      <!-- ═══ SYSTEMS OF TYPE (k,l) ═══ -->
-      <section data-transition="slide">
-        <h3 style="margin-bottom:0.15em;">Systems of Type <span class="accent">$(k, l)$</span></h3>
-        <p class="small dim" style="margin-top:0;">What distinguishes quantum from box-world</p>
-
-        <div class="split">
-          <div class="left" style="text-align:center;">
-            <div class="video-box" style="display:inline-block;">
-              <video autoplay loop muted playsinline preload="auto" style="max-height:42vh;">
                 <source src="assets/7_systems.webm" type="video/webm" />
               </video>
             </div>
           </div>
-          <div class="right" style="flex-direction:column; align-items:flex-start;">
-            <div class="highlight-box">
-              <p style="font-size:0.75em; margin:0;">
-                <strong class="accent">System Type $(k, l)$:</strong>&ensp;
-                $k$ fiducial measurements, $l$ outcomes each.
-              </p>
-            </div>
-            <div class="two-col" style="margin-top:0.5rem; font-size:0.75em;">
-              <div>
-                <h4 style="color:var(--accent-blue); margin:0 0 0.2rem;">Quantum (qubit)</h4>
-                <ul class="prop-list">
-                  <li>$k \approx d^2$ fiducial</li>
-                  <li>Bloch sphere state space</li>
-                  <li>Continuous measurements</li>
-                </ul>
-              </div>
-              <div>
-                <h4 style="color:var(--accent-orange); margin:0 0 0.2rem;">Box-World</h4>
-                <ul class="prop-list">
-                  <li>$k = 2$ fiducial (type $(2,2)$)</li>
-                  <li>Square state space</li>
-                  <li>PR-Box lives at the corners</li>
-                </ul>
-              </div>
-            </div>
-            <div class="highlight-box" style="border-color:rgba(251,191,36,0.2); margin-top:0.4rem;">
-              <p style="font-size:0.7em; margin:0; color:var(--accent-gold);">
-                Box-world's state space is strictly larger than quantum's —
-                more correlations are available.
-              </p>
-            </div>
-          </div>
         </div>
 
         <aside class="notes">
-          Systems classified by (k,l). Quantum: Bloch sphere. Box-world: square — larger.
-          The extra correlations in box-world include the PR-Box at the corners.
+          GPTs classify systems by (k,l). This operational language lets us compare
+          quantum, classical, and box-world on equal footing. Box-world has a larger
+          state space — the PR-Box lives at its corners.
         </aside>
       </section>
 
@@ -1467,7 +1421,6 @@
       { title: "Correlation Landscape",  section: "The Mystery", part: "I", sectionName: "The Mystery", gradient: "var(--accent-blue), var(--accent-purple)" },
       { title: "The CHSH Game",          section: "The Mystery", part: "I", sectionName: "The Mystery", gradient: "var(--accent-blue), var(--accent-purple)" },
       { title: "Part II: The Framework", section: "divider", part: "II", sectionName: "The Framework", gradient: "var(--accent-blue), var(--accent-green)" },
-      { title: "General Probabilistic Theories", section: "The Framework", part: "II", sectionName: "The Framework", gradient: "var(--accent-blue), var(--accent-green)" },
       { title: "Systems of Type (k,l)",  section: "The Framework", part: "II", sectionName: "The Framework", gradient: "var(--accent-blue), var(--accent-green)" },
       { title: "Composite Systems",      section: "The Framework", part: "II", sectionName: "The Framework", gradient: "var(--accent-blue), var(--accent-green)" },
       { title: "Part III: The Principle", section: "divider", part: "III", sectionName: "The Principle", gradient: "var(--accent-orange), var(--accent-gold)" },
@@ -1487,9 +1440,9 @@
     var sections = [
       { idx: 1,  label: "I. The Mystery" },
       { idx: 4,  label: "II. The Framework" },
-      { idx: 8,  label: "III. The Principle" },
-      { idx: 12, label: "IV. The Proof" },
-      { idx: 15, label: "V. The Verdict" },
+      { idx: 7,  label: "III. The Principle" },
+      { idx: 11, label: "IV. The Proof" },
+      { idx: 14, label: "V. The Verdict" },
     ];
 
     // Progress bar
