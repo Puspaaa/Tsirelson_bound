@@ -13,127 +13,156 @@
   <!-- KaTeX -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
 
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
   <style>
     /* ═══════════════════════════════════════════════
-       GLOBAL THEME
+       GLOBAL THEME — Refined Modern Palette
        ═══════════════════════════════════════════════ */
     :root {
-      --r-background-color: #0f0f1a;
+      --bg-primary: #0f1729;
+      --bg-surface: #182030;
+      --bg-elevated: #1e2a3a;
+      --border: #2a3a4e;
+      --text-heading: #e8edf5;
+      --text-body: #b0bec5;
+      --text-muted: #6b7d8f;
+      --accent-blue: #5b9bf5;
+      --accent-purple: #a78bfa;
+      --accent-green: #5ae4a7;
+      --accent-gold: #fbbf24;
+      --accent-red: #f87171;
+      --accent-orange: #fb923c;
+      --accent-teal: #2dd4bf;
+      --accent-pink: #f472b6;
+
+      --r-background-color: var(--bg-primary);
       --r-main-font: 'Inter', 'Segoe UI', system-ui, sans-serif;
       --r-heading-font: 'Inter', 'Segoe UI', system-ui, sans-serif;
-      --r-main-font-size: 32px;
-      --r-heading-color: #e0e0ff;
-      --r-main-color: #c8c8e0;
-      --r-link-color: #aa88ff;
-      --r-selection-background-color: #aa44ff55;
+      --r-main-font-size: 28px;
+      --r-heading-color: var(--text-heading);
+      --r-main-color: var(--text-body);
+      --r-link-color: var(--accent-blue);
+      --r-selection-background-color: rgba(91, 155, 245, 0.25);
     }
+
     .reveal { font-family: var(--r-main-font); }
     .reveal h1, .reveal h2, .reveal h3 {
       font-weight: 700; text-transform: none; letter-spacing: -0.02em;
     }
 
     /* ─── Utility classes ─── */
-    .accent     { color: #aa88ff; }
-    .accent-red { color: #ff5555; }
-    .accent-grn { color: #55ff99; }
-    .accent-ylw { color: #ffdd44; }
-    .accent-blu { color: #44aaff; }
-    .accent-pur { color: #aa44ff; }
-    .accent-org { color: #ff9800; }
+    .accent     { color: var(--accent-purple); }
+    .accent-red { color: var(--accent-red); }
+    .accent-grn { color: var(--accent-green); }
+    .accent-ylw { color: var(--accent-gold); }
+    .accent-blu { color: var(--accent-blue); }
+    .accent-pur { color: var(--accent-purple); }
+    .accent-org { color: var(--accent-orange); }
     .small      { font-size: 0.65em; }
     .tiny       { font-size: 0.50em; }
-    .dim        { opacity: 0.55; }
+    .dim        { opacity: 0.6; }
     .left-align { text-align: left; }
+
+    /* ─── Prevent overflow on all slides ─── */
+    .reveal .slides section {
+      overflow: hidden;
+      box-sizing: border-box;
+      padding: 20px 40px;
+    }
 
     /* ─── Split layout ─── */
     .split {
-      display: flex; gap: 2rem; align-items: center;
+      display: flex; gap: 1.5rem; align-items: flex-start;
       justify-content: center; width: 100%;
     }
-    .split > .left  { flex: 1; text-align: left; }
-    .split > .right { flex: 1; display: flex; justify-content: center; align-items: center; }
+    .split > .left  { flex: 1; text-align: left; min-width: 0; }
+    .split > .right { flex: 1; display: flex; justify-content: center; align-items: center; min-width: 0; }
 
     /* ─── Video container ─── */
     .video-box {
-      border: 1px solid #333; border-radius: 12px;
+      border: 1px solid var(--border); border-radius: 10px;
       overflow: hidden;
-      box-shadow: 0 0 30px rgba(170, 68, 255, 0.15);
+      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
     }
     .video-box video {
-      display: block; max-width: 100%; max-height: 55vh; background: #000;
+      display: block; max-width: 100%; max-height: 50vh; background: #000;
     }
 
     /* ─── Hierarchy bars ─── */
     .hierarchy-item {
-      display: flex; align-items: center; gap: 0.8rem;
-      margin: 0.5rem 0; font-size: 0.8em;
+      display: flex; align-items: center; gap: 0.7rem;
+      margin: 0.35rem 0; font-size: 0.75em;
     }
-    .hierarchy-bar { height: 8px; border-radius: 4px; flex-shrink: 0; }
-    .bar-local    { width: 80px;  background: #44aaff; }
-    .bar-quantum  { width: 140px; background: #aa44ff; }
-    .bar-ns       { width: 200px; background: #ff4444; }
+    .hierarchy-bar { height: 6px; border-radius: 3px; flex-shrink: 0; }
+    .bar-local    { width: 70px;  background: var(--accent-blue); }
+    .bar-quantum  { width: 120px; background: var(--accent-purple); }
+    .bar-ns       { width: 170px; background: var(--accent-red); }
 
     /* ─── Two-column layout ─── */
     .two-col {
       display: grid; grid-template-columns: 1fr 1fr;
-      gap: 2rem; align-items: start; text-align: left;
+      gap: 1.5rem; align-items: start; text-align: left;
     }
 
     /* ─── Property list ─── */
     .prop-list { list-style: none; padding: 0; margin: 0; }
     .prop-list li {
-      padding: 0.3em 0; font-size: 0.75em; border-bottom: 1px solid #ffffff10;
+      padding: 0.25em 0; font-size: 0.72em; border-bottom: 1px solid rgba(255,255,255,0.04);
     }
-    .prop-list li::before  { content: '▸ '; color: #aa88ff; }
-    .prop-list li.bad::before  { content: '✗ '; color: #ff5555; }
-    .prop-list li.good::before { content: '✓ '; color: #55ff99; }
+    .prop-list li::before  { content: '▸ '; color: var(--accent-purple); }
+    .prop-list li.bad::before  { content: '✗ '; color: var(--accent-red); }
+    .prop-list li.good::before { content: '✓ '; color: var(--accent-green); }
 
     /* ─── Flow diagram ─── */
     .flow {
       display: flex; align-items: center; justify-content: center;
-      gap: 0.5rem; flex-wrap: wrap;
+      gap: 0.4rem; flex-wrap: wrap;
     }
     .flow-box {
-      background: #1a1a2e; border: 2px solid; border-radius: 12px;
-      padding: 1rem 1.2rem; text-align: center; min-width: 140px;
+      background: var(--bg-surface); border: 1.5px solid; border-radius: 10px;
+      padding: 0.7rem 1rem; text-align: center; min-width: 120px;
     }
-    .flow-box h4 { margin: 0 0 0.3rem 0; font-size: 0.75em; font-weight: 700; }
-    .flow-box p, .flow-box .katex { margin: 0; font-size: 0.6em; }
-    .flow-arrow { font-size: 1.8em; color: #555; }
+    .flow-box h4 { margin: 0 0 0.2rem 0; font-size: 0.7em; font-weight: 600; }
+    .flow-box p, .flow-box .katex { margin: 0; font-size: 0.55em; }
+    .flow-arrow { font-size: 1.5em; color: var(--text-muted); }
 
     /* ─── Title slide ─── */
     .title-slide h1 {
-      font-size: 2.2em;
-      background: linear-gradient(135deg, #aa88ff, #44aaff);
+      font-size: 2em;
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       background-clip: text; margin-bottom: 0.15em;
     }
     .title-slide h2 {
-      font-size: 0.85em; color: #888; font-weight: 400; margin-bottom: 1.5em;
+      font-size: 0.8em; color: var(--text-muted); font-weight: 400; margin-bottom: 1.2em;
     }
     .title-slide .meta {
-      font-size: 0.55em; color: #666; margin-top: 0.8em;
+      font-size: 0.5em; color: var(--text-muted); margin-top: 0.6em;
     }
-    .title-slide .meta span { display: block; margin: 0.2em 0; }
+    .title-slide .meta span { display: block; margin: 0.15em 0; }
 
     /* ─── Highlight box ─── */
     .highlight-box {
-      background: linear-gradient(135deg, #aa44ff15, #ff444415);
-      border: 1px solid #aa44ff44; border-radius: 10px;
-      padding: 1rem 1.3rem; margin: 0.8rem 0;
+      background: rgba(91, 155, 245, 0.06);
+      border: 1px solid rgba(91, 155, 245, 0.15); border-radius: 8px;
+      padding: 0.7rem 1rem; margin: 0.5rem 0;
     }
 
     /* ─── Question callout ─── */
     .question-big {
-      font-size: 1.1em; color: #ffdd44;
-      font-style: italic; text-align: center; margin-top: 1rem;
+      font-size: 0.95em; color: var(--accent-gold);
+      font-style: italic; text-align: center; margin-top: 0.6rem;
     }
 
-    /* ─── Subtle grid bg ─── */
+    /* ─── Subtle bg ─── */
     .reveal .slides {
       background-image:
-        radial-gradient(circle at 20% 80%, rgba(170, 68, 255, 0.03) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(68, 170, 255, 0.03) 0%, transparent 50%);
+        radial-gradient(circle at 20% 80%, rgba(91, 155, 245, 0.02) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(167, 139, 250, 0.02) 0%, transparent 50%);
     }
 
     /* ─── Section divider slides ─── */
@@ -144,141 +173,141 @@
       justify-content: center;
     }
     .section-divider .section-number {
-      font-size: 0.45em;
-      letter-spacing: 0.2em;
+      font-size: 0.4em;
+      letter-spacing: 0.25em;
       text-transform: uppercase;
-      color: #555;
-      margin-bottom: 0.6em;
+      color: var(--text-muted);
+      margin-bottom: 0.5em;
     }
     .section-divider h2 {
-      font-size: 2.2em;
+      font-size: 2em;
       margin-bottom: 0.2em;
     }
     .section-divider .section-rule {
-      width: 120px;
-      height: 3px;
-      border-radius: 2px;
-      margin: 0.6em 0;
+      width: 100px;
+      height: 2px;
+      border-radius: 1px;
+      margin: 0.5em 0;
     }
 
     /* ─── Bound badge ─── */
     .bound-badge {
-      display: inline-block; padding: 0.4em 1em; border-radius: 8px;
-      font-weight: 700; font-size: 0.85em; margin: 0.3em;
+      display: inline-block; padding: 0.35em 0.9em; border-radius: 6px;
+      font-weight: 600; font-size: 0.78em; margin: 0.25em;
     }
-    .bound-classical { background: #44aaff22; border: 2px solid #44aaff; color: #44aaff; }
-    .bound-quantum   { background: #aa44ff22; border: 2px solid #aa44ff; color: #aa44ff; }
-    .bound-ns        { background: #ff444422; border: 2px solid #ff4444; color: #ff4444; }
+    .bound-classical { background: rgba(91, 155, 245, 0.12); border: 1.5px solid var(--accent-blue); color: var(--accent-blue); }
+    .bound-quantum   { background: rgba(167, 139, 250, 0.12); border: 1.5px solid var(--accent-purple); color: var(--accent-purple); }
+    .bound-ns        { background: rgba(248, 113, 113, 0.12); border: 1.5px solid var(--accent-red); color: var(--accent-red); }
 
     /* ─── Step blocks ─── */
     .step-block {
-      background: #12122a; border-left: 4px solid #aa44ff;
-      border-radius: 0 10px 10px 0; padding: 0.8rem 1.2rem;
-      margin: 0.5rem 0; text-align: left;
+      background: var(--bg-surface); border-left: 3px solid var(--accent-purple);
+      border-radius: 0 8px 8px 0; padding: 0.5rem 0.9rem;
+      margin: 0.35rem 0; text-align: left;
     }
-    .step-block.orange { border-left-color: #ff9800; }
-    .step-block.blue   { border-left-color: #44aaff; }
-    .step-block.green  { border-left-color: #55ff99; }
-    .step-block.red    { border-left-color: #ff5555; }
-    .step-block.yellow { border-left-color: #ffdd44; }
+    .step-block.orange { border-left-color: var(--accent-orange); }
+    .step-block.blue   { border-left-color: var(--accent-blue); }
+    .step-block.green  { border-left-color: var(--accent-green); }
+    .step-block.red    { border-left-color: var(--accent-red); }
+    .step-block.yellow { border-left-color: var(--accent-gold); }
 
     /* ─── Verdict card ─── */
     .verdict-card {
-      background: #0a0a1a; border: 2px solid; border-radius: 14px;
-      padding: 1.2rem 1.5rem; text-align: center;
+      background: var(--bg-primary); border: 1.5px solid; border-radius: 10px;
+      padding: 0.8rem 1.2rem; text-align: center;
     }
-    .verdict-card h4 { margin: 0 0 0.5rem 0; font-size: 0.85em; }
-    .verdict-card .katex { font-size: 0.75em; }
-    .verdict-pass { border-color: #55ff99; }
-    .verdict-fail { border-color: #ff5555; }
+    .verdict-card h4 { margin: 0 0 0.3rem 0; font-size: 0.78em; }
+    .verdict-card .katex { font-size: 0.7em; }
+    .verdict-pass { border-color: var(--accent-green); }
+    .verdict-fail { border-color: var(--accent-red); }
 
     /* ─── Chain diagram ─── */
     .chain-row {
       display: flex; align-items: center; justify-content: center;
-      gap: 0.8rem; margin: 1rem 0;
+      gap: 0.5rem; margin: 0.6rem 0;
     }
     .chain-node {
-      background: #1a1a2e; border: 2px solid; border-radius: 14px;
-      padding: 0.8rem 1.2rem; text-align: center; min-width: 180px;
+      background: var(--bg-surface); border: 1.5px solid; border-radius: 10px;
+      padding: 0.5rem 0.8rem; text-align: center; min-width: 100px;
     }
-    .chain-node h4 { margin: 0 0 0.3rem 0; font-size: 0.7em; font-weight: 700; }
-    .chain-node p  { margin: 0; font-size: 0.55em; color: #99a; }
-    .chain-arrow { font-size: 2em; color: #ffdd44; }
+    .chain-node h4 { margin: 0 0 0.2rem 0; font-size: 0.65em; font-weight: 600; }
+    .chain-node p  { margin: 0; font-size: 0.5em; color: var(--text-muted); }
+    .chain-arrow { font-size: 1.5em; color: var(--accent-gold); }
 
     /* ═══════════════════════════════════════════════
        PROGRESS BAR + HOME BUTTON
        ═══════════════════════════════════════════════ */
     #progress-container {
-      position: fixed; bottom: 0; left: 0; width: 100%; height: 6px;
-      background: #1a1a2e; z-index: 100; cursor: pointer;
+      position: fixed; bottom: 0; left: 0; width: 100%; height: 4px;
+      background: var(--bg-surface); z-index: 100; cursor: pointer;
     }
     #progress-bar {
       height: 100%; width: 0%;
-      background: linear-gradient(90deg, #44aaff, #aa44ff, #55ff99);
+      background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple), var(--accent-teal));
       transition: width 0.3s ease;
     }
     .progress-marker {
-      position: absolute; top: -18px; height: 24px; width: 2px;
-      background: #ffffff30; z-index: 101;
+      position: absolute; top: -16px; height: 20px; width: 1px;
+      background: rgba(255,255,255,0.12); z-index: 101;
     }
     .progress-marker-label {
-      position: absolute; top: -34px; font-size: 10px;
-      color: #666; white-space: nowrap;
+      position: absolute; top: -30px; font-size: 9px;
+      color: var(--text-muted); white-space: nowrap;
       transform: translateX(-50%);
       pointer-events: none;
     }
 
     /* Home button */
     #home-btn {
-      position: fixed; top: 18px; left: 18px; z-index: 100;
-      width: 42px; height: 42px; border-radius: 50%;
-      background: #1a1a2e; border: 2px solid #333;
-      color: #aa88ff; font-size: 20px;
+      position: fixed; top: 16px; left: 16px; z-index: 100;
+      width: 38px; height: 38px; border-radius: 8px;
+      background: var(--bg-surface); border: 1px solid var(--border);
+      color: var(--accent-blue); font-size: 18px;
       cursor: pointer; display: flex; align-items: center; justify-content: center;
-      transition: all 0.25s ease;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.4);
+      transition: all 0.2s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
     }
     #home-btn:hover {
-      background: #aa44ff33; border-color: #aa44ff;
-      transform: scale(1.1);
+      background: rgba(91, 155, 245, 0.12); border-color: var(--accent-blue);
+      transform: scale(1.05);
     }
 
     /* Slide map overlay */
     #slide-map {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(10,10,20,0.95); z-index: 200;
-      display: none; overflow-y: auto; padding: 60px 40px;
+      background: rgba(10, 15, 28, 0.96); z-index: 200;
+      display: none; overflow-y: auto; padding: 50px 40px;
     }
-    #slide-map.visible { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; align-content: start; }
+    #slide-map.visible { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; align-content: start; }
     .map-card {
-      width: 200px; height: 120px; border-radius: 10px;
-      background: #1a1a2e; border: 2px solid #333;
-      cursor: pointer; padding: 12px;
+      width: 190px; height: 110px; border-radius: 8px;
+      background: var(--bg-surface); border: 1.5px solid var(--border);
+      cursor: pointer; padding: 10px;
       display: flex; flex-direction: column; justify-content: center;
       align-items: center; text-align: center;
       transition: all 0.2s ease;
     }
-    .map-card:hover { border-color: #aa88ff; transform: scale(1.05); }
-    .map-card .map-num { font-size: 11px; color: #666; margin-bottom: 4px; }
-    .map-card .map-title { font-size: 13px; color: #ccc; font-weight: 600; }
-    .map-card .map-section { font-size: 10px; margin-top: 6px; padding: 2px 10px; border-radius: 10px; color: #888; }
-    .map-card.active { border-color: #aa88ff; box-shadow: 0 0 15px #aa88ff44; }
-    .map-card.is-divider { background: #0f0f1a; border-style: dashed; opacity: 0.7; }
+    .map-card:hover { border-color: var(--accent-blue); transform: scale(1.04); }
+    .map-card .map-num { font-size: 10px; color: var(--text-muted); margin-bottom: 4px; }
+    .map-card .map-title { font-size: 12px; color: var(--text-body); font-weight: 600; }
+    .map-card .map-section { font-size: 9px; margin-top: 5px; padding: 2px 8px; border-radius: 8px; color: var(--text-muted); }
+    .map-card.active { border-color: var(--accent-blue); box-shadow: 0 0 12px rgba(91, 155, 245, 0.2); }
+    .map-card.is-divider { background: var(--bg-primary); border-style: dashed; opacity: 0.65; }
     #slide-map-close {
-      position: fixed; top: 20px; right: 30px; z-index: 210;
-      font-size: 28px; color: #888; cursor: pointer; display: none;
+      position: fixed; top: 18px; right: 28px; z-index: 210;
+      font-size: 24px; color: var(--text-muted); cursor: pointer; display: none;
     }
-    #slide-map-close:hover { color: #fff; }
+    #slide-map-close:hover { color: var(--text-heading); }
   </style>
 </head>
 <body>
 
   <!-- HOME BUTTON -->
-  <button id="home-btn" title="Slide Map (press H)">⌂</button>
+  <button id="home-btn" title="Slide Map (press H)">&#9776;</button>
 
   <!-- SLIDE MAP OVERLAY -->
   <div id="slide-map"></div>
-  <span id="slide-map-close">✕</span>
+  <span id="slide-map-close">&times;</span>
 
   <!-- PROGRESS BAR -->
   <div id="progress-container">
@@ -296,18 +325,18 @@
         <h1>The Limit of Nature</h1>
         <h2>Tsirelson's Bound from a Generalised Data Processing Inequality</h2>
 
-        <div style="margin: 1.5rem 0;">
+        <div style="margin: 1.2rem 0;">
           <span class="bound-badge bound-classical">Classical: $S \leq 2$</span>
           <span class="bound-badge bound-quantum">Tsirelson: $S \leq 2\sqrt{2}$</span>
           <span class="bound-badge bound-ns">No-Signaling: $S \leq 4$</span>
         </div>
 
-        <div style="margin: 1rem 0;">
-          <span style="font-size:0.6em; color:#aa88ff;">Based on Dahlsten, Lercher &amp; Renner — <em>New J. Phys.</em> <strong>14</strong> (2012) 063024</span>
+        <div style="margin: 0.8rem 0;">
+          <span style="font-size:0.55em; color:var(--accent-purple);">Based on Dahlsten, Lercher &amp; Renner — <em>New J. Phys.</em> <strong>14</strong> (2012) 063024</span>
         </div>
 
         <div class="meta">
-          <span><strong style="color:#bbb;">Mohammed Boudjemaa&ensp;·&ensp;Yash Kumar Nagar&ensp;·&ensp;Nishchay Vora</strong></span>
+          <span><strong style="color:var(--text-body);">Mohammed Boudjemaa &ensp;·&ensp; Yash Kumar Nagar &ensp;·&ensp; Nishchay Vora</strong></span>
           <span>M2 Quantum Information — February 6, 2026</span>
         </div>
 
@@ -324,46 +353,46 @@
            ═══════════════════════════════════════════════════════ -->
       <section class="section-divider" data-transition="fade">
         <div class="section-number">Part I</div>
-        <h2 style="background: linear-gradient(135deg, #44aaff, #aa88ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+        <h2 style="background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
           The Mystery
         </h2>
-        <div class="section-rule" style="background: linear-gradient(90deg, #44aaff, #aa88ff);"></div>
+        <div class="section-rule" style="background: linear-gradient(90deg, var(--accent-blue), var(--accent-purple));"></div>
         <p class="small dim">Why isn't nature maximally non-local?</p>
       </section>
 
 
       <!-- ═══ THE CORRELATION LANDSCAPE ═══ -->
       <section data-transition="slide">
-        <h3 style="margin-bottom:0.2em;">The Correlation Landscape</h3>
+        <h3 style="margin-bottom:0.15em;">The Correlation Landscape</h3>
         <p class="small dim" style="margin-top:0;">Three nested worlds of correlations</p>
 
         <div class="split">
           <div class="left">
-            <div class="hierarchy-item fragment" data-fragment-index="1">
+            <div class="hierarchy-item">
               <div class="hierarchy-bar bar-local"></div>
               <div>
-                <strong class="accent-blu">Local&ensp;($\mathcal{L}$)</strong><br>
-                <span class="small">$S \leq 2$&ensp;—&ensp;Bell's inequality</span>
+                <strong class="accent-blu">Local ($\mathcal{L}$)</strong><br>
+                <span class="small">$S \leq 2$ — Bell's inequality</span>
               </div>
             </div>
-            <div class="hierarchy-item fragment" data-fragment-index="2">
+            <div class="hierarchy-item">
               <div class="hierarchy-bar bar-quantum"></div>
               <div>
-                <strong class="accent-pur">Quantum&ensp;($\mathcal{Q}$)</strong><br>
-                <span class="small">$S \leq 2\sqrt{2} \approx 2.83$&ensp;—&ensp;Tsirelson's limit</span>
+                <strong class="accent-pur">Quantum ($\mathcal{Q}$)</strong><br>
+                <span class="small">$S \leq 2\sqrt{2} \approx 2.83$ — Tsirelson's limit</span>
               </div>
             </div>
-            <div class="hierarchy-item fragment" data-fragment-index="3">
+            <div class="hierarchy-item">
               <div class="hierarchy-bar bar-ns"></div>
               <div>
-                <strong class="accent-red">No-Signaling&ensp;($\mathcal{NS}$)</strong><br>
-                <span class="small">$S \leq 4$&ensp;—&ensp;Relativity alone</span>
+                <strong class="accent-red">No-Signaling ($\mathcal{NS}$)</strong><br>
+                <span class="small">$S \leq 4$ — Relativity alone</span>
               </div>
             </div>
-            <div class="highlight-box fragment" data-fragment-index="4">
+            <div class="highlight-box" style="margin-top:0.5rem;">
               <strong class="accent-ylw">The hierarchy:</strong>
               <span class="small">&ensp;$\mathcal{L} \subset \mathcal{Q} \subset \mathcal{NS}$</span><br>
-              <p class="question-big" style="font-size:0.75em;">
+              <p class="question-big" style="font-size:0.7em;">
                 Relativity allows $S$ up to $4$. Why does nature stop at $2\sqrt{2}$?
               </p>
             </div>
@@ -387,30 +416,30 @@
 
       <!-- ═══ THE CHSH SCORE ═══ -->
       <section data-transition="slide">
-        <h3 style="margin-bottom:0.2em;">Measuring Non-Locality: <span class="accent-pur">The CHSH Score</span></h3>
+        <h3 style="margin-bottom:0.15em;">Measuring Non-Locality: <span class="accent-pur">The CHSH Score</span></h3>
         <p class="small dim" style="margin-top:0;">A single number that tracks where a theory lives</p>
 
         <div class="split">
           <div class="left">
-            <div class="highlight-box" style="margin-bottom: 0.8rem;">
-              <p class="small" style="margin:0 0 0.5rem 0; color:#99a;">
+            <div class="highlight-box" style="margin-bottom: 0.5rem;">
+              <p class="small" style="margin:0 0 0.3rem 0; color:var(--text-muted);">
                 <strong>Theorem</strong> (Tsirelson, 1980). For any quantum strategy:
               </p>
-              <p style="text-align:center; font-size:1.1em; margin:0;">
+              <p style="text-align:center; font-size:1em; margin:0;">
                 $S \;\leq\; 2\sqrt{2}$
               </p>
             </div>
 
-            <div style="text-align:center; margin: 0.5rem 0;">
+            <div style="text-align:center; margin: 0.3rem 0; font-size:0.9em;">
               $S \;=\; \displaystyle\sum_{x,y \in \{0,1\}} P(a \oplus b = x \cdot y \mid x,y)$
             </div>
 
-            <div style="margin-top: 0.8rem;">
+            <div style="margin-top: 0.5rem;">
               <div class="hierarchy-item"><div class="hierarchy-bar bar-local"></div><span class="accent-blu small">Classical: $S = 2$</span></div>
               <div class="hierarchy-item"><div class="hierarchy-bar bar-quantum"></div><span class="accent-pur small">Quantum: $S = 2\sqrt{2} \approx 2.83$</span></div>
               <div class="hierarchy-item"><div class="hierarchy-bar bar-ns"></div><span class="accent-red small">No-signaling: $S = 4$</span></div>
             </div>
-            <p class="small accent-pur fragment" style="margin-top:0.8em;">
+            <p class="small accent-pur" style="margin-top:0.5em;">
               Tsirelson proved $2\sqrt{2}$ is the ceiling. But for 30 years,
               nobody could explain <em>why</em> this particular number.
             </p>
@@ -434,36 +463,36 @@
 
       <!-- ═══ THE PR-BOX ═══ -->
       <section data-transition="slide">
-        <h3 style="margin-bottom:0.2em;">The Extremal Case: <span class="accent-ylw">The PR-Box</span></h3>
+        <h3 style="margin-bottom:0.15em;">The Extremal Case: <span class="accent-ylw">The PR-Box</span></h3>
         <p class="small dim" style="margin-top:0;">Popescu &amp; Rohrlich (1994) — a hypothetical device at $S = 4$</p>
 
         <div class="split">
           <div class="left">
-            <div class="highlight-box" style="text-align: center;">
-              <p style="font-size:1.1em; margin:0;">$a \oplus b = x \cdot y$</p>
-              <p class="tiny dim" style="margin-top:0.3em;">Always satisfied — deterministically</p>
+            <div class="highlight-box" style="text-align: center; margin-bottom:0.4rem;">
+              <p style="font-size:0.95em; margin:0;">$a \oplus b = x \cdot y$</p>
+              <p class="tiny dim" style="margin-top:0.2em;">Always satisfied — deterministically</p>
             </div>
 
-            <ul class="prop-list fragment" data-fragment-index="1">
+            <ul class="prop-list">
               <li class="good">$P(a = b \mid 00) = 1$</li>
               <li class="good">$P(a = b \mid 01) = 1$</li>
               <li class="good">$P(a = b \mid 10) = 1$</li>
-              <li class="bad">$P(a \neq b \mid 11) = 1$&ensp;— anti-correlation</li>
+              <li class="bad">$P(a \neq b \mid 11) = 1$ — anti-correlation</li>
             </ul>
 
-            <div style="margin-top: 0.6rem;" class="fragment" data-fragment-index="2">
+            <div style="margin-top: 0.4rem;">
               <div class="step-block orange">
                 <p class="small" style="margin:0;"><strong class="accent-org">CHSH score:</strong> $S = 4$ — maximal</p>
               </div>
               <div class="step-block green">
-                <p class="small" style="margin:0;"><strong class="accent-grn">No-signaling?</strong> Yes — marginals are uniform: $P(a|x) = \tfrac{1}{2}$</p>
+                <p class="small" style="margin:0;"><strong class="accent-grn">No-signaling?</strong> Yes — marginals uniform: $P(a|x) = \tfrac{1}{2}$</p>
               </div>
               <div class="step-block red">
                 <p class="small" style="margin:0;"><strong class="accent-red">Violates Tsirelson:</strong> $4 > 2\sqrt{2}$</p>
               </div>
             </div>
 
-            <p class="question-big fragment" data-fragment-index="3" style="font-size:0.7em;">
+            <p class="question-big" style="font-size:0.65em;">
               It doesn't violate relativity. So what law of physics forbids it?
             </p>
           </div>
@@ -489,46 +518,42 @@
            ═══════════════════════════════════════════════════════ -->
       <section class="section-divider" data-transition="fade">
         <div class="section-number">Part II</div>
-        <h2 style="background: linear-gradient(135deg, #44aaff, #55ff99); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+        <h2 style="background: linear-gradient(135deg, var(--accent-blue), var(--accent-green)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
           The Framework
         </h2>
-        <div class="section-rule" style="background: linear-gradient(90deg, #44aaff, #55ff99);"></div>
+        <div class="section-rule" style="background: linear-gradient(90deg, var(--accent-blue), var(--accent-green));"></div>
         <p class="small dim">A language to compare theories on equal footing</p>
       </section>
 
 
       <!-- ═══ GENERAL PROBABILISTIC THEORIES ═══ -->
       <section data-transition="slide">
-        <h3 style="margin-bottom:0.2em;">General Probabilistic Theories</h3>
+        <h3 style="margin-bottom:0.15em;">General Probabilistic Theories</h3>
         <p class="small dim" style="margin-top:0;">Beyond Hilbert spaces — an operational framework</p>
 
         <div class="split">
           <div class="left">
-            <div class="fragment" data-fragment-index="1">
-              <div class="highlight-box" style="border-color:#ff444444;">
-                <h4 style="color:#888; margin:0 0 0.3rem 0; font-size:0.7em;">&#10060;&ensp;Traditional QM</h4>
-                <p class="small" style="margin:0; color:#888;">States as $\psi \in \mathcal{H}$ — assumes the answer!</p>
-              </div>
+            <div class="highlight-box" style="border-color:rgba(248,113,113,0.2);">
+              <h4 style="color:var(--text-muted); margin:0 0 0.2rem 0; font-size:0.65em;">&#10060;&ensp;Traditional QM</h4>
+              <p class="small" style="margin:0; color:var(--text-muted);">States as $\psi \in \mathcal{H}$ — assumes the answer!</p>
             </div>
-            <div class="fragment" data-fragment-index="2" style="margin-top:0.8rem;">
-              <div class="highlight-box" style="border-color:#44aaff44;">
-                <h4 style="color:#44aaff; margin:0 0 0.3rem 0; font-size:0.7em;">&#10003;&ensp;Operational View</h4>
-                <p class="small" style="margin:0;">
-                  <strong>State</strong> $\vec{P}$: probabilities for $k$ <strong>fiducial measurements</strong>,
-                  each with $l$ outcomes.
-                </p>
-                <p style="margin:0.5rem 0 0; font-size:0.7em; color:white;">
-                  $\vec{P} = \big( P(i|j) \big)_{i,j}$
-                </p>
-              </div>
+            <div class="highlight-box" style="margin-top:0.4rem; border-color:rgba(91,155,245,0.2);">
+              <h4 style="color:var(--accent-blue); margin:0 0 0.2rem 0; font-size:0.65em;">&#10003;&ensp;Operational View</h4>
+              <p class="small" style="margin:0;">
+                <strong>State</strong> $\vec{P}$: probabilities for $k$ <strong>fiducial measurements</strong>,
+                each with $l$ outcomes.
+              </p>
+              <p style="margin:0.3rem 0 0; font-size:0.65em; color:white;">
+                $\vec{P} = \big( P(i|j) \big)_{i,j}$
+              </p>
             </div>
-            <ul class="prop-list fragment" data-fragment-index="3" style="margin-top:0.6rem;">
-              <li><strong>Convexity:</strong>&ensp;Mixtures of states are valid states</li>
-              <li><strong>Transformations:</strong>&ensp;$\vec{P} \mapsto M \cdot \vec{P}$ (linear)</li>
-              <li><strong>Measurements:</strong>&ensp;Effects $\vec{R}_i$ with $\vec{R}_i \cdot \vec{P} = P(\text{outcome } i)$</li>
+            <ul class="prop-list" style="margin-top:0.4rem;">
+              <li><strong>Convexity:</strong> Mixtures of states are valid states</li>
+              <li><strong>Transformations:</strong> $\vec{P} \mapsto M \cdot \vec{P}$ (linear)</li>
+              <li><strong>Measurements:</strong> Effects $\vec{R}_i$ with $\vec{R}_i \cdot \vec{P} = P(\text{outcome } i)$</li>
             </ul>
-            <div class="highlight-box fragment" data-fragment-index="4" style="border-color:#55ff9944; margin-top:0.5rem;">
-              <p style="font-size:0.65em; margin:0; color:#55ff99;">
+            <div class="highlight-box" style="border-color:rgba(90,228,167,0.2); margin-top:0.3rem;">
+              <p style="font-size:0.6em; margin:0; color:var(--accent-green);">
                 QM, classical probability, and box-world are all GPTs. Same rules, different state spaces.
               </p>
             </div>
@@ -552,29 +577,27 @@
 
       <!-- ═══ SYSTEMS OF TYPE (k,l) ═══ -->
       <section data-transition="slide">
-        <h3 style="margin-bottom:0.2em;">Systems of Type <span class="accent">$(k, l)$</span></h3>
+        <h3 style="margin-bottom:0.15em;">Systems of Type <span class="accent">$(k, l)$</span></h3>
         <p class="small dim" style="margin-top:0;">What distinguishes quantum from box-world</p>
 
         <div class="split">
           <div class="left" style="text-align:center;">
             <div class="video-box" style="display:inline-block;">
-              <video autoplay loop muted playsinline preload="auto" style="max-height:45vh;">
+              <video autoplay loop muted playsinline preload="auto" style="max-height:42vh;">
                 <source src="assets/7_systems.webm" type="video/webm" />
               </video>
             </div>
           </div>
           <div class="right" style="flex-direction:column; align-items:flex-start;">
-            <div class="fragment" data-fragment-index="1">
-              <div class="highlight-box">
-                <p style="font-size:0.7em; margin:0;">
-                  <strong class="accent">System Type $(k, l)$:</strong>&ensp;
-                  $k$ fiducial measurements, $l$ outcomes each.
-                </p>
-              </div>
+            <div class="highlight-box">
+              <p style="font-size:0.65em; margin:0;">
+                <strong class="accent">System Type $(k, l)$:</strong>&ensp;
+                $k$ fiducial measurements, $l$ outcomes each.
+              </p>
             </div>
-            <div class="two-col fragment" data-fragment-index="2" style="margin-top:0.8rem; font-size:0.7em;">
+            <div class="two-col" style="margin-top:0.5rem; font-size:0.65em;">
               <div>
-                <h4 style="color:#44aaff; margin:0 0 0.3rem;">Quantum (qubit)</h4>
+                <h4 style="color:var(--accent-blue); margin:0 0 0.2rem;">Quantum (qubit)</h4>
                 <ul class="prop-list">
                   <li>$k \approx d^2$ fiducial</li>
                   <li>Bloch sphere state space</li>
@@ -582,7 +605,7 @@
                 </ul>
               </div>
               <div>
-                <h4 style="color:#ff9800; margin:0 0 0.3rem;">Box-World</h4>
+                <h4 style="color:var(--accent-orange); margin:0 0 0.2rem;">Box-World</h4>
                 <ul class="prop-list">
                   <li>$k = 2$ fiducial (type $(2,2)$)</li>
                   <li>Square state space</li>
@@ -590,13 +613,11 @@
                 </ul>
               </div>
             </div>
-            <div class="fragment" data-fragment-index="3" style="margin-top:0.8rem;">
-              <div class="highlight-box" style="border-color:#ffdd4444;">
-                <p style="font-size:0.65em; margin:0; color:#ffdd44;">
-                  Box-world's state space is strictly larger than quantum's —
-                  more correlations are available.
-                </p>
-              </div>
+            <div class="highlight-box" style="border-color:rgba(251,191,36,0.2); margin-top:0.4rem;">
+              <p style="font-size:0.6em; margin:0; color:var(--accent-gold);">
+                Box-world's state space is strictly larger than quantum's —
+                more correlations are available.
+              </p>
             </div>
           </div>
         </div>
@@ -610,32 +631,26 @@
 
       <!-- ═══ COMPOSITE SYSTEMS & NO-SIGNALING ═══ -->
       <section data-transition="slide">
-        <h3 style="margin-bottom:0.2em;">Composite Systems <span class="accent-grn">&amp; No-Signaling</span></h3>
+        <h3 style="margin-bottom:0.15em;">Composite Systems <span class="accent-grn">&amp; No-Signaling</span></h3>
         <p class="small dim" style="margin-top:0;">How systems combine — and the structural rules they obey</p>
 
         <div class="split">
           <div class="left">
-            <div class="fragment" data-fragment-index="1">
-              <div class="highlight-box">
-                <h4 style="color:#aa88ff; margin:0 0 0.3rem 0; font-size:0.75em;">Tensor Products</h4>
-                <p style="font-size:0.7em; margin:0;">$V_{AB} = V_A \otimes V_B$</p>
-                <p class="small dim" style="margin:0.2em 0 0;">Joint state: $P(ii'|jj')$</p>
-              </div>
+            <div class="highlight-box">
+              <h4 style="color:var(--accent-purple); margin:0 0 0.2rem 0; font-size:0.7em;">Tensor Products</h4>
+              <p style="font-size:0.65em; margin:0;">$V_{AB} = V_A \otimes V_B$</p>
+              <p class="small dim" style="margin:0.15em 0 0;">Joint state: $P(ii'|jj')$</p>
             </div>
-            <div class="fragment" data-fragment-index="2" style="margin-top:0.8rem;">
-              <div class="highlight-box">
-                <h4 style="color:#aa88ff; margin:0 0 0.3rem 0; font-size:0.75em;">No-Signaling Constraint</h4>
-                <p style="font-size:0.7em; margin:0;">$P_A(i|j) = \sum_{i'} P_{AB}(ii'|jj')$</p>
-                <p class="small dim" style="margin:0.2em 0 0;">Marginals independent of remote settings.</p>
-              </div>
+            <div class="highlight-box" style="margin-top:0.4rem;">
+              <h4 style="color:var(--accent-purple); margin:0 0 0.2rem 0; font-size:0.7em;">No-Signaling Constraint</h4>
+              <p style="font-size:0.65em; margin:0;">$P_A(i|j) = \sum_{i'} P_{AB}(ii'|jj')$</p>
+              <p class="small dim" style="margin:0.15em 0 0;">Marginals independent of remote settings.</p>
             </div>
-            <div class="fragment" data-fragment-index="3" style="margin-top:0.8rem;">
-              <div class="highlight-box" style="border-color:#ffdd4444; background:linear-gradient(135deg, #ffdd4410, #ff444410);">
-                <p style="font-size:0.7em; margin:0; color:#ffdd44; font-weight:bold;">
-                  Box-world satisfies convexity, tensor products, and no-signaling
-                  — yet exceeds $2\sqrt{2}$. We need something more.
-                </p>
-              </div>
+            <div class="highlight-box" style="margin-top:0.4rem; border-color:rgba(251,191,36,0.2); background:rgba(251,191,36,0.04);">
+              <p style="font-size:0.63em; margin:0; color:var(--accent-gold); font-weight:600;">
+                Box-world satisfies convexity, tensor products, and no-signaling
+                — yet exceeds $2\sqrt{2}$. We need something more.
+              </p>
             </div>
           </div>
           <div class="right">
@@ -660,17 +675,17 @@
            ═══════════════════════════════════════════════════════ -->
       <section class="section-divider" data-transition="fade">
         <div class="section-number">Part III</div>
-        <h2 style="background: linear-gradient(135deg, #ff9800, #ffdd44); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+        <h2 style="background: linear-gradient(135deg, var(--accent-orange), var(--accent-gold)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
           The Principle
         </h2>
-        <div class="section-rule" style="background: linear-gradient(90deg, #ff9800, #ffdd44);"></div>
+        <div class="section-rule" style="background: linear-gradient(90deg, var(--accent-orange), var(--accent-gold));"></div>
         <p class="small dim">The Data Processing Inequality and its consequences</p>
       </section>
 
 
       <!-- ═══ GENERALIZED ENTROPY & DPI ═══ -->
       <section data-transition="slide">
-        <h3 style="margin-bottom:0.2em;"><span class="accent-org">Generalized Entropy</span> &amp; the <span class="accent-ylw">DPI</span></h3>
+        <h3 style="margin-bottom:0.15em;"><span class="accent-org">Generalized Entropy</span> &amp; the <span class="accent-ylw">DPI</span></h3>
         <p class="small dim" style="margin-top:0;">Three axioms that tame non-locality</p>
 
         <div class="split">
@@ -679,35 +694,35 @@
               <p class="small" style="margin:0;">
                 <strong class="accent-org">COND</strong> — $H(A|B) = H(AB) - H(B)$
               </p>
-              <p class="tiny dim" style="margin:0.2em 0 0;">Conditional entropy via chain rule</p>
+              <p class="tiny dim" style="margin:0.15em 0 0;">Conditional entropy via chain rule</p>
             </div>
             <div class="step-block yellow">
               <p class="small" style="margin:0;">
                 <strong class="accent-ylw">SHAN</strong> — Classical entropy = Shannon entropy
               </p>
-              <p class="tiny dim" style="margin:0.2em 0 0;">$H_{\text{class}} = H_{\text{Sh}}$</p>
+              <p class="tiny dim" style="margin:0.15em 0 0;">$H_{\text{class}} = H_{\text{Sh}}$</p>
             </div>
             <div class="step-block red">
               <p class="small" style="margin:0;">
                 <strong class="accent-red">DPI</strong> — $H(A|B) \leq H(A|T(B))$
               </p>
-              <p class="tiny dim" style="margin:0.2em 0 0;">Local processing cannot increase correlations</p>
+              <p class="tiny dim" style="margin:0.15em 0 0;">Local processing cannot increase correlations</p>
             </div>
 
-            <div class="highlight-box fragment" data-fragment-index="1" style="text-align: center;">
-              <p class="small dim" style="margin:0 0 0.4rem 0;">Generalized entropy for any GPT:</p>
-              <p style="font-size: 0.85em; margin: 0;">
+            <div class="highlight-box" style="text-align: center; margin-top:0.4rem;">
+              <p class="small dim" style="margin:0 0 0.2rem 0;">Generalized entropy for any GPT:</p>
+              <p style="font-size: 0.8em; margin: 0;">
                 $H(\vec{P}) = \min_{e \in \mathcal{M}^*} H_{\text{Sh}}\!\bigl(e(\vec{P})\bigr)$
               </p>
-              <p class="tiny dim" style="margin-top:0.3em;">Minimum Shannon entropy over all fine-grained measurements</p>
+              <p class="tiny dim" style="margin-top:0.2em;">Minimum Shannon entropy over all fine-grained measurements</p>
             </div>
 
-            <div class="chain-row fragment" data-fragment-index="2" style="margin-top: 0.6rem;">
-              <div class="chain-node" style="border-color: #ff9800; min-width:140px;"><h4 class="accent-org">DPI</h4><p>+ COND + SHAN</p></div>
-              <span class="chain-arrow">⟹</span>
-              <div class="chain-node" style="border-color: #aa44ff; min-width:140px;"><h4 class="accent-pur">IC</h4><p>$I \leq m$</p></div>
-              <span class="chain-arrow">⟹</span>
-              <div class="chain-node" style="border-color: #44aaff; min-width:140px;"><h4 class="accent-blu">Tsirelson</h4><p>$S \leq 2\sqrt{2}$</p></div>
+            <div class="chain-row" style="margin-top: 0.4rem;">
+              <div class="chain-node" style="border-color: var(--accent-orange);"><h4 class="accent-org">DPI</h4><p>+ COND + SHAN</p></div>
+              <span class="chain-arrow">&#10233;</span>
+              <div class="chain-node" style="border-color: var(--accent-purple);"><h4 class="accent-pur">IC</h4><p>$I \leq m$</p></div>
+              <span class="chain-arrow">&#10233;</span>
+              <div class="chain-node" style="border-color: var(--accent-blue);"><h4 class="accent-blu">Tsirelson</h4><p>$S \leq 2\sqrt{2}$</p></div>
             </div>
           </div>
           <div class="right">
@@ -730,48 +745,48 @@
 
       <!-- ═══ INFORMATION CAUSALITY ═══ -->
       <section data-transition="slide">
-        <h3 style="margin-bottom:0.2em;"><span class="accent-pur">Information Causality</span></h3>
-        <p class="small dim" style="margin-top:0;">Pawłowski et al. (2009) — the constraint DPI enforces</p>
+        <h3 style="margin-bottom:0.15em;"><span class="accent-pur">Information Causality</span></h3>
+        <p class="small dim" style="margin-top:0;">Pawlowski et al. (2009) — the constraint DPI enforces</p>
 
         <!-- Game diagram -->
-        <div class="flow fragment" data-fragment-index="1">
-          <div class="flow-box" style="border-color:#00bfa5;">
-            <h4 style="color:#00bfa5;">Alice</h4>
+        <div class="flow">
+          <div class="flow-box" style="border-color:var(--accent-teal);">
+            <h4 style="color:var(--accent-teal);">Alice</h4>
             <p>$\vec{a} = (a_0, \ldots, a_{N-1})$</p>
             <p class="tiny dim">$N$ random bits</p>
           </div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-box" style="border-color:#ff9800;">
-            <h4 style="color:#ff9800;">Channel</h4>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="flow-box" style="border-color:var(--accent-orange);">
+            <h4 style="color:var(--accent-orange);">Channel</h4>
             <p>$m$ bits</p>
           </div>
-          <div class="flow-arrow">→</div>
-          <div class="flow-box" style="border-color:#448aff;">
-            <h4 style="color:#448aff;">Bob</h4>
+          <div class="flow-arrow">&rarr;</div>
+          <div class="flow-box" style="border-color:var(--accent-blue);">
+            <h4 style="color:var(--accent-blue);">Bob</h4>
             <p>index $b$, guesses $\beta$</p>
           </div>
         </div>
 
-        <div class="split fragment" data-fragment-index="2" style="margin-top:0.6rem;">
+        <div class="split" style="margin-top:0.4rem;">
           <div class="left" style="flex:1;">
             <div class="highlight-box" style="text-align:center;">
-              <p style="font-size:0.9em; margin:0;">
+              <p style="font-size:0.82em; margin:0;">
                 $I = \displaystyle\sum_{i=0}^{N-1} I_{\text{Sh}}(a_i : \beta \mid b = i) \;\leq\; m$
               </p>
-              <p class="tiny dim" style="margin-top:0.3em;">
-                Total info Bob extracts ≤ bits sent. No free lunch from shared resources.
+              <p class="tiny dim" style="margin-top:0.2em;">
+                Total info Bob extracts &le; bits sent. No free lunch from shared resources.
               </p>
             </div>
-            <div style="display: flex; gap: 1rem; margin-top: 0.8rem; justify-content: center;">
-              <div class="verdict-card verdict-pass" style="flex:1; max-width: 200px;">
+            <div style="display: flex; gap: 0.8rem; margin-top: 0.5rem; justify-content: center;">
+              <div class="verdict-card verdict-pass" style="flex:1; max-width: 180px;">
                 <h4 class="accent-grn">Quantum</h4>
                 <p class="small">$I \leq m$</p>
-                <p class="tiny accent-grn" style="margin-top:0.3em;">&#10003; PASSES</p>
+                <p class="tiny accent-grn" style="margin-top:0.2em;">&#10003; PASSES</p>
               </div>
-              <div class="verdict-card verdict-fail" style="flex:1; max-width: 200px;">
+              <div class="verdict-card verdict-fail" style="flex:1; max-width: 180px;">
                 <h4 class="accent-red">PR-Box</h4>
                 <p class="small">$I > m$</p>
-                <p class="tiny accent-red" style="margin-top:0.3em;">&#10007; FAILS</p>
+                <p class="tiny accent-red" style="margin-top:0.2em;">&#10007; FAILS</p>
               </div>
             </div>
           </div>
@@ -794,28 +809,28 @@
 
       <!-- ═══ THE LOGICAL CHAIN ═══ -->
       <section data-transition="slide">
-        <h3 style="margin-bottom:0.2em;"><span class="accent-ylw">The Logical Chain</span></h3>
+        <h3 style="margin-bottom:0.15em;"><span class="accent-ylw">The Logical Chain</span></h3>
         <p class="small dim" style="margin-top:0;">How an information-processing principle excludes super-quantum correlations</p>
 
         <div style="display: flex; justify-content: center;">
-          <div class="video-box" style="max-width: 85%;">
-            <video autoplay loop muted playsinline preload="auto" style="max-height: 60vh; width: 100%;">
+          <div class="video-box" style="max-width: 80%;">
+            <video autoplay loop muted playsinline preload="auto" style="max-height: 55vh; width: 100%;">
               <source src="assets/s2_dpi_chain.webm" type="video/webm" />
             </video>
           </div>
         </div>
 
-        <div class="highlight-box" style="margin-top: 0.8rem; text-align: center;">
-          <p style="margin: 0; font-size: 0.85em;">
+        <div class="highlight-box" style="margin-top: 0.6rem; text-align: center;">
+          <p style="margin: 0; font-size: 0.78em;">
             <strong class="accent-org">DPI</strong>
-            <span style="color:#ffdd44; margin: 0 0.5em;">⟹</span>
+            <span style="color:var(--accent-gold); margin: 0 0.4em;">&#10233;</span>
             <strong class="accent-pur">Information Causality</strong>
-            <span style="color:#ffdd44; margin: 0 0.5em;">⟹</span>
+            <span style="color:var(--accent-gold); margin: 0 0.4em;">&#10233;</span>
             <strong class="accent-blu">Tsirelson's Bound</strong>
-            <span style="color:#ffdd44; margin: 0 0.5em;">⟹</span>
+            <span style="color:var(--accent-gold); margin: 0 0.4em;">&#10233;</span>
             <strong class="accent-red">PR-Box excluded</strong>
           </p>
-          <p class="tiny dim" style="margin-top: 0.3em;">
+          <p class="tiny dim" style="margin-top: 0.2em;">
             The real constraint is information-theoretic, not just relativistic.
           </p>
         </div>
@@ -832,17 +847,17 @@
            ═══════════════════════════════════════════════════════ -->
       <section class="section-divider" data-transition="fade">
         <div class="section-number">Part IV</div>
-        <h2 style="background: linear-gradient(135deg, #aa44ff, #ff5555); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+        <h2 style="background: linear-gradient(135deg, var(--accent-purple), var(--accent-red)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
           The Proof
         </h2>
-        <div class="section-rule" style="background: linear-gradient(90deg, #aa44ff, #ff5555);"></div>
+        <div class="section-rule" style="background: linear-gradient(90deg, var(--accent-purple), var(--accent-red));"></div>
         <p class="small dim">How four lemmas build the main theorem</p>
       </section>
 
 
       <!-- ═══ PROOF ARCHITECTURE ═══ -->
       <section data-transition="slide">
-        <h3 style="margin-bottom:0.2em;"><span class="accent-grn">Proof Architecture</span></h3>
+        <h3 style="margin-bottom:0.15em;"><span class="accent-grn">Proof Architecture</span></h3>
         <p class="small dim" style="margin-top:0;">Theorem 2: COND + SHAN + DPI imply Tsirelson's bound for any GPT</p>
 
         <div class="split">
@@ -852,28 +867,28 @@
                 <strong class="accent-blu">Lemma 3 (Subadditivity):</strong>
                 $\sum_i H(A_i|\gamma) \geq H(A_1\ldots A_n|\gamma)$
               </p>
-              <p class="tiny dim" style="margin:0.2em 0 0;">Uses COND + DPI. Decomposes joint entropy.</p>
+              <p class="tiny dim" style="margin:0.1em 0 0;">Uses COND + DPI. Decomposes joint entropy.</p>
             </div>
             <div class="step-block green">
               <p class="small" style="margin:0;">
                 <strong class="accent-grn">Lemma 4 (Product States):</strong>
                 $H(A|B) = H(A)$ for $\vec{P}_A \otimes \vec{P}_B$
               </p>
-              <p class="tiny dim" style="margin:0.2em 0 0;">Uses COND + SHAN + DPI. Independence ↔ no correlation.</p>
+              <p class="tiny dim" style="margin:0.1em 0 0;">Uses COND + SHAN + DPI. Independence &#8596; no correlation.</p>
             </div>
             <div class="step-block orange">
               <p class="small" style="margin:0;">
                 <strong class="accent-org">Lemma 5 (Positivity):</strong>
                 $H(X|Y) \geq 0$ for classical $X$
               </p>
-              <p class="tiny dim" style="margin:0.2em 0 0;">Uses cloning of classical states + DPI.</p>
+              <p class="tiny dim" style="margin:0.1em 0 0;">Uses cloning of classical states + DPI.</p>
             </div>
-            <div class="step-block" style="border-left-color: #aa44ff;">
+            <div class="step-block" style="border-left-color: var(--accent-purple);">
               <p class="small" style="margin:0;">
                 <strong class="accent-pur">Lemma 6 (IC Bound):</strong>
                 $H(\vec{a}|B\vec{x}) \geq n - m$
               </p>
-              <p class="tiny dim" style="margin:0.2em 0 0;">Combines all previous. Yields Information Causality.</p>
+              <p class="tiny dim" style="margin:0.1em 0 0;">Combines all previous. Yields Information Causality.</p>
             </div>
           </div>
           <div class="right">
@@ -894,41 +909,41 @@
 
       <!-- ═══ STEP-BY-STEP DERIVATION ═══ -->
       <section data-transition="slide">
-        <h3 style="margin-bottom:0.2em;"><span class="accent-grn">From Axioms to Tsirelson</span></h3>
+        <h3 style="margin-bottom:0.15em;"><span class="accent-grn">From Axioms to Tsirelson</span></h3>
         <p class="small dim" style="margin-top:0;">The proof in three steps</p>
 
         <div class="split">
           <div class="left">
-            <div class="step-block" style="border-left-color: #aa44ff;">
-              <p class="small" style="margin:0; font-weight:bold; color:#aa44ff;">Step 1: Bound total uncertainty</p>
-              <p class="tiny" style="margin:0.3em 0 0; color: #99a;">
+            <div class="step-block" style="border-left-color: var(--accent-purple);">
+              <p class="small" style="margin:0; font-weight:600; color:var(--accent-purple);">Step 1: Bound total uncertainty</p>
+              <p class="tiny" style="margin:0.2em 0 0; color: var(--text-muted);">
                 $H(\vec{a}|B\vec{x}) - H(\vec{x}|\vec{a}B) = H(\vec{a}) - H(\vec{x}|B)$<br>
                 $\geq H(\vec{a}) - H(\vec{x}) = n - H(\vec{x}) \geq n - m$
               </p>
-              <p class="tiny dim" style="margin:0.2em 0 0;">Using COND, product states (Lemma 4), DPI, and SHAN.</p>
+              <p class="tiny dim" style="margin:0.1em 0 0;">Using COND, product states (Lemma 4), DPI, and SHAN.</p>
             </div>
 
-            <div class="step-block blue" style="margin-top: 0.3rem;">
-              <p class="small" style="margin:0; font-weight:bold; color:#44aaff;">Step 2: Split into individual bits</p>
-              <p class="tiny" style="margin:0.3em 0 0; color: #99a;">
+            <div class="step-block blue" style="margin-top: 0.2rem;">
+              <p class="small" style="margin:0; font-weight:600; color:var(--accent-blue);">Step 2: Split into individual bits</p>
+              <p class="tiny" style="margin:0.2em 0 0; color: var(--text-muted);">
                 $\sum_i H(a_i | B\vec{x}) \geq H(\vec{a}|B\vec{x}) \geq n - m$<br>
                 $\sum_i H(a_i | \beta(i)) \geq n - m$
               </p>
-              <p class="tiny dim" style="margin:0.2em 0 0;">Using subadditivity (Lemma 3), then DPI on Bob's guess $\beta$.</p>
+              <p class="tiny dim" style="margin:0.1em 0 0;">Using subadditivity (Lemma 3), then DPI on Bob's guess $\beta$.</p>
             </div>
 
-            <div class="step-block green" style="margin-top: 0.3rem;">
-              <p class="small" style="margin:0; font-weight:bold; color:#55ff99;">Step 3: Recover IC → Tsirelson</p>
-              <p class="tiny" style="margin:0.3em 0 0; color: #99a;">
+            <div class="step-block green" style="margin-top: 0.2rem;">
+              <p class="small" style="margin:0; font-weight:600; color:var(--accent-green);">Step 3: Recover IC &#8594; Tsirelson</p>
+              <p class="tiny" style="margin:0.2em 0 0; color: var(--text-muted);">
                 $I = \sum_i I_{\text{Sh}}(a_i:\beta(i)) = n - \sum_i H(a_i|\beta(i)) \leq m$
               </p>
-              <p class="tiny dim" style="margin:0.2em 0 0;">By SHAN, $H$ is Shannon for classical bits. IC implies Tsirelson (Pawłowski et al.).</p>
+              <p class="tiny dim" style="margin:0.1em 0 0;">By SHAN, $H$ is Shannon for classical bits. IC implies Tsirelson (Pawlowski et al.).</p>
             </div>
 
-            <div class="highlight-box" style="margin-top: 0.5rem; text-align: center;">
-              <p style="margin:0; font-size:0.75em;">
+            <div class="highlight-box" style="margin-top: 0.3rem; text-align: center;">
+              <p style="margin:0; font-size:0.68em;">
                 <strong class="accent-ylw">Key insight:</strong> Only 3 axioms needed —
-                fewer than the 5 of Pawłowski et al.
+                fewer than the 5 of Pawlowski et al.
               </p>
             </div>
           </div>
@@ -953,24 +968,24 @@
            ═══════════════════════════════════════════════════════ -->
       <section class="section-divider" data-transition="fade">
         <div class="section-number">Part V</div>
-        <h2 style="background: linear-gradient(135deg, #55ff99, #44aaff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+        <h2 style="background: linear-gradient(135deg, var(--accent-green), var(--accent-blue)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
           The Verdict
         </h2>
-        <div class="section-rule" style="background: linear-gradient(90deg, #55ff99, #44aaff);"></div>
+        <div class="section-rule" style="background: linear-gradient(90deg, var(--accent-green), var(--accent-blue));"></div>
         <p class="small dim">What breaks, and what it all means</p>
       </section>
 
 
       <!-- ═══ WHERE BOX-WORLD BREAKS ═══ -->
       <section data-transition="slide">
-        <h3 style="margin-bottom:0.2em;"><span class="accent-red">Where Box-World Breaks Down</span></h3>
+        <h3 style="margin-bottom:0.15em;"><span class="accent-red">Where Box-World Breaks Down</span></h3>
         <p class="small dim" style="margin-top:0;">A diagnostic comparison: which axioms does it violate?</p>
 
         <div class="split">
           <div class="left">
-            <div class="two-col" style="font-size: 0.75em;">
+            <div class="two-col" style="font-size: 0.7em;">
               <div>
-                <h4 class="accent-pur" style="margin:0 0 0.5rem 0;">Quantum Mechanics</h4>
+                <h4 class="accent-pur" style="margin:0 0 0.3rem 0;">Quantum Mechanics</h4>
                 <ul class="prop-list">
                   <li class="good">DPI holds ($H_{\text{vN}}$)</li>
                   <li class="good">Strong subadditivity</li>
@@ -980,7 +995,7 @@
                 </ul>
               </div>
               <div>
-                <h4 class="accent-red" style="margin:0 0 0.5rem 0;">Box-World</h4>
+                <h4 class="accent-red" style="margin:0 0 0.3rem 0;">Box-World</h4>
                 <ul class="prop-list">
                   <li class="bad">DPI violated!</li>
                   <li class="bad">SSA violated!</li>
@@ -991,14 +1006,14 @@
               </div>
             </div>
 
-            <div class="highlight-box" style="margin-top: 1rem; text-align: center;">
-              <p style="margin:0; font-size: 0.75em;">
+            <div class="highlight-box" style="margin-top: 0.6rem; text-align: center;">
+              <p style="margin:0; font-size: 0.68em;">
                 <strong class="accent-ylw">DPI is the dividing line.</strong>
                 Any theory violating it can potentially exceed Tsirelson's bound.
               </p>
             </div>
 
-            <div class="step-block" style="border-left-color: #55ff99; margin-top: 0.5rem;">
+            <div class="step-block" style="border-left-color: var(--accent-green); margin-top: 0.3rem;">
               <p class="small" style="margin:0;">
                 <strong class="accent-grn">Minimality:</strong> COND + SHAN + DPI are sufficient.
                 For certain entropy definitions, <em>DPI alone</em> is enough.
@@ -1023,7 +1038,7 @@
 
       <!-- ═══ THE BIG PICTURE ═══ -->
       <section data-transition="slide">
-        <h3 style="margin-bottom:0.2em;"><span class="accent-blu">The Big Picture</span></h3>
+        <h3 style="margin-bottom:0.15em;"><span class="accent-blu">The Big Picture</span></h3>
         <p class="small dim" style="margin-top:0;">What this paper achieves and what remains open</p>
 
         <div class="split">
@@ -1034,36 +1049,36 @@
                 DPI + COND + SHAN imply Tsirelson's bound — proven for <em>any</em> GPT.
               </p>
             </div>
-            <div class="step-block green" style="margin-top: 0.3rem;">
+            <div class="step-block green" style="margin-top: 0.2rem;">
               <p class="small" style="margin:0;">
                 <strong class="accent-grn">Result 2:</strong>
-                Only 3 natural axioms needed — more minimal than the 5 of Pawłowski et al.
+                Only 3 natural axioms needed — more minimal than the 5 of Pawlowski et al.
               </p>
             </div>
-            <div class="step-block green" style="margin-top: 0.3rem;">
+            <div class="step-block green" style="margin-top: 0.2rem;">
               <p class="small" style="margin:0;">
                 <strong class="accent-grn">Result 3:</strong>
                 For some entropy definitions, DPI alone suffices.
               </p>
             </div>
 
-            <div class="highlight-box" style="margin-top: 0.8rem;">
-              <p class="small" style="margin:0 0 0.3rem 0; color: #ffdd44; font-weight: bold;">Open Questions</p>
-              <ul class="prop-list" style="font-size: 0.9em;">
+            <div class="highlight-box" style="margin-top: 0.5rem;">
+              <p class="small" style="margin:0 0 0.2rem 0; color: var(--accent-gold); font-weight: 600;">Open Questions</p>
+              <ul class="prop-list" style="font-size: 0.85em;">
                 <li>Can DPI + additional axioms fully derive quantum theory?</li>
                 <li>Are there non-quantum theories satisfying DPI between $\mathcal{L}$ and $\mathcal{Q}$?</li>
                 <li>What supplements DPI to exclude <em>all</em> non-quantum correlations?</li>
               </ul>
             </div>
 
-            <div class="chain-row" style="margin-top: 0.5rem;">
-              <div class="chain-node" style="border-color: #ff9800; min-width: 100px;"><h4 class="accent-org">DPI</h4></div>
-              <span class="chain-arrow">⟹</span>
-              <div class="chain-node" style="border-color: #aa44ff; min-width: 100px;"><h4 class="accent-pur">IC</h4></div>
-              <span class="chain-arrow">⟹</span>
-              <div class="chain-node" style="border-color: #44aaff; min-width: 100px;"><h4 class="accent-blu">Tsirelson</h4></div>
-              <span class="chain-arrow">⟹</span>
-              <div class="chain-node" style="border-color: #55ff99; min-width: 100px;"><h4 class="accent-grn">QM?</h4><p>Open!</p></div>
+            <div class="chain-row" style="margin-top: 0.4rem;">
+              <div class="chain-node" style="border-color: var(--accent-orange);"><h4 class="accent-org">DPI</h4></div>
+              <span class="chain-arrow">&#10233;</span>
+              <div class="chain-node" style="border-color: var(--accent-purple);"><h4 class="accent-pur">IC</h4></div>
+              <span class="chain-arrow">&#10233;</span>
+              <div class="chain-node" style="border-color: var(--accent-blue);"><h4 class="accent-blu">Tsirelson</h4></div>
+              <span class="chain-arrow">&#10233;</span>
+              <div class="chain-node" style="border-color: var(--accent-green);"><h4 class="accent-grn">QM?</h4><p>Open!</p></div>
             </div>
           </div>
           <div class="right">
@@ -1085,32 +1100,32 @@
 
       <!-- ═══ THANK YOU ═══ -->
       <section class="title-slide" data-transition="fade">
-        <h1 style="background: linear-gradient(135deg, #55ff99, #44aaff, #aa44ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+        <h1 style="background: linear-gradient(135deg, var(--accent-green), var(--accent-blue), var(--accent-purple)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
           Thank You
         </h1>
         <h2>Questions?</h2>
 
-        <div style="margin: 1.5rem 0;">
+        <div style="margin: 1.2rem 0;">
           <span class="bound-badge bound-classical">$S \leq 2$</span>
-          <span style="color:#ffdd44; font-size: 1.2em; margin: 0 0.3em;">⊂</span>
+          <span style="color:var(--accent-gold); font-size: 1.1em; margin: 0 0.3em;">&sub;</span>
           <span class="bound-badge bound-quantum">$S \leq 2\sqrt{2}$</span>
-          <span style="color:#ffdd44; font-size: 1.2em; margin: 0 0.3em;">⊂</span>
+          <span style="color:var(--accent-gold); font-size: 1.1em; margin: 0 0.3em;">&sub;</span>
           <span class="bound-badge bound-ns">$S \leq 4$</span>
         </div>
 
-        <div class="highlight-box" style="display: inline-block; margin-top: 1rem;">
-          <p style="margin:0; font-size:0.7em;">
-            <strong class="accent-org">DPI</strong>&ensp;⟹&ensp;
-            <strong class="accent-pur">Information Causality</strong>&ensp;⟹&ensp;
+        <div class="highlight-box" style="display: inline-block; margin-top: 0.8rem;">
+          <p style="margin:0; font-size:0.65em;">
+            <strong class="accent-org">DPI</strong>&ensp;&#10233;&ensp;
+            <strong class="accent-pur">Information Causality</strong>&ensp;&#10233;&ensp;
             <strong class="accent-blu">Tsirelson's Bound</strong>
           </p>
-          <p class="tiny dim" style="margin-top:0.3em;">
+          <p class="tiny dim" style="margin-top:0.2em;">
             The limit of quantum correlations is information-theoretic.
           </p>
         </div>
 
-        <div class="meta" style="margin-top: 2rem;">
-          <span style="font-size: 1.1em;"><strong style="color:#bbb;">Mohammed Boudjemaa&ensp;·&ensp;Yash Kumar Nagar&ensp;·&ensp;Nishchay Vora</strong></span>
+        <div class="meta" style="margin-top: 1.5rem;">
+          <span style="font-size: 1em;"><strong style="color:var(--text-body);">Mohammed Boudjemaa &ensp;·&ensp; Yash Kumar Nagar &ensp;·&ensp; Nishchay Vora</strong></span>
           <span>Based on Dahlsten, Lercher &amp; Renner — <em>New J. Phys.</em> 14 (2012) 063024</span>
         </div>
 
@@ -1123,7 +1138,7 @@
     </div><!-- /slides -->
   </div><!-- /reveal -->
 
-  <!-- ─── Scripts ─── -->
+  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
@@ -1139,6 +1154,9 @@
       backgroundTransition: 'fade',
       slideNumber: 'c/t',
       showNotes: false,
+
+      // Disable fragments — all content appears immediately
+      fragments: false,
 
       mouseWheel: true,
       keyboard: true,
@@ -1157,7 +1175,7 @@
       },
     });
 
-    // ─── Slide metadata ───
+    // Slide metadata
     var slideMeta = [
       { title: "Title",                  section: "" },
       { title: "Part I: The Mystery",    section: "divider" },
@@ -1183,14 +1201,14 @@
 
     // Section boundaries for progress bar markers
     var sections = [
-      { idx: 1,  label: "I. The Mystery",   color: "#44aaff" },
-      { idx: 5,  label: "II. The Framework", color: "#55ff99" },
-      { idx: 9,  label: "III. The Principle", color: "#ffdd44" },
-      { idx: 13, label: "IV. The Proof",     color: "#aa44ff" },
-      { idx: 16, label: "V. The Verdict",    color: "#55ff99" },
+      { idx: 1,  label: "I. The Mystery" },
+      { idx: 5,  label: "II. The Framework" },
+      { idx: 9,  label: "III. The Principle" },
+      { idx: 13, label: "IV. The Proof" },
+      { idx: 16, label: "V. The Verdict" },
     ];
 
-    // ─── Progress bar ───
+    // Progress bar
     var progressBar = document.getElementById('progress-bar');
     var progressContainer = document.getElementById('progress-container');
     var totalSlides = slideMeta.length;
@@ -1205,7 +1223,6 @@
       label.className = 'progress-marker-label';
       label.style.left = pct + '%';
       label.textContent = sec.label;
-      label.style.color = sec.color;
 
       progressContainer.appendChild(marker);
       progressContainer.appendChild(label);
@@ -1228,7 +1245,7 @@
       Reveal.slide(targetSlide);
     });
 
-    // ─── Slide map ───
+    // Slide map
     var slideMap = document.getElementById('slide-map');
     var slideMapClose = document.getElementById('slide-map-close');
     var homeBtn = document.getElementById('home-btn');
@@ -1238,9 +1255,9 @@
       var current = Reveal.getIndices().h;
 
       var title = document.createElement('div');
-      title.style.cssText = 'width:100%; text-align:center; margin-bottom: 20px;';
-      title.innerHTML = '<h2 style="color:#e0e0ff; font-size:24px; font-weight:700;">Slide Map</h2>' +
-        '<p style="color:#888; font-size:13px;">Click any slide to navigate. Press H or Escape to close.</p>';
+      title.style.cssText = 'width:100%; text-align:center; margin-bottom: 18px;';
+      title.innerHTML = '<h2 style="color:#e8edf5; font-size:22px; font-weight:700;">Slide Map</h2>' +
+        '<p style="color:#6b7d8f; font-size:12px;">Click any slide to navigate. Press H or Escape to close.</p>';
       slideMap.appendChild(title);
 
       slideMeta.forEach(function(meta, i) {
@@ -1298,7 +1315,7 @@
 
     Reveal.on('slidechanged', function() { closeSlideMap(); });
 
-    // ─── Video handler ───
+    // Video handler
     function handleSlideVideos(event) {
       document.querySelectorAll('video').forEach(function(v) { v.pause(); });
       var slide = event.currentSlide;
