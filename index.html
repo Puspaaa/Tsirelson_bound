@@ -7,7 +7,7 @@
 
   <!-- Reveal.js core -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" id="theme" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css" id="theme" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css" />
 
   <!-- KaTeX -->
@@ -23,30 +23,30 @@
        GLOBAL THEME — Refined Modern Palette
        ═══════════════════════════════════════════════ */
     :root {
-      --bg-primary: #0f1729;
-      --bg-surface: #182030;
-      --bg-elevated: #1e2a3a;
-      --border: #2a3a4e;
-      --text-heading: #e8edf5;
-      --text-body: #b0bec5;
-      --text-muted: #6b7d8f;
-      --accent-blue: #5b9bf5;
-      --accent-purple: #a78bfa;
-      --accent-green: #5ae4a7;
-      --accent-gold: #fbbf24;
-      --accent-red: #f87171;
-      --accent-orange: #fb923c;
-      --accent-teal: #2dd4bf;
-      --accent-pink: #f472b6;
+      --bg-primary: #f8f9fc;
+      --bg-surface: #ffffff;
+      --bg-elevated: #eef1f6;
+      --border: #d0d7e2;
+      --text-heading: #1a2332;
+      --text-body: #3d4f5f;
+      --text-muted: #7a8a9a;
+      --accent-blue: #2563eb;
+      --accent-purple: #7c3aed;
+      --accent-green: #059669;
+      --accent-gold: #d97706;
+      --accent-red: #dc2626;
+      --accent-orange: #ea580c;
+      --accent-teal: #0d9488;
+      --accent-pink: #db2777;
 
       --r-background-color: var(--bg-primary);
       --r-main-font: 'Inter', 'Segoe UI', system-ui, sans-serif;
       --r-heading-font: 'Inter', 'Segoe UI', system-ui, sans-serif;
-      --r-main-font-size: 28px;
+      --r-main-font-size: 34px;
       --r-heading-color: var(--text-heading);
       --r-main-color: var(--text-body);
       --r-link-color: var(--accent-blue);
-      --r-selection-background-color: rgba(91, 155, 245, 0.25);
+      --r-selection-background-color: rgba(37, 99, 235, 0.2);
     }
 
     .reveal { font-family: var(--r-main-font); }
@@ -62,17 +62,18 @@
     .accent-blu { color: var(--accent-blue); }
     .accent-pur { color: var(--accent-purple); }
     .accent-org { color: var(--accent-orange); }
-    .small      { font-size: 0.65em; }
-    .tiny       { font-size: 0.50em; }
-    .dim        { opacity: 0.6; }
+    .small      { font-size: 0.72em; }
+    .tiny       { font-size: 0.58em; }
+    .dim        { opacity: 0.55; }
     .left-align { text-align: left; }
 
     /* ─── Prevent overflow on all slides ─── */
     .reveal .slides section {
       overflow: hidden;
       box-sizing: border-box;
-      padding: 20px 40px;
+      padding: 30px 50px;
     }
+    .reveal .slides { background-image: none; }
 
     /* ─── Split layout ─── */
     .split {
@@ -86,16 +87,18 @@
     .video-box {
       border: 1px solid var(--border); border-radius: 10px;
       overflow: hidden;
-      box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+      position: relative; z-index: 0;
     }
     .video-box video {
-      display: block; max-width: 100%; max-height: 50vh; background: #000;
+      display: block; max-width: 100%; max-height: 44vh; background: var(--bg-elevated);
+      position: relative; z-index: 0;
     }
 
     /* ─── Hierarchy bars ─── */
     .hierarchy-item {
       display: flex; align-items: center; gap: 0.7rem;
-      margin: 0.35rem 0; font-size: 0.75em;
+      margin: 0.35rem 0; font-size: 0.82em;
     }
     .hierarchy-bar { height: 6px; border-radius: 3px; flex-shrink: 0; }
     .bar-local    { width: 70px;  background: var(--accent-blue); }
@@ -111,7 +114,7 @@
     /* ─── Property list ─── */
     .prop-list { list-style: none; padding: 0; margin: 0; }
     .prop-list li {
-      padding: 0.25em 0; font-size: 0.72em; border-bottom: 1px solid rgba(255,255,255,0.04);
+      padding: 0.3em 0; font-size: 0.78em; border-bottom: 1px solid rgba(0,0,0,0.05);
     }
     .prop-list li::before  { content: '▸ '; color: var(--accent-purple); }
     .prop-list li.bad::before  { content: '✗ '; color: var(--accent-red); }
@@ -126,29 +129,29 @@
       background: var(--bg-surface); border: 1.5px solid; border-radius: 10px;
       padding: 0.7rem 1rem; text-align: center; min-width: 120px;
     }
-    .flow-box h4 { margin: 0 0 0.2rem 0; font-size: 0.7em; font-weight: 600; }
-    .flow-box p, .flow-box .katex { margin: 0; font-size: 0.55em; }
+    .flow-box h4 { margin: 0 0 0.2rem 0; font-size: 0.78em; font-weight: 600; }
+    .flow-box p, .flow-box .katex { margin: 0; font-size: 0.62em; }
     .flow-arrow { font-size: 1.5em; color: var(--text-muted); }
 
     /* ─── Title slide ─── */
     .title-slide h1 {
-      font-size: 2em;
+      font-size: 2.2em;
       background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       background-clip: text; margin-bottom: 0.15em;
     }
     .title-slide h2 {
-      font-size: 0.8em; color: var(--text-muted); font-weight: 400; margin-bottom: 1.2em;
+      font-size: 0.85em; color: var(--text-muted); font-weight: 400; margin-bottom: 1.2em;
     }
     .title-slide .meta {
-      font-size: 0.5em; color: var(--text-muted); margin-top: 0.6em;
+      font-size: 0.55em; color: var(--text-muted); margin-top: 0.6em;
     }
     .title-slide .meta span { display: block; margin: 0.15em 0; }
 
     /* ─── Highlight box ─── */
     .highlight-box {
-      background: rgba(91, 155, 245, 0.06);
-      border: 1px solid rgba(91, 155, 245, 0.15); border-radius: 8px;
+      background: rgba(37, 99, 235, 0.04);
+      border: 1px solid rgba(37, 99, 235, 0.15); border-radius: 8px;
       padding: 0.7rem 1rem; margin: 0.5rem 0;
     }
 
@@ -160,9 +163,7 @@
 
     /* ─── Subtle bg ─── */
     .reveal .slides {
-      background-image:
-        radial-gradient(circle at 20% 80%, rgba(91, 155, 245, 0.02) 0%, transparent 50%),
-        radial-gradient(circle at 80% 20%, rgba(167, 139, 250, 0.02) 0%, transparent 50%);
+      background-image: none;
     }
 
     /* ─── Section divider slides ─── */
@@ -195,15 +196,16 @@
       display: inline-block; padding: 0.35em 0.9em; border-radius: 6px;
       font-weight: 600; font-size: 0.78em; margin: 0.25em;
     }
-    .bound-classical { background: rgba(91, 155, 245, 0.12); border: 1.5px solid var(--accent-blue); color: var(--accent-blue); }
-    .bound-quantum   { background: rgba(167, 139, 250, 0.12); border: 1.5px solid var(--accent-purple); color: var(--accent-purple); }
-    .bound-ns        { background: rgba(248, 113, 113, 0.12); border: 1.5px solid var(--accent-red); color: var(--accent-red); }
+    .bound-classical { background: rgba(37, 99, 235, 0.08); border: 1.5px solid var(--accent-blue); color: var(--accent-blue); }
+    .bound-quantum   { background: rgba(124, 58, 237, 0.08); border: 1.5px solid var(--accent-purple); color: var(--accent-purple); }
+    .bound-ns        { background: rgba(220, 38, 38, 0.08); border: 1.5px solid var(--accent-red); color: var(--accent-red); }
 
     /* ─── Step blocks ─── */
     .step-block {
-      background: var(--bg-surface); border-left: 3px solid var(--accent-purple);
-      border-radius: 0 8px 8px 0; padding: 0.5rem 0.9rem;
+      background: var(--bg-surface); border-left: 4px solid var(--accent-purple);
+      border-radius: 0 8px 8px 0; padding: 0.55rem 1rem;
       margin: 0.35rem 0; text-align: left;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
     }
     .step-block.orange { border-left-color: var(--accent-orange); }
     .step-block.blue   { border-left-color: var(--accent-blue); }
@@ -213,11 +215,12 @@
 
     /* ─── Verdict card ─── */
     .verdict-card {
-      background: var(--bg-primary); border: 1.5px solid; border-radius: 10px;
+      background: var(--bg-surface); border: 1.5px solid; border-radius: 10px;
       padding: 0.8rem 1.2rem; text-align: center;
+      box-shadow: 0 1px 6px rgba(0,0,0,0.06);
     }
-    .verdict-card h4 { margin: 0 0 0.3rem 0; font-size: 0.78em; }
-    .verdict-card .katex { font-size: 0.7em; }
+    .verdict-card h4 { margin: 0 0 0.3rem 0; font-size: 0.82em; }
+    .verdict-card .katex { font-size: 0.75em; }
     .verdict-pass { border-color: var(--accent-green); }
     .verdict-fail { border-color: var(--accent-red); }
 
@@ -229,17 +232,18 @@
     .chain-node {
       background: var(--bg-surface); border: 1.5px solid; border-radius: 10px;
       padding: 0.5rem 0.8rem; text-align: center; min-width: 100px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
     }
-    .chain-node h4 { margin: 0 0 0.2rem 0; font-size: 0.65em; font-weight: 600; }
-    .chain-node p  { margin: 0; font-size: 0.5em; color: var(--text-muted); }
+    .chain-node h4 { margin: 0 0 0.2rem 0; font-size: 0.72em; font-weight: 600; }
+    .chain-node p  { margin: 0; font-size: 0.56em; color: var(--text-muted); }
     .chain-arrow { font-size: 1.5em; color: var(--accent-gold); }
 
     /* ═══════════════════════════════════════════════
        PROGRESS BAR + HOME BUTTON
        ═══════════════════════════════════════════════ */
     #progress-container {
-      position: fixed; bottom: 0; left: 0; width: 100%; height: 4px;
-      background: var(--bg-surface); z-index: 100; cursor: pointer;
+      position: fixed; bottom: 0; left: 0; width: 100%; height: 5px;
+      background: var(--bg-elevated); z-index: 100; cursor: pointer;
     }
     #progress-bar {
       height: 100%; width: 0%;
@@ -248,10 +252,10 @@
     }
     .progress-marker {
       position: absolute; top: -16px; height: 20px; width: 1px;
-      background: rgba(255,255,255,0.12); z-index: 101;
+      background: rgba(0,0,0,0.1); z-index: 101;
     }
     .progress-marker-label {
-      position: absolute; top: -30px; font-size: 9px;
+      position: absolute; top: -30px; font-size: 10px;
       color: var(--text-muted); white-space: nowrap;
       transform: translateX(-50%);
       pointer-events: none;
@@ -260,22 +264,22 @@
     /* Home button */
     #home-btn {
       position: fixed; top: 16px; left: 16px; z-index: 100;
-      width: 38px; height: 38px; border-radius: 8px;
+      width: 40px; height: 40px; border-radius: 8px;
       background: var(--bg-surface); border: 1px solid var(--border);
       color: var(--accent-blue); font-size: 18px;
       cursor: pointer; display: flex; align-items: center; justify-content: center;
       transition: all 0.2s ease;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
     }
     #home-btn:hover {
-      background: rgba(91, 155, 245, 0.12); border-color: var(--accent-blue);
+      background: rgba(37, 99, 235, 0.08); border-color: var(--accent-blue);
       transform: scale(1.05);
     }
 
     /* Slide map overlay */
     #slide-map {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(10, 15, 28, 0.96); z-index: 200;
+      background: rgba(248, 249, 252, 0.97); z-index: 200;
       display: none; overflow-y: auto; padding: 50px 40px;
     }
     #slide-map.visible { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; align-content: start; }
@@ -286,13 +290,14 @@
       display: flex; flex-direction: column; justify-content: center;
       align-items: center; text-align: center;
       transition: all 0.2s ease;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.06);
     }
     .map-card:hover { border-color: var(--accent-blue); transform: scale(1.04); }
-    .map-card .map-num { font-size: 10px; color: var(--text-muted); margin-bottom: 4px; }
-    .map-card .map-title { font-size: 12px; color: var(--text-body); font-weight: 600; }
-    .map-card .map-section { font-size: 9px; margin-top: 5px; padding: 2px 8px; border-radius: 8px; color: var(--text-muted); }
-    .map-card.active { border-color: var(--accent-blue); box-shadow: 0 0 12px rgba(91, 155, 245, 0.2); }
-    .map-card.is-divider { background: var(--bg-primary); border-style: dashed; opacity: 0.65; }
+    .map-card .map-num { font-size: 11px; color: var(--text-muted); margin-bottom: 4px; }
+    .map-card .map-title { font-size: 13px; color: var(--text-heading); font-weight: 600; }
+    .map-card .map-section { font-size: 10px; margin-top: 5px; padding: 2px 8px; border-radius: 8px; color: var(--text-muted); }
+    .map-card.active { border-color: var(--accent-blue); box-shadow: 0 0 12px rgba(37, 99, 235, 0.15); }
+    .map-card.is-divider { background: var(--bg-elevated); border-style: dashed; opacity: 0.65; }
     #slide-map-close {
       position: fixed; top: 18px; right: 28px; z-index: 210;
       font-size: 24px; color: var(--text-muted); cursor: pointer; display: none;
@@ -304,17 +309,18 @@
       width: 100%; max-width: 1840px; margin: 0 auto;
     }
     .lemma-card {
-      display: flex; align-items: center; gap: 16px;
+      display: flex; align-items: center; gap: 18px;
       background: var(--bg-surface); border: 1.5px solid var(--border);
-      border-radius: 10px; padding: 10px 18px;
+      border-radius: 10px; padding: 12px 20px;
       cursor: pointer; transition: all 0.45s cubic-bezier(.4,0,.2,1);
-      overflow: hidden; min-height: 56px;
+      overflow: hidden; min-height: 60px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04);
     }
-    .lemma-card:hover { border-color: rgba(255,255,255,0.15); }
+    .lemma-card:hover { border-color: rgba(0,0,0,0.2); }
     .lemma-card.active {
-      flex-grow: 1; padding: 16px 22px;
+      flex-grow: 1; padding: 18px 24px;
       border-color: var(--lemma-color, var(--accent-purple));
-      box-shadow: 0 0 20px rgba(91,155,245,0.08);
+      box-shadow: 0 2px 12px rgba(37,99,235,0.08);
     }
     .lemma-card:not(.active) {
       flex-grow: 0;
@@ -324,17 +330,17 @@
       white-space: nowrap; flex-shrink: 0;
     }
     .lemma-tag {
-      font-size: 11px; font-weight: 700; letter-spacing: 0.06em;
-      padding: 3px 10px; border-radius: 5px;
-      background: rgba(91,155,245,0.1); border: 1px solid;
+      font-size: 13px; font-weight: 700; letter-spacing: 0.06em;
+      padding: 4px 12px; border-radius: 5px;
+      background: rgba(37,99,235,0.06); border: 1px solid;
       flex-shrink: 0;
     }
     .lemma-name {
-      font-size: 15px; font-weight: 600; color: var(--text-heading);
+      font-size: 17px; font-weight: 600; color: var(--text-heading);
       white-space: nowrap;
     }
     .lemma-eq-small {
-      font-size: 13px; color: var(--text-muted); margin-left: 8px;
+      font-size: 15px; color: var(--text-muted); margin-left: 8px;
       white-space: nowrap;
       transition: opacity 0.3s;
     }
@@ -350,26 +356,26 @@
       flex: 1; min-width: 0;
     }
     .lemma-eq-big {
-      font-size: 20px; color: var(--text-heading); margin-bottom: 8px;
-      padding: 8px 14px; background: rgba(91,155,245,0.04);
+      font-size: 24px; color: var(--text-heading); margin-bottom: 10px;
+      padding: 10px 16px; background: rgba(37,99,235,0.03);
       border-radius: 8px; text-align: center;
-      border: 1px solid rgba(255,255,255,0.04);
+      border: 1px solid rgba(0,0,0,0.05);
       transition: transform 0.4s cubic-bezier(.4,0,.2,1);
     }
     .lemma-card.active .lemma-eq-big {
       transform: scale(1);
     }
     .lemma-description {
-      font-size: 12.5px; color: var(--text-body); line-height: 1.55;
+      font-size: 14.5px; color: var(--text-body); line-height: 1.6;
     }
     .lemma-description strong { color: var(--text-heading); }
     .lemma-axioms {
-      font-size: 11px; margin-top: 6px; padding: 4px 10px;
-      background: rgba(167,139,250,0.06); border-radius: 5px;
+      font-size: 13px; margin-top: 8px; padding: 5px 12px;
+      background: rgba(124,58,237,0.05); border-radius: 5px;
       color: var(--text-muted); display: inline-block;
     }
     .lemma-venn {
-      flex-shrink: 0; width: 260px; height: 190px;
+      flex-shrink: 0; width: 300px; height: 220px;
       display: flex; align-items: center; justify-content: center;
       transition: transform 0.4s cubic-bezier(.4,0,.2,1);
     }
@@ -624,7 +630,7 @@
                 <strong>State</strong> $\vec{P}$: probabilities for $k$ <strong>fiducial measurements</strong>,
                 each with $l$ outcomes.
               </p>
-              <p style="margin:0.3rem 0 0; font-size:0.65em; color:white;">
+              <p style="margin:0.3rem 0 0; font-size:0.65em; color:var(--text-body);">
                 $\vec{P} = \big( P(i|j) \big)_{i,j}$
               </p>
             </div>
@@ -937,55 +943,7 @@
 
 
       <!-- ═══ PROOF ARCHITECTURE ═══ -->
-      <section data-transition="slide">
-        <h3 style="margin-bottom:0.15em;"><span class="accent-grn">Proof Architecture</span></h3>
-        <p class="small dim" style="margin-top:0;">Theorem 2: COND + SHAN + DPI imply Tsirelson's bound for any GPT</p>
-
-        <div class="split">
-          <div class="left">
-            <div class="step-block blue">
-              <p class="small" style="margin:0;">
-                <strong class="accent-blu">Lemma 3 (Subadditivity):</strong>
-                $\sum_i H(A_i|\gamma) \geq H(A_1\ldots A_n|\gamma)$
-              </p>
-              <p class="tiny dim" style="margin:0.1em 0 0;">Uses COND + DPI. Decomposes joint entropy.</p>
-            </div>
-            <div class="step-block green">
-              <p class="small" style="margin:0;">
-                <strong class="accent-grn">Lemma 4 (Product States):</strong>
-                $H(A|B) = H(A)$ for $\vec{P}_A \otimes \vec{P}_B$
-              </p>
-              <p class="tiny dim" style="margin:0.1em 0 0;">Uses COND + SHAN + DPI. Independence &#8596; no correlation.</p>
-            </div>
-            <div class="step-block orange">
-              <p class="small" style="margin:0;">
-                <strong class="accent-org">Lemma 5 (Positivity):</strong>
-                $H(X|Y) \geq 0$ for classical $X$
-              </p>
-              <p class="tiny dim" style="margin:0.1em 0 0;">Uses cloning of classical states + DPI.</p>
-            </div>
-            <div class="step-block" style="border-left-color: var(--accent-purple);">
-              <p class="small" style="margin:0;">
-                <strong class="accent-pur">Lemma 6 (IC Bound):</strong>
-                $H(\vec{a}|B\vec{x}) \geq n - m$
-              </p>
-              <p class="tiny dim" style="margin:0.1em 0 0;">Combines all previous. Yields Information Causality.</p>
-            </div>
-          </div>
-          <div class="right">
-            <div class="video-box">
-              <video autoplay loop muted playsinline preload="auto">
-                <source src="assets/s3_proof_sketch.webm" type="video/webm" />
-              </video>
-            </div>
-          </div>
-        </div>
-
-        <aside class="notes">
-          Four lemmas feed into the theorem. Each builds on the previous,
-          using different combinations of COND, SHAN, and DPI.
-        </aside>
-      </section>
+      <!-- Removed: merged into the Four Lemmas accordion slide -->
 
 
       <!-- ═══ FOUR LEMMAS — INTERACTIVE ACCORDION ═══ -->
@@ -1015,14 +973,14 @@
               <div class="lemma-venn">
                 <svg viewBox="0 0 260 190" xmlns="http://www.w3.org/2000/svg">
                   <!-- Two overlapping circles: sum of parts > whole -->
-                  <circle cx="100" cy="95" r="65" fill="rgba(91,155,245,0.12)" stroke="#5b9bf5" stroke-width="2"/>
-                  <circle cx="160" cy="95" r="65" fill="rgba(90,228,167,0.12)" stroke="#5ae4a7" stroke-width="2"/>
+                  <circle cx="100" cy="95" r="65" fill="rgba(37,99,235,0.1)" stroke="#2563eb" stroke-width="2"/>
+                  <circle cx="160" cy="95" r="65" fill="rgba(5,150,105,0.1)" stroke="#059669" stroke-width="2"/>
                   <!-- Labels -->
-                  <text x="72" y="92" fill="#5b9bf5" font-size="13" font-weight="600" text-anchor="middle">H(A|γ)</text>
-                  <text x="130" y="75" fill="#fbbf24" font-size="11" font-weight="600" text-anchor="middle">I(A:B|γ)</text>
-                  <text x="188" y="92" fill="#5ae4a7" font-size="13" font-weight="600" text-anchor="middle">H(B|γ)</text>
+                  <text x="72" y="92" fill="#2563eb" font-size="14" font-weight="600" text-anchor="middle">H(A|γ)</text>
+                  <text x="130" y="75" fill="#d97706" font-size="12" font-weight="600" text-anchor="middle">I(A:B|γ)</text>
+                  <text x="188" y="92" fill="#059669" font-size="14" font-weight="600" text-anchor="middle">H(B|γ)</text>
                   <!-- Caption -->
-                  <text x="130" y="178" fill="#6b7d8f" font-size="11" text-anchor="middle">Sum counts overlap twice → ΣH(Aᵢ) ≥ H(joint)</text>
+                  <text x="130" y="178" fill="#7a8a9a" font-size="12" text-anchor="middle">Sum counts overlap twice → ΣH(Aᵢ) ≥ H(joint)</text>
                 </svg>
               </div>
             </div>
@@ -1048,16 +1006,16 @@
               <div class="lemma-venn">
                 <svg viewBox="0 0 260 190" xmlns="http://www.w3.org/2000/svg">
                   <!-- Two SEPARATE circles: no overlap = product state -->
-                  <circle cx="75" cy="95" r="50" fill="rgba(91,155,245,0.12)" stroke="#5b9bf5" stroke-width="2"/>
-                  <circle cx="185" cy="95" r="50" fill="rgba(251,146,60,0.12)" stroke="#fb923c" stroke-width="2"/>
+                  <circle cx="75" cy="95" r="50" fill="rgba(37,99,235,0.1)" stroke="#2563eb" stroke-width="2"/>
+                  <circle cx="185" cy="95" r="50" fill="rgba(234,88,12,0.1)" stroke="#ea580c" stroke-width="2"/>
                   <!-- Tensor symbol between -->
-                  <text x="130" y="100" fill="#6b7d8f" font-size="22" font-weight="700" text-anchor="middle">⊗</text>
+                  <text x="130" y="100" fill="#7a8a9a" font-size="24" font-weight="700" text-anchor="middle">⊗</text>
                   <!-- Labels -->
-                  <text x="75" y="92" fill="#5b9bf5" font-size="14" font-weight="600" text-anchor="middle">H(A)</text>
-                  <text x="75" y="108" fill="#5b9bf5" font-size="11" text-anchor="middle">= H(A|B)</text>
-                  <text x="185" y="98" fill="#fb923c" font-size="14" font-weight="600" text-anchor="middle">H(B)</text>
+                  <text x="75" y="92" fill="#2563eb" font-size="15" font-weight="600" text-anchor="middle">H(A)</text>
+                  <text x="75" y="108" fill="#2563eb" font-size="12" text-anchor="middle">= H(A|B)</text>
+                  <text x="185" y="98" fill="#ea580c" font-size="15" font-weight="600" text-anchor="middle">H(B)</text>
                   <!-- Caption -->
-                  <text x="130" y="178" fill="#6b7d8f" font-size="11" text-anchor="middle">No overlap → knowing B doesn't help with A</text>
+                  <text x="130" y="178" fill="#7a8a9a" font-size="12" text-anchor="middle">No overlap → knowing B doesn't help with A</text>
                 </svg>
               </div>
             </div>
@@ -1083,21 +1041,21 @@
               <div class="lemma-venn">
                 <svg viewBox="0 0 260 190" xmlns="http://www.w3.org/2000/svg">
                   <!-- X and Y overlapping, H(X|Y) highlighted as the remaining crescent -->
-                  <circle cx="105" cy="95" r="60" fill="rgba(251,146,60,0.08)" stroke="#fb923c" stroke-width="2"/>
-                  <circle cx="160" cy="95" r="55" fill="rgba(167,139,250,0.08)" stroke="#a78bfa" stroke-width="2"/>
+                  <circle cx="105" cy="95" r="60" fill="rgba(234,88,12,0.06)" stroke="#ea580c" stroke-width="2"/>
+                  <circle cx="160" cy="95" r="55" fill="rgba(124,58,237,0.06)" stroke="#7c3aed" stroke-width="2"/>
                   <!-- Highlight H(X|Y) crescent -->
                   <clipPath id="xOnly">
                     <rect x="0" y="0" width="120" height="190"/>
                   </clipPath>
-                  <circle cx="105" cy="95" r="60" fill="rgba(251,146,60,0.25)" clip-path="url(#xOnly)"/>
+                  <circle cx="105" cy="95" r="60" fill="rgba(234,88,12,0.18)" clip-path="url(#xOnly)"/>
                   <!-- Labels -->
-                  <text x="68" y="95" fill="#fb923c" font-size="13" font-weight="700" text-anchor="middle">H(X|Y)</text>
-                  <text x="68" y="110" fill="#5ae4a7" font-size="12" font-weight="700" text-anchor="middle">≥ 0</text>
-                  <text x="135" y="80" fill="#fbbf24" font-size="11" text-anchor="middle">I(X:Y)</text>
-                  <text x="185" y="95" fill="#a78bfa" font-size="13" font-weight="600" text-anchor="middle">Y</text>
-                  <text x="70" y="40" fill="#fb923c" font-size="12" font-weight="500" text-anchor="middle">X (classical)</text>
+                  <text x="68" y="95" fill="#ea580c" font-size="14" font-weight="700" text-anchor="middle">H(X|Y)</text>
+                  <text x="68" y="112" fill="#059669" font-size="13" font-weight="700" text-anchor="middle">≥ 0</text>
+                  <text x="135" y="80" fill="#d97706" font-size="12" text-anchor="middle">I(X:Y)</text>
+                  <text x="185" y="95" fill="#7c3aed" font-size="14" font-weight="600" text-anchor="middle">Y</text>
+                  <text x="70" y="40" fill="#ea580c" font-size="13" font-weight="500" text-anchor="middle">X (classical)</text>
                   <!-- Caption -->
-                  <text x="130" y="178" fill="#6b7d8f" font-size="11" text-anchor="middle">Classical X: crescent always has area ≥ 0</text>
+                  <text x="130" y="178" fill="#7a8a9a" font-size="12" text-anchor="middle">Classical X: crescent always has area ≥ 0</text>
                 </svg>
               </div>
             </div>
@@ -1125,20 +1083,20 @@
               <div class="lemma-venn">
                 <svg viewBox="0 0 260 190" xmlns="http://www.w3.org/2000/svg">
                   <!-- Three overlapping circles: Alice's bits, Channel, Bob's info -->
-                  <circle cx="90" cy="85" r="55" fill="rgba(91,155,245,0.1)" stroke="#5b9bf5" stroke-width="2"/>
-                  <circle cx="170" cy="85" r="55" fill="rgba(167,139,250,0.1)" stroke="#a78bfa" stroke-width="2"/>
-                  <circle cx="130" cy="130" r="45" fill="rgba(251,191,36,0.1)" stroke="#fbbf24" stroke-width="1.5"/>
+                  <circle cx="90" cy="85" r="55" fill="rgba(37,99,235,0.08)" stroke="#2563eb" stroke-width="2"/>
+                  <circle cx="170" cy="85" r="55" fill="rgba(124,58,237,0.08)" stroke="#7c3aed" stroke-width="2"/>
+                  <circle cx="130" cy="130" r="45" fill="rgba(217,119,6,0.08)" stroke="#d97706" stroke-width="1.5"/>
                   <!-- Labels -->
-                  <text x="60" y="78" fill="#5b9bf5" font-size="12" font-weight="600" text-anchor="middle">ā</text>
-                  <text x="60" y="93" fill="#5b9bf5" font-size="10" text-anchor="middle">(n bits)</text>
-                  <text x="200" y="78" fill="#a78bfa" font-size="12" font-weight="600" text-anchor="middle">Bx̄</text>
-                  <text x="200" y="93" fill="#a78bfa" font-size="10" text-anchor="middle">(Bob)</text>
-                  <text x="130" y="155" fill="#fbbf24" font-size="11" font-weight="600" text-anchor="middle">Channel</text>
-                  <text x="130" y="168" fill="#fbbf24" font-size="10" text-anchor="middle">(m bits)</text>
+                  <text x="60" y="78" fill="#2563eb" font-size="13" font-weight="600" text-anchor="middle">ā</text>
+                  <text x="60" y="93" fill="#2563eb" font-size="11" text-anchor="middle">(n bits)</text>
+                  <text x="200" y="78" fill="#7c3aed" font-size="13" font-weight="600" text-anchor="middle">Bx̄</text>
+                  <text x="200" y="93" fill="#7c3aed" font-size="11" text-anchor="middle">(Bob)</text>
+                  <text x="130" y="155" fill="#d97706" font-size="12" font-weight="600" text-anchor="middle">Channel</text>
+                  <text x="130" y="168" fill="#d97706" font-size="11" text-anchor="middle">(m bits)</text>
                   <!-- Bound annotation -->
-                  <text x="130" y="55" fill="#5ae4a7" font-size="12" font-weight="700" text-anchor="middle">H(ā|Bx̄) ≥ n − m</text>
+                  <text x="130" y="55" fill="#059669" font-size="13" font-weight="700" text-anchor="middle">H(ā|Bx̄) ≥ n − m</text>
                   <!-- Caption -->
-                  <text x="130" y="188" fill="#6b7d8f" font-size="10" text-anchor="middle">Overlap bounded by channel capacity m</text>
+                  <text x="130" y="188" fill="#7a8a9a" font-size="11" text-anchor="middle">Overlap bounded by channel capacity m</text>
                 </svg>
               </div>
             </div>
@@ -1439,7 +1397,6 @@
       { title: "Information Causality",  section: "The Principle" },
       { title: "The Logical Chain",      section: "The Principle" },
       { title: "Part IV: The Proof",     section: "divider" },
-      { title: "Proof Architecture",     section: "The Proof" },
       { title: "The Four Lemmas",        section: "The Proof" },
       { title: "From Axioms to Tsirelson", section: "The Proof" },
       { title: "Part V: The Verdict",    section: "divider" },
@@ -1454,7 +1411,7 @@
       { idx: 5,  label: "II. The Framework" },
       { idx: 9,  label: "III. The Principle" },
       { idx: 13, label: "IV. The Proof" },
-      { idx: 17, label: "V. The Verdict" },
+      { idx: 16, label: "V. The Verdict" },
     ];
 
     // Progress bar
@@ -1505,8 +1462,8 @@
 
       var title = document.createElement('div');
       title.style.cssText = 'width:100%; text-align:center; margin-bottom: 18px;';
-      title.innerHTML = '<h2 style="color:#e8edf5; font-size:22px; font-weight:700;">Slide Map</h2>' +
-        '<p style="color:#6b7d8f; font-size:12px;">Click any slide to navigate. Press H or Escape to close.</p>';
+      title.innerHTML = '<h2 style="color:#1a2332; font-size:22px; font-weight:700;">Slide Map</h2>' +
+        '<p style="color:#7a8a9a; font-size:12px;">Click any slide to navigate. Press H or Escape to close.</p>';
       slideMap.appendChild(title);
 
       slideMeta.forEach(function(meta, i) {
