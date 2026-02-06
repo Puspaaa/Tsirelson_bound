@@ -1130,48 +1130,38 @@
         <h3 style="margin-bottom:0.15em;"><span class="accent-grn">From Axioms to Tsirelson</span></h3>
         <p class="small dim" style="margin-top:0;">The proof in three steps</p>
 
-        <div class="split">
-          <div class="left">
-            <div class="step-block" style="border-left-color: var(--accent-purple);">
-              <p class="small" style="margin:0; font-weight:600; color:var(--accent-purple);">Step 1: Bound total uncertainty</p>
-              <p class="tiny" style="margin:0.2em 0 0; color: var(--text-muted);">
-                $H(\vec{a}|B\vec{x}) - H(\vec{x}|\vec{a}B) = H(\vec{a}) - H(\vec{x}|B)$<br>
-                $\geq H(\vec{a}) - H(\vec{x}) = n - H(\vec{x}) \geq n - m$
-              </p>
-              <p class="tiny dim" style="margin:0.1em 0 0;">Using COND, product states (Lemma 4), DPI, and SHAN.</p>
-            </div>
-
-            <div class="step-block blue" style="margin-top: 0.2rem;">
-              <p class="small" style="margin:0; font-weight:600; color:var(--accent-blue);">Step 2: Split into individual bits</p>
-              <p class="tiny" style="margin:0.2em 0 0; color: var(--text-muted);">
-                $\sum_i H(a_i | B\vec{x}) \geq H(\vec{a}|B\vec{x}) \geq n - m$<br>
-                $\sum_i H(a_i | \beta(i)) \geq n - m$
-              </p>
-              <p class="tiny dim" style="margin:0.1em 0 0;">Using subadditivity (Lemma 3), then DPI on Bob's guess $\beta$.</p>
-            </div>
-
-            <div class="step-block green" style="margin-top: 0.2rem;">
-              <p class="small" style="margin:0; font-weight:600; color:var(--accent-green);">Step 3: Recover IC &#8594; Tsirelson</p>
-              <p class="tiny" style="margin:0.2em 0 0; color: var(--text-muted);">
-                $I = \sum_i I_{\text{Sh}}(a_i:\beta(i)) = n - \sum_i H(a_i|\beta(i)) \leq m$
-              </p>
-              <p class="tiny dim" style="margin:0.1em 0 0;">By SHAN, $H$ is Shannon for classical bits. IC implies Tsirelson (Pawlowski et al.).</p>
-            </div>
-
-            <div class="highlight-box" style="margin-top: 0.3rem; text-align: center;">
-              <p style="margin:0; font-size:0.76em;">
-                <strong class="accent-ylw">Key insight:</strong> Only 3 axioms needed —
-                fewer than the 5 of Pawlowski et al.
-              </p>
-            </div>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 0.5rem;">
+          <div class="step-block" style="border-left-color: var(--accent-purple);">
+            <p class="small" style="margin:0; font-weight:600; color:var(--accent-purple);">Step 1: Bound total uncertainty</p>
+            <p class="tiny" style="margin:0.2em 0 0; color: var(--text-muted);">
+              $H(\vec{a}|B\vec{x}) - H(\vec{x}|\vec{a}B) = H(\vec{a}) - H(\vec{x}|B)$<br>
+              $\geq H(\vec{a}) - H(\vec{x}) = n - H(\vec{x}) \geq n - m$
+            </p>
+            <p class="tiny dim" style="margin:0.1em 0 0;">Using COND, product states (Lemma 4), DPI, and SHAN.</p>
           </div>
-          <div class="right">
-            <div class="video-box">
-              <video autoplay loop muted playsinline preload="auto">
-                <source src="assets/s3_lemma_flow.webm" type="video/webm" />
-              </video>
-            </div>
+
+          <div class="step-block blue">
+            <p class="small" style="margin:0; font-weight:600; color:var(--accent-blue);">Step 2: Split into individual bits</p>
+            <p class="tiny" style="margin:0.2em 0 0; color: var(--text-muted);">
+              $\sum_i H(a_i | B\vec{x}) \geq H(\vec{a}|B\vec{x}) \geq n - m$<br>
+              $\sum_i H(a_i | \beta(i)) \geq n - m$
+            </p>
+            <p class="tiny dim" style="margin:0.1em 0 0;">Using subadditivity (Lemma 3), then DPI on Bob's guess $\beta$.</p>
           </div>
+
+          <div class="step-block green">
+            <p class="small" style="margin:0; font-weight:600; color:var(--accent-green);">Step 3: Recover IC &#8594; Tsirelson</p>
+            <p class="tiny" style="margin:0.2em 0 0; color: var(--text-muted);">
+              $I = \sum_i I_{\text{Sh}}(a_i:\beta(i)) = n - \sum_i H(a_i|\beta(i)) \leq m$
+            </p>
+            <p class="tiny dim" style="margin:0.1em 0 0;">By SHAN, $H$ is Shannon for classical bits. IC implies Tsirelson (Pawlowski et al.).</p>
+          </div>
+        </div>
+
+        <div class="highlight-box" style="margin-top: 0.5rem; text-align: center;">
+          <p style="margin:0; font-size:0.8em;">
+            <strong class="accent-ylw">Key insight:</strong> Only 3 axioms needed — fewer than the 5 of Pawlowski et al.
+          </p>
         </div>
 
         <aside class="notes">
@@ -1199,51 +1189,41 @@
         <h3 style="margin-bottom:0.15em;"><span class="accent-red">Where Box-World Breaks Down</span></h3>
         <p class="small dim" style="margin-top:0;">A diagnostic comparison: which axioms does it violate?</p>
 
-        <div class="split">
-          <div class="left">
-            <div class="two-col" style="font-size: 0.7em;">
-              <div>
-                <h4 class="accent-pur" style="margin:0 0 0.3rem 0;">Quantum Mechanics</h4>
-                <ul class="prop-list">
-                  <li class="good">DPI holds ($H_{\text{vN}}$)</li>
-                  <li class="good">Strong subadditivity</li>
-                  <li class="good">$H(X|Y) \geq 0$ (classical)</li>
-                  <li class="good">IC: $I \leq m$</li>
-                  <li class="good">$S \leq 2 + \sqrt{2}$</li>
-                </ul>
-              </div>
-              <div>
-                <h4 class="accent-red" style="margin:0 0 0.3rem 0;">Box-World</h4>
-                <ul class="prop-list">
-                  <li class="bad">DPI violated!</li>
-                  <li class="bad">SSA violated!</li>
-                  <li class="bad">Conditional entropy $&lt; 0$</li>
-                  <li class="bad">IC violated: $I > m$</li>
-                  <li class="bad">$S = 4 > 2 + \sqrt{2}$</li>
-                </ul>
-              </div>
-            </div>
-
-            <div class="highlight-box" style="margin-top: 0.6rem; text-align: center;">
-              <p style="margin:0; font-size: 0.76em;">
-                <strong class="accent-ylw">DPI is the dividing line.</strong>
-                Any theory violating it can potentially exceed Tsirelson's bound.
-              </p>
-            </div>
-
-            <div class="step-block" style="border-left-color: var(--accent-green); margin-top: 0.3rem;">
-              <p class="small" style="margin:0;">
-                <strong class="accent-grn">Minimality:</strong> COND + SHAN + DPI are sufficient.
-                For certain entropy definitions, <em>DPI alone</em> is enough.
-              </p>
-            </div>
+        <div class="two-col" style="font-size: 0.78em; margin-top: 0.5rem;">
+          <div style="background: var(--bg-surface); border-radius: 10px; padding: 1rem; border: 1px solid var(--border);">
+            <h4 class="accent-pur" style="margin:0 0 0.5rem 0; font-size: 1.1em;">Quantum Mechanics</h4>
+            <ul class="prop-list">
+              <li class="good">DPI holds ($H_{\text{vN}}$)</li>
+              <li class="good">Strong subadditivity</li>
+              <li class="good">$H(X|Y) \geq 0$ (classical)</li>
+              <li class="good">IC: $I \leq m$</li>
+              <li class="good">$S \leq 2 + \sqrt{2}$</li>
+            </ul>
           </div>
-          <div class="right">
-            <div class="video-box">
-              <video autoplay loop muted playsinline preload="auto">
-                <source src="assets/s3_boxworld.webm" type="video/webm" />
-              </video>
-            </div>
+          <div style="background: var(--bg-surface); border-radius: 10px; padding: 1rem; border: 1px solid var(--border);">
+            <h4 class="accent-red" style="margin:0 0 0.5rem 0; font-size: 1.1em;">Box-World</h4>
+            <ul class="prop-list">
+              <li class="bad">DPI violated!</li>
+              <li class="bad">SSA violated!</li>
+              <li class="bad">Conditional entropy $&lt; 0$</li>
+              <li class="bad">IC violated: $I > m$</li>
+              <li class="bad">$S = 4 > 2 + \sqrt{2}$</li>
+            </ul>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 1rem; margin-top: 0.6rem;">
+          <div class="highlight-box" style="flex: 1; text-align: center;">
+            <p style="margin:0; font-size: 0.8em;">
+              <strong class="accent-ylw">DPI is the dividing line.</strong>
+              Any theory violating it can potentially exceed Tsirelson's bound.
+            </p>
+          </div>
+          <div class="step-block" style="flex: 1; border-left-color: var(--accent-green);">
+            <p class="small" style="margin:0;">
+              <strong class="accent-grn">Minimality:</strong> COND + SHAN + DPI are sufficient.
+              For certain entropy definitions, <em>DPI alone</em> is enough.
+            </p>
           </div>
         </div>
 
