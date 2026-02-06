@@ -692,43 +692,47 @@
       </section>
 
 
-      <!-- ═══ SYSTEMS OF TYPE (k,l) ═══ -->
+      <!-- ═══ GPT & SYSTEMS OF TYPE (k,l) ═══ -->
       <section data-transition="slide">
-        <h3 style="margin-bottom:0.15em;">Systems of Type <span class="accent">$(k, l)$</span></h3>
-        <p class="small dim" style="margin-top:0;">An operational language to compare any theory</p>
+        <h3 style="margin-bottom:0.15em;">General Probabilistic Theories</h3>
+        <p class="small dim" style="margin-top:0;">A universal language — systems defined by $(k, l)$</p>
 
         <div class="split">
           <div class="left">
-            <div class="highlight-box" style="margin-bottom: 0.4rem;">
-              <p style="font-size:0.8em; margin:0;">
-                <strong class="accent">Definition:</strong> A system has $k$ <em>fiducial measurements</em>, each with $l$ outcomes.
+            <div class="highlight-box" style="margin-bottom: 0.35rem; padding: 0.35rem;">
+              <p class="small" style="margin:0 0 0.2rem 0;">
+                <strong class="accent-blu">GPT Framework:</strong> Describe <em>any</em> theory operationally
               </p>
-              <p style="font-size:0.75em; margin:0.25rem 0 0; color:var(--text-body);">
-                State $\vec{P} = \big( P(i|j) \big)$ — probabilities for all measurement-outcome pairs.
+              <p class="tiny" style="margin:0; color:var(--text-body);">
+                No Hilbert spaces assumed — just probabilities from experiments.
               </p>
             </div>
 
-            <div class="two-col" style="margin-top:0.4rem; font-size:0.72em;">
+            <div class="highlight-box" style="margin-bottom: 0.35rem; padding: 0.35rem; border-color:rgba(167,139,250,0.3);">
+              <p class="small" style="margin:0;">
+                <strong class="accent-pur">System of type $(k, l)$:</strong>
+              </p>
+              <p class="tiny" style="margin:0.15rem 0 0;">
+                $k$ fiducial measurements, each with $l$ outcomes.<br>
+                State = $\vec{P} = (P(\text{outcome } i \mid \text{measurement } j))$
+              </p>
+            </div>
+
+            <div class="two-col" style="font-size:0.68em; margin-top:0.3rem;">
               <div>
-                <h4 style="color:var(--accent-purple); margin:0 0 0.15rem;">Quantum (qubit)</h4>
-                <ul class="prop-list" style="margin:0;">
-                  <li>Bloch sphere states</li>
-                  <li>Continuous measurements</li>
-                </ul>
+                <h4 style="color:var(--accent-purple); margin:0 0 0.1rem;">Quantum</h4>
+                <p class="tiny" style="margin:0;">Bloch sphere states<br>Continuous measurements</p>
               </div>
               <div>
-                <h4 style="color:var(--accent-orange); margin:0 0 0.15rem;">Box-World (2,2)</h4>
-                <ul class="prop-list" style="margin:0;">
-                  <li>Square state space</li>
-                  <li>PR-Box at corners</li>
-                </ul>
+                <h4 style="color:var(--accent-orange); margin:0 0 0.1rem;">Box-World (2,2)</h4>
+                <p class="tiny" style="margin:0;">Square state space<br>PR-Box at corners</p>
               </div>
             </div>
 
-            <div class="highlight-box" style="border-color:rgba(90,228,167,0.2); margin-top:0.4rem;">
-              <p style="font-size:0.7em; margin:0; color:var(--accent-green);">
-                Same framework describes classical, quantum, and exotic theories.
-                Box-world's state space is <em>larger</em> than quantum's.
+            <div class="highlight-box" style="border-color:rgba(90,228,167,0.2); margin-top:0.35rem; padding:0.3rem;">
+              <p style="font-size:0.68em; margin:0; color:var(--accent-green);">
+                Classical, quantum, and box-world are all GPTs.<br>
+                <strong>Same rules — different state spaces.</strong>
               </p>
             </div>
           </div>
@@ -742,9 +746,9 @@
         </div>
 
         <aside class="notes">
-          GPTs classify systems by (k,l). This operational language lets us compare
-          quantum, classical, and box-world on equal footing. Box-world has a larger
-          state space — the PR-Box lives at its corners.
+          GPTs let us compare theories on equal footing without assuming QM.
+          Systems are classified by (k,l). Quantum has the Bloch sphere;
+          box-world has a square — larger state space means more correlations.
         </aside>
       </section>
 
@@ -1421,7 +1425,7 @@
       { title: "Correlation Landscape",  section: "The Mystery", part: "I", sectionName: "The Mystery", gradient: "var(--accent-blue), var(--accent-purple)" },
       { title: "The CHSH Game",          section: "The Mystery", part: "I", sectionName: "The Mystery", gradient: "var(--accent-blue), var(--accent-purple)" },
       { title: "Part II: The Framework", section: "divider", part: "II", sectionName: "The Framework", gradient: "var(--accent-blue), var(--accent-green)" },
-      { title: "Systems of Type (k,l)",  section: "The Framework", part: "II", sectionName: "The Framework", gradient: "var(--accent-blue), var(--accent-green)" },
+      { title: "GPT & Systems (k,l)",   section: "The Framework", part: "II", sectionName: "The Framework", gradient: "var(--accent-blue), var(--accent-green)" },
       { title: "Composite Systems",      section: "The Framework", part: "II", sectionName: "The Framework", gradient: "var(--accent-blue), var(--accent-green)" },
       { title: "Part III: The Principle", section: "divider", part: "III", sectionName: "The Principle", gradient: "var(--accent-orange), var(--accent-gold)" },
       { title: "Entropy & DPI",          section: "The Principle", part: "III", sectionName: "The Principle", gradient: "var(--accent-orange), var(--accent-gold)" },
