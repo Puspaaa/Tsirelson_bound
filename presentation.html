@@ -947,7 +947,71 @@
         <aside class="notes">
           IC says Bob cannot extract more info than bits sent, even with entanglement.
           DPI implies IC, IC implies Tsirelson, and Tsirelson excludes the PR-box.
-          This is why nature stops at 2+√2: information-theoretic, not just relativistic.
+          This is why nature stops at 2√2: information-theoretic, not just relativistic.
+        </aside>
+      </section>
+
+
+      <!-- ═══ THE GEOMETRIC DERIVATION ═══ -->
+      <section data-transition="slide">
+        <h3 style="margin-bottom:0.15em;"><span class="accent-ylw">The Geometric Derivation</span></h3>
+        <p class="small dim" style="margin-top:0;">From Information Conservation to the Tsirelson Bound</p>
+
+        <div class="split">
+          <div class="left">
+            <div class="step-block orange" style="padding:0.35rem 0.5rem;">
+              <p class="small" style="margin:0; font-weight:600; color:var(--accent-orange);">1. The Geometric Constraint</p>
+              <p class="tiny" style="margin:0.15em 0 0; color: var(--text-muted);">
+                IC + no recursive explosion $\Rightarrow$ Euclidean norm constraint:
+              </p>
+              <p style="margin:0.2em 0 0; font-size:0.85em; text-align:center;">
+                $\displaystyle\sum_i (2p_i - 1)^2 \;\leq\; 1$
+              </p>
+              <p class="tiny dim" style="margin:0.1em 0 0;">
+                where $p_i = P(\text{guess } a_i \text{ correctly})$ and $(2p_i - 1)$ is Bob's <strong>bias</strong>.
+              </p>
+            </div>
+
+            <div class="step-block purple" style="padding:0.35rem 0.5rem; margin-top:0.25rem;">
+              <p class="small" style="margin:0; font-weight:600; color:var(--accent-purple);">2. Physics Link: RAC → CHSH</p>
+              <p class="tiny" style="margin:0.15em 0 0; color: var(--text-muted);">
+                Bob's guessing efficiency is proportional to correlation strength:
+              </p>
+              <p style="margin:0.2em 0 0; font-size:0.85em; text-align:center;">
+                $2p_i - 1 = \dfrac{S}{4}$
+              </p>
+            </div>
+
+            <div class="step-block green" style="padding:0.35rem 0.5rem; margin-top:0.25rem;">
+              <p class="small" style="margin:0; font-weight:600; color:var(--accent-green);">3. The Calculation</p>
+              <p class="tiny" style="margin:0.15em 0 0; color: var(--text-muted);">
+                Substituting into the constraint (symmetric for both bits):
+              </p>
+              <p style="margin:0.2em 0 0; font-size:0.85em; text-align:center;">
+                $2 \cdot \left(\dfrac{S}{4}\right)^2 \leq 1 \;\;\Rightarrow\;\; \dfrac{S^2}{8} \leq 1 \;\;\Rightarrow\;\; \boxed{S \leq 2\sqrt{2}}$
+              </p>
+            </div>
+
+            <div class="highlight-box" style="margin-top:0.3rem; padding:0.25rem; text-align:center; border-color:rgba(90,228,167,0.3);">
+              <p class="small" style="margin:0;">
+                <strong class="accent-grn">The bias vector must stay inside the unit sphere.</strong><br>
+                <span class="tiny dim">PR-Box ($S=4$) gives $|\vec{b}| = \sqrt{2} > 1$ — <span class="accent-red">violates IC!</span></span>
+              </p>
+            </div>
+          </div>
+          <div class="right">
+            <div class="video-box">
+              <video autoplay muted playsinline preload="auto">
+                <source src="assets/3_rac.webm" type="video/webm" />
+              </video>
+            </div>
+          </div>
+        </div>
+
+        <aside class="notes">
+          This is the heart of the paper. IC forces Bob's bias vector to live inside a unit hypersphere.
+          The PR-Box vector has length sqrt(2), piercing the sphere. Quantum mechanics is exactly at the boundary.
+          Therefore, QM is the limit of non-locality that respects information conservation.
         </aside>
       </section>
 
@@ -1396,6 +1460,7 @@
       { title: "Part III: The Principle", section: "divider", part: "III", sectionName: "The Principle", gradient: "var(--accent-orange), var(--accent-gold)" },
       { title: "Entropy & DPI",          section: "The Principle", part: "III", sectionName: "The Principle", gradient: "var(--accent-orange), var(--accent-gold)" },
       { title: "Information Causality",  section: "The Principle", part: "III", sectionName: "The Principle", gradient: "var(--accent-orange), var(--accent-gold)" },
+      { title: "Geometric Derivation",   section: "The Principle", part: "III", sectionName: "The Principle", gradient: "var(--accent-orange), var(--accent-gold)" },
       { title: "Part IV: The Proof",     section: "divider", part: "IV", sectionName: "The Proof", gradient: "var(--accent-purple), var(--accent-red)" },
       { title: "The Four Lemmas",        section: "The Proof", part: "IV", sectionName: "The Proof", gradient: "var(--accent-purple), var(--accent-red)" },
       { title: "From Axioms to Tsirelson", section: "The Proof", part: "IV", sectionName: "The Proof", gradient: "var(--accent-purple), var(--accent-red)" },
@@ -1410,8 +1475,8 @@
       { idx: 1,  label: "I. The Mystery" },
       { idx: 4,  label: "II. The Framework" },
       { idx: 7,  label: "III. The Principle" },
-      { idx: 10, label: "IV. The Proof" },
-      { idx: 13, label: "V. The Verdict" },
+      { idx: 11, label: "IV. The Proof" },
+      { idx: 14, label: "V. The Verdict" },
     ];
 
     // Progress bar
