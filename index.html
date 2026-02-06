@@ -7,8 +7,8 @@
 
   <!-- Reveal.js core -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css" id="theme" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/github.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css" id="theme" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css" id="code-theme" />
 
   <!-- KaTeX -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
@@ -20,9 +20,38 @@
 
   <style>
     /* ═══════════════════════════════════════════════
-       GLOBAL THEME — Refined Modern Palette
+       GLOBAL THEME — Dark Mode (default) + Light Mode Toggle
        ═══════════════════════════════════════════════ */
     :root {
+      /* Dark theme colors (default) */
+      --bg-primary: #0f1419;
+      --bg-surface: #1a1f2e;
+      --bg-elevated: #242b3d;
+      --border: #3d4a5c;
+      --text-heading: #e8edf5;
+      --text-body: #b8c5d6;
+      --text-muted: #6b7d8f;
+      --accent-blue: #5b9bf5;
+      --accent-purple: #a78bfa;
+      --accent-green: #5ae4a7;
+      --accent-gold: #fbbf24;
+      --accent-red: #f87171;
+      --accent-orange: #fb923c;
+      --accent-teal: #2dd4bf;
+      --accent-pink: #f472b6;
+
+      --r-background-color: var(--bg-primary);
+      --r-main-font: 'Inter', 'Segoe UI', system-ui, sans-serif;
+      --r-heading-font: 'Inter', 'Segoe UI', system-ui, sans-serif;
+      --r-main-font-size: 42px;
+      --r-heading-color: var(--text-heading);
+      --r-main-color: var(--text-body);
+      --r-link-color: var(--accent-blue);
+      --r-selection-background-color: rgba(91, 155, 245, 0.3);
+    }
+
+    /* Light theme override */
+    body.light-mode {
       --bg-primary: #f8f9fc;
       --bg-surface: #ffffff;
       --bg-elevated: #eef1f6;
@@ -38,26 +67,16 @@
       --accent-orange: #ea580c;
       --accent-teal: #0d9488;
       --accent-pink: #db2777;
-
-      --r-background-color: #f8f9fc;
-      --r-main-font: 'Inter', 'Segoe UI', system-ui, sans-serif;
-      --r-heading-font: 'Inter', 'Segoe UI', system-ui, sans-serif;
-      --r-main-font-size: 42px;
-      --r-heading-color: var(--text-heading);
-      --r-main-color: var(--text-body);
-      --r-link-color: var(--accent-blue);
-      --r-selection-background-color: rgba(37, 99, 235, 0.2);
-      --r-overlay-element-bg-color: 240, 240, 240;
-      --r-overlay-element-fg-color: 30, 30, 30;
     }
 
-    /* Force light background everywhere */
+    /* Force background everywhere */
     body, .reveal-viewport {
-      background: #f8f9fc !important;
-      background-color: #f8f9fc !important;
+      background: var(--bg-primary) !important;
+      background-color: var(--bg-primary) !important;
+      transition: background-color 0.4s ease;
     }
     .reveal .slide-background {
-      background-color: #f8f9fc !important;
+      background-color: var(--bg-primary) !important;
     }
     .reveal .slide-background-content {
       background: none !important;
@@ -65,7 +84,7 @@
 
     .reveal {
       font-family: var(--r-main-font);
-      background-color: #f8f9fc;
+      background-color: var(--bg-primary);
       color: var(--text-body);
     }
     .reveal h1, .reveal h2, .reveal h3 {
@@ -117,7 +136,7 @@
       position: relative; z-index: 0;
     }
     .video-box video {
-      display: block; max-width: 100%; max-height: 44vh; background: #eef1f6;
+      display: block; max-width: 100%; max-height: 44vh; background: var(--bg-elevated);
       position: relative; z-index: 0;
       border-radius: 8px;
     }
@@ -306,8 +325,11 @@
     /* Slide map overlay */
     #slide-map {
       position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-      background: rgba(248, 249, 252, 0.97); z-index: 200;
+      background: rgba(15, 20, 25, 0.97); z-index: 200;
       display: none; overflow-y: auto; padding: 50px 40px;
+    }
+    body.light-mode #slide-map {
+      background: rgba(248, 249, 252, 0.97);
     }
     #slide-map.visible { display: flex; flex-wrap: wrap; justify-content: center; gap: 14px; align-content: start; }
     .map-card {
@@ -412,7 +434,7 @@
     .lemma-card:not(.active) .lemma-venn { display: none; }
     .lemma-venn svg { width: 100%; height: 100%; }
 
-    /* ─── Reveal.js controls, slide number — light theme ─── */
+    /* ─── Reveal.js controls, slide number — theme-aware ─── */
     .reveal .controls { color: var(--accent-blue); }
     .reveal .slide-number {
       color: var(--text-muted) !important;
@@ -421,10 +443,68 @@
       font-family: 'Inter', sans-serif !important;
     }
     .reveal .slide-number a { color: var(--text-muted) !important; }
-    .reveal .progress { background: rgba(0, 0, 0, 0.08); color: var(--accent-blue); }
+    .reveal .progress { background: rgba(255, 255, 255, 0.1); color: var(--accent-blue); }
+    body.light-mode .reveal .progress { background: rgba(0, 0, 0, 0.08); }
 
-    /* ─── KaTeX — ensure dark text on light bg ─── */
+    /* ─── KaTeX — theme-aware text ─── */
     .reveal .katex { color: var(--text-heading); }
+
+    /* ─── Theme Toggle Button ─── */
+    #theme-toggle {
+      position: fixed; top: 16px; right: 16px; z-index: 100;
+      width: 40px; height: 40px; border-radius: 8px;
+      background: var(--bg-surface); border: 1px solid var(--border);
+      color: var(--accent-gold); font-size: 18px;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+    #theme-toggle:hover {
+      background: var(--bg-elevated); border-color: var(--accent-gold);
+      transform: scale(1.05);
+    }
+    body.light-mode #theme-toggle {
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    /* ─── Persistent Section Label (top-left) ─── */
+    #section-label {
+      position: fixed; top: 16px; left: 70px; z-index: 100;
+      display: flex; align-items: center; gap: 10px;
+      padding: 8px 16px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      pointer-events: none;
+    }
+    #section-label.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    body.light-mode #section-label {
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    #section-label .section-part {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+    #section-label .section-name {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-heading);
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
 
   </style>
 </head>
@@ -432,6 +512,15 @@
 
   <!-- HOME BUTTON -->
   <button id="home-btn" title="Slide Map (press H)">&#9776;</button>
+
+  <!-- THEME TOGGLE BUTTON -->
+  <button id="theme-toggle" title="Toggle Light/Dark Mode (press T)">&#9788;</button>
+
+  <!-- PERSISTENT SECTION LABEL -->
+  <div id="section-label">
+    <span class="section-part">Part I</span>
+    <span class="section-name">The Mystery</span>
+  </div>
 
   <!-- SLIDE MAP OVERLAY -->
   <div id="slide-map"></div>
@@ -1424,26 +1513,26 @@
 
     // Slide metadata
     var slideMeta = [
-      { title: "Title",                  section: "" },
-      { title: "Part I: The Mystery",    section: "divider" },
-      { title: "Correlation Landscape",  section: "The Mystery" },
-      { title: "The CHSH Score",         section: "The Mystery" },
-      { title: "The PR-Box",            section: "The Mystery" },
-      { title: "Part II: The Framework", section: "divider" },
-      { title: "General Probabilistic Theories", section: "The Framework" },
-      { title: "Systems of Type (k,l)",  section: "The Framework" },
-      { title: "Composite Systems",      section: "The Framework" },
-      { title: "Part III: The Principle", section: "divider" },
-      { title: "Entropy & DPI",          section: "The Principle" },
-      { title: "Information Causality",  section: "The Principle" },
-      { title: "The Logical Chain",      section: "The Principle" },
-      { title: "Part IV: The Proof",     section: "divider" },
-      { title: "The Four Lemmas",        section: "The Proof" },
-      { title: "From Axioms to Tsirelson", section: "The Proof" },
-      { title: "Part V: The Verdict",    section: "divider" },
-      { title: "Box-World Breakdown",    section: "The Verdict" },
-      { title: "The Big Picture",        section: "The Verdict" },
-      { title: "Thank You",             section: "" },
+      { title: "Title",                  section: "", part: "" },
+      { title: "Part I: The Mystery",    section: "divider", part: "I", sectionName: "The Mystery", gradient: "var(--accent-blue), var(--accent-purple)" },
+      { title: "Correlation Landscape",  section: "The Mystery", part: "I", sectionName: "The Mystery", gradient: "var(--accent-blue), var(--accent-purple)" },
+      { title: "The CHSH Score",         section: "The Mystery", part: "I", sectionName: "The Mystery", gradient: "var(--accent-blue), var(--accent-purple)" },
+      { title: "The PR-Box",            section: "The Mystery", part: "I", sectionName: "The Mystery", gradient: "var(--accent-blue), var(--accent-purple)" },
+      { title: "Part II: The Framework", section: "divider", part: "II", sectionName: "The Framework", gradient: "var(--accent-blue), var(--accent-green)" },
+      { title: "General Probabilistic Theories", section: "The Framework", part: "II", sectionName: "The Framework", gradient: "var(--accent-blue), var(--accent-green)" },
+      { title: "Systems of Type (k,l)",  section: "The Framework", part: "II", sectionName: "The Framework", gradient: "var(--accent-blue), var(--accent-green)" },
+      { title: "Composite Systems",      section: "The Framework", part: "II", sectionName: "The Framework", gradient: "var(--accent-blue), var(--accent-green)" },
+      { title: "Part III: The Principle", section: "divider", part: "III", sectionName: "The Principle", gradient: "var(--accent-orange), var(--accent-gold)" },
+      { title: "Entropy & DPI",          section: "The Principle", part: "III", sectionName: "The Principle", gradient: "var(--accent-orange), var(--accent-gold)" },
+      { title: "Information Causality",  section: "The Principle", part: "III", sectionName: "The Principle", gradient: "var(--accent-orange), var(--accent-gold)" },
+      { title: "The Logical Chain",      section: "The Principle", part: "III", sectionName: "The Principle", gradient: "var(--accent-orange), var(--accent-gold)" },
+      { title: "Part IV: The Proof",     section: "divider", part: "IV", sectionName: "The Proof", gradient: "var(--accent-purple), var(--accent-red)" },
+      { title: "The Four Lemmas",        section: "The Proof", part: "IV", sectionName: "The Proof", gradient: "var(--accent-purple), var(--accent-red)" },
+      { title: "From Axioms to Tsirelson", section: "The Proof", part: "IV", sectionName: "The Proof", gradient: "var(--accent-purple), var(--accent-red)" },
+      { title: "Part V: The Verdict",    section: "divider", part: "V", sectionName: "The Verdict", gradient: "var(--accent-green), var(--accent-blue)" },
+      { title: "Box-World Breakdown",    section: "The Verdict", part: "V", sectionName: "The Verdict", gradient: "var(--accent-green), var(--accent-blue)" },
+      { title: "The Big Picture",        section: "The Verdict", part: "V", sectionName: "The Verdict", gradient: "var(--accent-green), var(--accent-blue)" },
+      { title: "Thank You",             section: "", part: "" },
     ];
 
     // Section boundaries for progress bar markers
@@ -1503,8 +1592,8 @@
 
       var title = document.createElement('div');
       title.style.cssText = 'width:100%; text-align:center; margin-bottom: 18px;';
-      title.innerHTML = '<h2 style="color:#1a2332; font-size:22px; font-weight:700;">Slide Map</h2>' +
-        '<p style="color:#7a8a9a; font-size:12px;">Click any slide to navigate. Press H or Escape to close.</p>';
+      title.innerHTML = '<h2 style="color:var(--text-heading); font-size:22px; font-weight:700;">Slide Map</h2>' +
+        '<p style="color:var(--text-muted); font-size:12px;">Click any slide to navigate. Press H or Escape to close.</p>';
       slideMap.appendChild(title);
 
       slideMeta.forEach(function(meta, i) {
@@ -1636,6 +1725,92 @@
         }
       }, { passive: false });
     })();
+
+    // ═══════════════════════════════════════════════
+    // THEME TOGGLE
+    // ═══════════════════════════════════════════════
+    var themeToggle = document.getElementById('theme-toggle');
+    var isLightMode = localStorage.getItem('tsirelson-theme') === 'light';
+
+    function applyTheme(light) {
+      if (light) {
+        document.body.classList.add('light-mode');
+        themeToggle.innerHTML = '&#9790;'; // moon icon
+        themeToggle.title = 'Switch to Dark Mode (press T)';
+        // Update Reveal theme
+        document.getElementById('theme').href = 'https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css';
+        document.getElementById('code-theme').href = 'https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/github.css';
+      } else {
+        document.body.classList.remove('light-mode');
+        themeToggle.innerHTML = '&#9788;'; // sun icon
+        themeToggle.title = 'Switch to Light Mode (press T)';
+        // Update Reveal theme
+        document.getElementById('theme').href = 'https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/black.css';
+        document.getElementById('code-theme').href = 'https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css';
+      }
+    }
+
+    // Apply initial theme
+    applyTheme(isLightMode);
+
+    themeToggle.addEventListener('click', function() {
+      isLightMode = !isLightMode;
+      localStorage.setItem('tsirelson-theme', isLightMode ? 'light' : 'dark');
+      applyTheme(isLightMode);
+    });
+
+    // Keyboard shortcut T for theme toggle
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 't' || e.key === 'T') {
+        if (!e.ctrlKey && !e.metaKey && !e.altKey) {
+          isLightMode = !isLightMode;
+          localStorage.setItem('tsirelson-theme', isLightMode ? 'light' : 'dark');
+          applyTheme(isLightMode);
+          e.preventDefault();
+        }
+      }
+    });
+
+    // ═══════════════════════════════════════════════
+    // PERSISTENT SECTION LABEL
+    // ═══════════════════════════════════════════════
+    var sectionLabel = document.getElementById('section-label');
+    var sectionPart = sectionLabel.querySelector('.section-part');
+    var sectionName = sectionLabel.querySelector('.section-name');
+
+    function updateSectionLabel(slideIndex) {
+      var meta = slideMeta[slideIndex];
+      
+      // Hide on title slide, dividers, and thank you slide
+      if (!meta || !meta.part || meta.section === 'divider' || slideIndex === 0 || slideIndex === slideMeta.length - 1) {
+        sectionLabel.classList.remove('visible');
+        return;
+      }
+
+      // Show section label with current section info
+      sectionPart.textContent = 'Part ' + meta.part;
+      sectionName.textContent = meta.sectionName;
+      
+      // Update gradient based on section
+      if (meta.gradient) {
+        sectionName.style.background = 'linear-gradient(135deg, ' + meta.gradient + ')';
+        sectionName.style.webkitBackgroundClip = 'text';
+        sectionName.style.webkitTextFillColor = 'transparent';
+        sectionName.style.backgroundClip = 'text';
+      }
+      
+      sectionLabel.classList.add('visible');
+    }
+
+    // Update on slide change
+    Reveal.on('slidechanged', function(event) {
+      updateSectionLabel(event.indexh);
+    });
+
+    // Initial update
+    Reveal.on('ready', function(event) {
+      updateSectionLabel(event.indexh);
+    });
   </script>
 </body>
 </html>
