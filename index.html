@@ -581,7 +581,7 @@
       <!-- ═══ THE CORRELATION LANDSCAPE ═══ -->
       <section data-transition="slide">
         <h3 style="margin-bottom:0.15em;">The Correlation Landscape</h3>
-        <p class="small dim" style="margin-top:0;">Three nested worlds of correlations</p>
+        <p class="small dim" style="margin-top:0;">Three nested worlds — each with a maximum CHSH score</p>
 
         <div class="split">
           <div class="left">
@@ -596,21 +596,20 @@
               <div class="hierarchy-bar bar-quantum"></div>
               <div>
                 <strong class="accent-pur">Quantum ($\mathcal{Q}$)</strong><br>
-                <span class="small">$S \leq 2 + \sqrt{2} \approx 3.41$ — Tsirelson's limit</span>
+                <span class="small">$S \leq 2 + \sqrt{2} \approx 3.41$ — <strong>Tsirelson's bound</strong></span>
               </div>
             </div>
             <div class="hierarchy-item">
               <div class="hierarchy-bar bar-ns"></div>
               <div>
                 <strong class="accent-red">No-Signaling ($\mathcal{NS}$)</strong><br>
-                <span class="small">$S \leq 4$ — Relativity alone</span>
+                <span class="small">$S \leq 4$ — PR-Box lives here</span>
               </div>
             </div>
             <div class="highlight-box" style="margin-top:0.5rem;">
-              <strong class="accent-ylw">The hierarchy:</strong>
-              <span class="small">&ensp;$\mathcal{L} \subset \mathcal{Q} \subset \mathcal{NS}$</span><br>
-              <p class="question-big" style="font-size:0.8em;">
-                Relativity allows $S$ up to $4$. Why does nature stop at $2 + \sqrt{2}$?
+              <span class="small">$\mathcal{L} \;\subset\; \mathcal{Q} \;\subset\; \mathcal{NS}$</span>
+              <p class="question-big" style="font-size:0.75em; margin-top:0.3em;">
+                Relativity allows up to $S=4$.<br>Why does nature stop at $2 + \sqrt{2}$?
               </p>
             </div>
           </div>
@@ -624,43 +623,43 @@
         </div>
 
         <aside class="notes">
-          The space of all correlations forms nested sets. Classical physics
-          lives in the innermost. No-signaling is the outermost. Quantum is
-          in between, and Tsirelson's bound marks its boundary.
+          The space of correlations forms nested sets. Classical (local) is innermost,
+          no-signaling is outermost. Quantum sits in between. Tsirelson's bound
+          marks where quantum ends — but why that specific number?
         </aside>
       </section>
 
 
-      <!-- ═══ CHSH SCORE & PR-BOX ═══ -->
+      <!-- ═══ THE CHSH GAME ═══ -->
       <section data-transition="slide">
-        <h3 style="margin-bottom:0.15em;">The CHSH Score &amp; <span class="accent-ylw">the PR-Box</span></h3>
-        <p class="small dim" style="margin-top:0;">A measure of non-locality — and its hypothetical extreme</p>
+        <h3 style="margin-bottom:0.15em;">The CHSH Game</h3>
+        <p class="small dim" style="margin-top:0;">A coordination game between separated players</p>
 
         <div class="split">
           <div class="left">
             <div class="highlight-box" style="margin-bottom: 0.4rem; padding: 0.4rem;">
-              <p class="tiny" style="margin:0 0 0.2rem 0; color:var(--text-muted);">
-                <strong>Theorem</strong> (Tsirelson, 1980):
-              </p>
-              <p style="text-align:center; font-size:0.95em; margin:0;">
-                $S \;\leq\; 2 + \sqrt{2}$
-              </p>
+              <p class="small" style="margin:0 0 0.2rem 0;"><strong>Rules:</strong> Alice gets $x$, Bob gets $y$ (random bits)</p>
+              <p class="small" style="margin:0;"><strong>Goal:</strong> Output $a, b$ such that $a \oplus b = x \cdot y$</p>
+              <p class="tiny dim" style="margin:0.2rem 0 0 0;">Win if outputs XOR equals inputs AND</p>
             </div>
 
-            <div style="margin: 0.3rem 0;">
-              <div class="hierarchy-item"><div class="hierarchy-bar bar-local"></div><span class="accent-blu small">Classical: $S = 2$</span></div>
-              <div class="hierarchy-item"><div class="hierarchy-bar bar-quantum"></div><span class="accent-pur small">Quantum: $S = 2 + \sqrt{2} \approx 3.41$</span></div>
-              <div class="hierarchy-item"><div class="hierarchy-bar bar-ns"></div><span class="accent-red small">No-signaling: $S = 4$</span></div>
+            <div style="margin: 0.4rem 0;">
+              <div class="step-block blue" style="padding:0.25rem 0.4rem;">
+                <p class="small" style="margin:0;"><strong class="accent-blu">Local strategies:</strong> Win $\tfrac{3}{4}$ rounds</p>
+                <p class="tiny dim" style="margin:0;">Best classical: always output $a=b=0$ → fails on $x=y=1$</p>
+              </div>
+              <div class="step-block purple" style="padding:0.25rem 0.4rem;">
+                <p class="small" style="margin:0;"><strong class="accent-pur">Quantum strategies:</strong> Win $\cos^2(\pi/8) \approx 85\%$</p>
+                <p class="tiny dim" style="margin:0;">Shared entanglement + optimal measurements</p>
+              </div>
+              <div class="step-block red" style="padding:0.25rem 0.4rem;">
+                <p class="small" style="margin:0;"><strong class="accent-red">PR-Box:</strong> Win $100\%$ of rounds</p>
+                <p class="tiny dim" style="margin:0;">$a \oplus b = x \cdot y$ always — but nature forbids it</p>
+              </div>
             </div>
 
-            <div class="highlight-box" style="margin-top:0.4rem; border-color: rgba(251,191,36,0.3); padding: 0.35rem;">
-              <p class="tiny accent-ylw" style="margin:0 0 0.15rem 0;"><strong>PR-Box</strong> (Popescu-Rohrlich, 1994)</p>
-              <p class="tiny" style="margin:0;">$a \oplus b = x \cdot y$ always — achieves $S = 4$</p>
-              <p class="tiny dim" style="margin:0.15rem 0 0 0;">No-signaling ✓ &nbsp;|&nbsp; Violates Tsirelson ✗</p>
-            </div>
-
-            <p class="question-big" style="font-size:0.7em; margin-top:0.4em;">
-              What law of physics forbids the PR-Box?
+            <p class="small accent-ylw" style="margin-top:0.3em;">
+              <strong>The mystery:</strong> Why can't nature win more than 85%?
             </p>
           </div>
           <div class="right">
@@ -673,9 +672,9 @@
         </div>
 
         <aside class="notes">
-          The CHSH score measures non-locality. Quantum tops out at Tsirelson's
-          limit. The PR-Box hits S=4 without violating no-signaling — yet
-          nature forbids it. What principle excludes it?
+          The CHSH game: Alice and Bob can't communicate but share a resource.
+          Local hidden variables max out at 75% wins. Quantum reaches 85%.
+          A PR-Box would win every time — but physics doesn't allow it.
         </aside>
       </section>
 
@@ -1466,7 +1465,7 @@
       { title: "Title",                  section: "", part: "" },
       { title: "Part I: The Mystery",    section: "divider", part: "I", sectionName: "The Mystery", gradient: "var(--accent-blue), var(--accent-purple)" },
       { title: "Correlation Landscape",  section: "The Mystery", part: "I", sectionName: "The Mystery", gradient: "var(--accent-blue), var(--accent-purple)" },
-      { title: "CHSH Score & PR-Box",    section: "The Mystery", part: "I", sectionName: "The Mystery", gradient: "var(--accent-blue), var(--accent-purple)" },
+      { title: "The CHSH Game",          section: "The Mystery", part: "I", sectionName: "The Mystery", gradient: "var(--accent-blue), var(--accent-purple)" },
       { title: "Part II: The Framework", section: "divider", part: "II", sectionName: "The Framework", gradient: "var(--accent-blue), var(--accent-green)" },
       { title: "General Probabilistic Theories", section: "The Framework", part: "II", sectionName: "The Framework", gradient: "var(--accent-blue), var(--accent-green)" },
       { title: "Systems of Type (k,l)",  section: "The Framework", part: "II", sectionName: "The Framework", gradient: "var(--accent-blue), var(--accent-green)" },
